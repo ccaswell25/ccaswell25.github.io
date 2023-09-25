@@ -1,5 +1,36 @@
 ---
-title: "ccaswell25.github.io"
+title: "Carly Caswell"
+image: carly_portrait.jpg
+toc: false
+about:
+  template: trestles
+  image-shape: round
+  image-width: 15em
+  links: 
+    - text: LinkedIn
+      href: https://www.linkedin.com/in/carlycaswell25/ 
+      icon: linkedin
+      
+    - text: GitHub
+      href: https://github.com/ccaswell25
+      icon: github
+    - text: Email
+      href: mailtoo::ccaswell25@gmail.com 
+      icon: envelope
 ---
 
-Hi this is Carly! 
+## Hi There!
+
+My name is Carly and welcome to my personal website. This site will give you an overview of my professional life, interests, and passions (both personal and work-related).
+
+**What am I up to right now?**
+
+I am currently a Master of Environmental Data Science student at the University of California Santa Barbara, studying to apply data science skills to real challenges facing our ever-changing climate.
+
+### Education
+
+\~More bio information to come\~
+
+### Experience
+
+\~More bio information to come\~
