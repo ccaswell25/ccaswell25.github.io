@@ -26,5 +26,33 @@
     "title": "Resources",
     "section": "",
     "text": "More details to come!"
+  },
+  {
+    "objectID": "projects.html",
+    "href": "projects.html",
+    "title": "Carly Caswell",
+    "section": "",
+    "text": "--- title: “Projects”\n---"
+  },
+  {
+    "objectID": "posts.html",
+    "href": "posts.html",
+    "title": "My Blog",
+    "section": "",
+    "text": "test blog post title\n\n\n\nQuarto\n\n\nR\n\n\nMEDS\n\n\n\nblog post test description\n\n\n\nCarly Caswell\n\n\nOct 29, 2023\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/2023-10-29-short-post-description/index.html",
+    "href": "posts/2023-10-29-short-post-description/index.html",
+    "title": "test blog post title",
+    "section": "",
+    "text": "I am going to insert a footnote here1."
+  },
+  {
+    "objectID": "posts/2023-10-29-short-post-description/index.html#footnotes",
+    "href": "posts/2023-10-29-short-post-description/index.html#footnotes",
+    "title": "test blog post title",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nHere is the associated footnote, which will appear at the bottom of my document in a “Footnotes” section.↩︎"
   }
 ]
