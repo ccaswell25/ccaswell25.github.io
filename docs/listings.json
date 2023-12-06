@@ -2,6 +2,8 @@
   {
     "listing": "/posts.html",
     "items": [
+      "/posts/trial-python-render/STAC-search.html",
+      "/posts/trial-python-render/eds242-finalblog.html",
       "/posts/2023-10-29-short-post-description/index.html"
     ]
   }
