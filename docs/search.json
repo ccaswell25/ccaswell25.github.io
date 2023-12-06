@@ -1,29 +1,15 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Carly Caswell",
+    "objectID": "resources.html",
+    "href": "resources.html",
+    "title": "Resources",
     "section": "",
-    "text": "My name is Carly and welcome to my personal website. This site will give you an overview of my professional life, interests, and passions (both personal and work-related).\nWhat am I up to right now?\nI am currently a Master of Environmental Data Science student at the University of California Santa Barbara, studying to apply data science skills to real challenges facing our ever-changing climate.\n\n\nMaster in Environmental Data Science [Present] University of California, Santa Barbara\nBS in Business Administration [2018] University of Vermont\n\n\n\nEntrepreneurship Teaching Assistant [2023 - Present] UCSB\nSolutions Consultant [2021 - 2023] Smartsheet\nAI Solutions Consultant [2018 - 2021] Quinyx"
-  },
-  {
-    "objectID": "index.html#hi-there",
-    "href": "index.html#hi-there",
-    "title": "Carly Caswell",
-    "section": "",
-    "text": "My name is Carly and welcome to my personal website. This site will give you an overview of my professional life, interests, and passions (both personal and work-related).\nWhat am I up to right now?\nI am currently a Master of Environmental Data Science student at the University of California Santa Barbara, studying to apply data science skills to real challenges facing our ever-changing climate.\n\n\nMaster in Environmental Data Science [Present] University of California, Santa Barbara\nBS in Business Administration [2018] University of Vermont\n\n\n\nEntrepreneurship Teaching Assistant [2023 - Present] UCSB\nSolutions Consultant [2021 - 2023] Smartsheet\nAI Solutions Consultant [2018 - 2021] Quinyx"
+    "text": "More details to come!"
   },
   {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
-    "section": "",
-    "text": "More details to come!"
-  },
-  {
-    "objectID": "resources.html",
-    "href": "resources.html",
-    "title": "Resources",
     "section": "",
     "text": "More details to come!"
   },
@@ -35,32 +21,18 @@
     "text": "--- title: “Projects”\n---"
   },
   {
-    "objectID": "posts.html",
-    "href": "posts.html",
-    "title": "My Blog",
-    "section": "",
-    "text": "ipynmb rendered as html\n\n\ntest description\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEDS242 Blog\n\n\ntest description\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ntest blog post title\n\n\n\nQuarto\n\n\nR\n\n\nMEDS\n\n\n\nblog post test description\n\n\n\nCarly Caswell\n\n\nOct 29, 2023\n\n\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "posts/2023-10-29-short-post-description/index.html",
-    "href": "posts/2023-10-29-short-post-description/index.html",
-    "title": "test blog post title",
-    "section": "",
-    "text": "I am going to insert a footnote here1."
-  },
-  {
-    "objectID": "posts/2023-10-29-short-post-description/index.html#footnotes",
-    "href": "posts/2023-10-29-short-post-description/index.html#footnotes",
-    "title": "test blog post title",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nHere is the associated footnote, which will appear at the bottom of my document in a “Footnotes” section.↩︎"
-  },
-  {
     "objectID": "posts/trial-python-render/STAC-search.html",
     "href": "posts/trial-python-render/STAC-search.html",
     "title": "ipynmb rendered as html",
     "section": "",
     "text": "Code\n#Import Libraries\nimport numpy as np \nimport geopandas as gpd\nimport rioxarray as rioxr\nimport matplotlib.pyplot as plt\n\nfrom shapely.geometry import Polygon\n\n#Used to access the STAC catalogs:\nfrom pystac_client import Client\n\n#Used to sign (requesting further access) items form the MPC STAC catalog:\nimport planetary_computer\n\n#Other libraries for nice outputs:\nfrom IPython.display import Image"
+  },
+  {
+    "objectID": "posts/trial-python-render/STAC-search.html#access",
+    "href": "posts/trial-python-render/STAC-search.html#access",
+    "title": "ipynmb rendered as html",
+    "section": "Access",
+    "text": "Access\nWe use the Client function from the pystac_client package to access the catalog:\n\n\nCode\n#access catalog\ncatalog = Client.open(\"https://planetarycomputer.microsoft.com/api/stac/v1\", \n                      modifier = planetary_computer.sign_inplace)\n\n\nThe modifier parameter is needed to access the data in the MPC catalog."
   },
   {
     "objectID": "posts/trial-python-render/STAC-search.html#exploration",
@@ -105,11 +77,18 @@
     "text": "Exercise\nThe cop-dem-glo-90 (id of collection) collection contains the Copernicus DEM at 90m resolution (the one we used for the Grand Canyon).\n\nUse the bbox for Santa Barbara to look for items in this collection\nGet the first item in the search and check its assets\nPlot the item’s rendered preview asset\nOpen the item’s data using rioxarray\n\n\n\nCode\n#Use the bbox for Santa Barbara for items in collection: cop-demo-glo90\nsearch2 = catalog.search(\n    collections = ['cop-dem-glo-90'], # a list of collection id\n    intersects = bbox,\n    datetime = time_range\n)\n\nitems2 = search2.item_collection()\n\n#Number of items in the search:\nlen(items2)\n\nitems2\n\n\n\n\n\n    \n    \n    \n        \n            \n                \n                    ItemCollection\n                \n            \n            \n\nItems\n\n\n\n\n\nItem: Copernicus_DSM_COG_30_N34_00_W120_00_DEM\n\n\n\nid: Copernicus_DSM_COG_30_N34_00_W120_00_DEM\n\n\nbbox: [-120.00041666666667, 34.000416666666666, -119.00041666666667, 35.000416666666666]\n\n\ngsd: 90\n\n\ndatetime: 2021-04-22T00:00:00Z\n\n\nplatform: TanDEM-X\n\n\nproj:epsg: 4326\n\n\nproj:shape: [1200, 1200]\n\n\nproj:transform: [0.0008333333333333334, 0.0, -120.00041666666667, 0.0, -0.0008333333333333334, 35.000416666666666]\n\n\n\n\nSTAC Extensions\n\n\n\nhttps://stac-extensions.github.io/projection/v1.0.0/schema.json\n\n\n\n\n\nAssets\n\n\n\n\n\nAsset: N34_00_W120_00\n\n\n\nhref: https://elevationeuwest.blob.core.windows.net/copernicus-dem/COP90_hh/Copernicus_DSM_COG_30_N34_00_W120_00_DEM.tif?st=2023-11-26T21%3A39%3A40Z&se=2023-12-04T21%3A39%3A42Z&sp=rl&sv=2021-06-08&sr=c&skoid=c85c15d6-d1ae-42d4-af60-e2ca0f81359b&sktid=72f988bf-86f1-41af-91ab-2d7cd011db47&skt=2023-11-27T21%3A39%3A39Z&ske=2023-12-04T21%3A39%3A39Z&sks=b&skv=2021-06-08&sig=qt4yGbZ/9krZE9KfP0/RWBPymTc8UKhAficlBHi%2B95g%3D\n\n\ntype: image/tiff; application=geotiff; profile=cloud-optimized\n\n\ntitle: N34_00_W120_00\n\n\nroles: ['data']\n\n\nowner: Copernicus_DSM_COG_30_N34_00_W120_00_DEM\n\n\n\n\n\n\n\n\n\n\nAsset: TileJSON with default rendering\n\n\n\nhref: https://planetarycomputer.microsoft.com/api/data/v1/item/tilejson.json?collection=cop-dem-glo-90&item=Copernicus_DSM_COG_30_N34_00_W120_00_DEM&assets=data&colormap_name=terrain&rescale=-1000%2C4000&format=png\n\n\ntype: application/json\n\n\ntitle: TileJSON with default rendering\n\n\nroles: ['tiles']\n\n\nowner: Copernicus_DSM_COG_30_N34_00_W120_00_DEM\n\n\n\n\n\n\n\n\n\n\nAsset: Rendered preview\n\n\n\nhref: https://planetarycomputer.microsoft.com/api/data/v1/item/preview.png?collection=cop-dem-glo-90&item=Copernicus_DSM_COG_30_N34_00_W120_00_DEM&assets=data&colormap_name=terrain&rescale=-1000%2C4000&format=png\n\n\ntype: image/png\n\n\ntitle: Rendered preview\n\n\nroles: ['overview']\n\n\nowner: Copernicus_DSM_COG_30_N34_00_W120_00_DEM\n\n\nrel: preview\n\n\n\n\n\n\n\nLinks\n\n\n\n\n\nLink:\n\n\n\nrel: collection\n\n\nhref: https://planetarycomputer.microsoft.com/api/stac/v1/collections/cop-dem-glo-90\n\n\ntype: application/json\n\n\n\n\n\n\n\n\n\n\nLink:\n\n\n\nrel: parent\n\n\nhref: https://planetarycomputer.microsoft.com/api/stac/v1/collections/cop-dem-glo-90\n\n\ntype: application/json\n\n\n\n\n\n\n\n\n\n\nLink: Microsoft Planetary Computer STAC API\n\n\n\nrel: root\n\n\nhref: https://planetarycomputer.microsoft.com/api/stac/v1\n\n\ntype: application/json\n\n\ntitle: Microsoft Planetary Computer STAC API\n\n\n\n\n\n\n\n\n\n\nLink:\n\n\n\nrel: self\n\n\nhref: https://planetarycomputer.microsoft.com/api/stac/v1/collections/cop-dem-glo-90/items/Copernicus_DSM_COG_30_N34_00_W120_00_DEM\n\n\ntype: application/geo+json\n\n\n\n\n\n\n\n\n\n\nLink: Copernicus DEM User handbook\n\n\n\nrel: handbook\n\n\nhref: https://object.cloud.sdsc.edu/v1/AUTH_opentopography/www/metadata/Copernicus_metadata.pdf\n\n\ntype: application/pdf\n\n\ntitle: Copernicus DEM User handbook\n\n\n\n\n\n\n\n\n\n\nLink: Map of item\n\n\n\nrel: preview\n\n\nhref: https://planetarycomputer.microsoft.com/api/data/v1/item/map?collection=cop-dem-glo-90&item=Copernicus_DSM_COG_30_N34_00_W120_00_DEM\n\n\ntype: text/html\n\n\ntitle: Map of item"
   },
   {
-    "objectID": "posts/trial-python-render/STAC-search.html#access",
-    "href": "posts/trial-python-render/STAC-search.html#access",
-    "title": "ipynmb rendered as html",
-    "section": "Access",
-    "text": "Access\nWe use the Client function from the pystac_client package to access the catalog:\n\n\nCode\n#access catalog\ncatalog = Client.open(\"https://planetarycomputer.microsoft.com/api/stac/v1\", \n                      modifier = planetary_computer.sign_inplace)\n\n\nThe modifier parameter is needed to access the data in the MPC catalog."
+    "objectID": "posts/2023-10-29-short-post-description/index.html",
+    "href": "posts/2023-10-29-short-post-description/index.html",
+    "title": "test blog post title",
+    "section": "",
+    "text": "I am going to insert a footnote here1."
+  },
+  {
+    "objectID": "posts/2023-10-29-short-post-description/index.html#footnotes",
+    "href": "posts/2023-10-29-short-post-description/index.html#footnotes",
+    "title": "test blog post title",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nHere is the associated footnote, which will appear at the bottom of my document in a “Footnotes” section.↩︎"
   },
   {
     "objectID": "posts/trial-python-render/eds242-finalblog.html",
@@ -124,5 +103,26 @@
     "title": "EDS242 Blog",
     "section": "",
     "text": "text"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Carly Caswell",
+    "section": "",
+    "text": "My name is Carly and welcome to my personal website. This site will give you an overview of my professional life, interests, and passions (both personal and work-related).\nWhat am I up to right now?\nI am currently a Master of Environmental Data Science student at the University of California Santa Barbara, studying to apply data science skills to real challenges facing our ever-changing climate.\n\n\nMaster in Environmental Data Science [Present] University of California, Santa Barbara\nBS in Business Administration [2018] University of Vermont\n\n\n\nEntrepreneurship Teaching Assistant [2023 - Present] UCSB\nSolutions Consultant [2021 - 2023] Smartsheet\nAI Solutions Consultant [2018 - 2021] Quinyx"
+  },
+  {
+    "objectID": "index.html#hi-there",
+    "href": "index.html#hi-there",
+    "title": "Carly Caswell",
+    "section": "",
+    "text": "My name is Carly and welcome to my personal website. This site will give you an overview of my professional life, interests, and passions (both personal and work-related).\nWhat am I up to right now?\nI am currently a Master of Environmental Data Science student at the University of California Santa Barbara, studying to apply data science skills to real challenges facing our ever-changing climate.\n\n\nMaster in Environmental Data Science [Present] University of California, Santa Barbara\nBS in Business Administration [2018] University of Vermont\n\n\n\nEntrepreneurship Teaching Assistant [2023 - Present] UCSB\nSolutions Consultant [2021 - 2023] Smartsheet\nAI Solutions Consultant [2018 - 2021] Quinyx"
+  },
+  {
+    "objectID": "posts.html",
+    "href": "posts.html",
+    "title": "My Blog",
+    "section": "",
+    "text": "ipynmb rendered as html\n\n\ntest description\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEDS242 Blog\n\n\ntest description\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ntest blog post title\n\n\n\nQuarto\n\n\nR\n\n\nMEDS\n\n\n\nblog post test description\n\n\n\nCarly Caswell\n\n\nOct 29, 2023\n\n\n\n\n\n\n\n\nNo matching items"
   }
 ]
