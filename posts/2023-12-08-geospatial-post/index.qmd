@@ -1,0 +1,214 @@
+---
+title: "Modeling Suitable Growth Areas for Marine Species on the West Coast of the United States"
+description: "Determining growth suitability for developing marine aquaculture on the West Coast the United States Exclusive Economic Zones (EEZ)."
+author:
+ - name: Carly Caswell
+   url: https://ccaswell25.github.io/
+   affiliation: Master of Environmental Data Science Program \@ The Bren School (UCSB) & The National Center for Ecological Analysis & Synthesis
+   affiliation-url: https://ucsb-meds.github.io/
+date: 12-09-2023
+categories: \[GIS, R, MEDS\] 
+image: eez.png
+draft: false
+---
+
+[Project Repository Located Here](https://github.com/eds223-fall-2023-org/assignment-4-ccaswell25/blob/main/assignment4.Rmd)
+
+## About This Project
+
+A surprising fact (cited). This is an important problem to consider because
+
+This is where marine aquaculture can play an important role, which is defined as....
+
+With the global food supply crisis, sustainable protein alternatives to meat production have proven to be sufficiently important in the future of our food supply. In order to consider planning for future marine aquaculture projects and initiatives, we need to consider a few important implications, such as ocean depth, temperatures, logistics traffic, etc.
+
+In this analysis, given a species input, I am going to analyze what the determined Exclusive Economic Zones (EEZ) are on the West Coast of the United States that would be best suited to developing marine aquaculture for that species of interest.
+
+![Pictured: The US Exclusive Economic Zones (EEZ). Sourced by the National Oceanic and Atmospheric Association](eez.png){width=50%}
+
+[Click here for more details on the EEZ Zones](https://oceanservice.noaa.gov/facts/eez.html)
+
+## Analysis Highlights:
+
+1.  Combining vector and raster data
+2.  Resampling raster data using `resample` function
+3.  Masking raster data using `raster` package
+4.  Operations on raster data
+5.  Creating interactive maps using `leaflet`
+6.  Designing a function for any species
+
+## About the Data:
+
+When considering suitability for marine aquaculture for a specific species, we need to consider two primary conditions: Depth and Temperature. When finding suitable EEZ regions, we are going to need data on the depth and surface temperature details (datasets 1 and 2). We can then find suitable regions using the Exclusive Economic Zones (EEZ, dataset 3), which are..... 
+
+**Dataset 1: Sea Surface Temperature**
+
+This data is average annual sea surface temperature (SST) from the years 2008 to 2012. This will be used to characterize the average sea surface temperature within the EEZ region.To find the averages for each year, I created a raster stack of each year titled `sst` (sea surface temperature).
+
+This data was generated from [NOAA's 5km Daily Global Satellite Sea Surface Temperature Anomaly v3.1](https://coralreefwatch.noaa.gov/product/5km/index_5km_ssta.php)
+
+**Dataset 2: Bathymetry**
+
+This data is raster data characterizing the depth of the ocean, defined as a raster titled `depth`. 
+
+This data was generated from [General Bathymetric Chart of the Oceans (GEBCO)](https://www.gebco.net/data_and_products/gridded_bathymetry_data/#area).
+
+**Dataset 3: Exclusive Economic Zones**
+
+To narrow the focus for this analysis, I will just be focusing on West Coast US Exclusive Economic Zones. These zones serve as .........
+
+This data was used as a shapefile titled `wc_eez`. 
+
+This data was generated from [Marineregions.org](https://www.marineregions.org/eez.php).
+
+## Final Results
+I created a function (outlined below) that utilizes the following inputs:
+
+`species_name`: your species of interest. Note: this should be a realistic species for human commerical consumption.
+
+`min_temp`: minimum suitable temperature in Celsius, found on [SeaLifeBase](https://www.sealifebase.ca/search.php)
+
+`max_temp`: maximum suitable temperature in Celsius, found on [SeaLifeBase](https://www.sealifebase.ca/search.php)
+
+`min_depth`: minimum meters below sea level for optimal growth, found on [SeaLifeBase](https://www.sealifebase.ca/search.php)
+
+`max_depth`: maximum meters below sea level for optimal growth, found on [SeaLifeBase](https://www.sealifebase.ca/search.php)
+
+
+....figure out how to hide this output so it's a dropdown in the blog....
+```{r}
+species_function = function(species_name, min_temp, max_temp, min_depth, max_depth){
+
+# read in the shapefile for the West Coast EEZ
+wc_eez <- st_read(here('./data2/wc_regions_clean.shp'))
+
+# read in your SST rasters
+filelist <- list.files("./data2/average_annual/", full.names = TRUE)
+filelist 
+
+# Make SST rasters into a raster stack
+sst <- rast(filelist)
+
+# Read in bathymetry raster (`depth.tif`)
+depth <- rast(here("data2", "depth.tif"))
+
+# reproject any data not in the same projection
+sst <- project(sst, "EPSG:4326")
+st_crs(wc_eez) == st_crs(sst)
+st_crs(depth) == st_crs(sst)
+
+#Finding the mean SST
+sst_mean <- app(sst, fun = "mean")
+#Converting SST from kelvin to Celsius
+sst_mean_cel <- sst_mean - 273.15
+
+#Cropping depth to match extent of SST 
+new_depth <- crop(depth, sst_mean_cel)
+
+#Resampling the depth data to match SST using nearest neighbor
+new_depth_resample <- resample(new_depth, y = sst, method = "near")
+
+#Reclassifying for sea surface temperature depending on species suitable conditions 
+rcl_sst <- matrix(c(-Inf, min_temp, NA,
+                min_temp,max_temp, 1,
+                max_temp, Inf, NA),
+              ncol = 3, byrow = TRUE)
+
+#reclassifing the sst raster
+sst_temp_rcl <- classify(sst_mean_cel, rcl = rcl_sst)
+
+
+#Reclassifying for sea level depth depending on species suitable conditions 
+#Assumption: sea level is 0 so anything below sea level is negative
+max_depth <- -(max_depth) #converting max depth to negative, representative of this assumption
+
+rcl_d <- matrix(c(max_depth,min_depth,1,
+                      -Inf, max_depth, NA,
+                      min_depth,Inf,NA),
+                    ncol = 3, byrow = TRUE)
+
+#reclassifying sea depth level raster 
+sst_depth_rcl <- classify(new_depth_resample, rcl = rcl_d)
+
+#Finding locations that satisfy both SST and depth conditions
+suitable_locations <- lapp(c(sst_depth_rcl, sst_temp_rcl), "*")
+
+
+#Next finding suitable cells within WC_EEZ:
+suitable_regions <- crop(suitable_locations, wc_eez)
+suitable_regions <- mask(suitable_regions, wc_eez)
+
+#Finding the total area of grid cells:
+area_grid <- expanse(suitable_regions)
+
+#Finding total suitable area within EEZ:
+eez_raster <- rasterize(wc_eez, suitable_regions, field = "rgn")
+
+#Adding the area percent as another component to suitable area:
+suitable_area <- cross_join(wc_eez, area_grid) %>% 
+  mutate(area_perc = (area/ area_m2)* 100 )
+
+#Creating map for total suitable area by region
+map1 <- 
+  tm_shape(suitable_area) +
+  tm_fill("area_km2",palette = (c("#90e0ef", "#48cae4", "#00b4d8", 
+                          "#0096c7", "#0077b6", "#023e8a")), title = "Area of Suitable Habitat (km^2) by EEZ Region") +  tm_layout("Suitable Area for Oysters by EEZ Region", legend.outside = TRUE) +
+   tm_borders(col = "gray") +
+  tm_basemap("OpenStreetMap") 
+  
+print(map1)  
+#Creating map for percentage of total suitable area by region
+
+map2 <-
+  tm_shape(suitable_area) +
+  tm_fill("area_perc",palette = "Purples", title = "Percentage of Suitable Area by EEZ Region") +
+  tm_layout("Suitable Percentage of Area for Oysters by EEZ Region", legend.outside = TRUE) +
+   tm_borders(col = "gray") +
+  tm_basemap("OpenStreetMap")
+
+print(map2)
+}
+```
+
+The outputs of the function create two maps showcasing the total suitable area for the species' growth as well as the percentage (%) of suitable area for the species' growth. 
+
+In the examples below, this output is showing results for species of oysters:
+
+![Total Suitable Area](area_suitable.png){width=100%}
+![Total Percentage of Suitable Area](perc_area_suitable.png){width=100%}
+
+
+## Conclusion
+To conclude, I am able to indicate.....add results and conclusions. 
+Discussion of conclusions, including any potential caveats or future directions
+
+
+
+## Details of the Data Analysis 
+
+For my data analysis, I had to take a number of steps to getting complete suitable areas mapped. 
+
+1. first needed to do some basic data cleaning such as reprojecting to make sure all fields were using the same coordinate reference system (so we can accurately compare and layer maps). 
+
+I then took the mean sea surface temperature over the raster stacks and converted it to Celsius.This provided me with a raster of means for the entire West Coast. In order to just look at our Exclusive Economic Zones, I used `crop` to reduce the ratser data to our area of interest. Because the resolution of the data do not match, I also the nearest neighbor method using `resample` to make sure the resolutions match and checked the coordinate reference systems were the same.  
+
+In the visualization below, I can see the variation in average sea surface temperatures in Celsius for the West Coast EEZ.
+
+![Sea Surface Temperature in Celsius](resampled_sst_avg.png){width=100%}
+
+
+Next, I need to reclassify the data (using `reclassify`) to meet both depth and sea temperature specifications for the species of interest. As an example in this analysis, I will use oysters, however the function created as part of this analysis will showcase any species of choosing. 
+
+Given I want to understand suitable oyster regions, I found information on species depth and temperature requirements on [SeaLifeBase](https://www.sealifebase.ca/search.php). This was used to find information on oyster's suitable sea surface temperature and depth specifications which was determined to be between 11 and 30 degrees celsius and optimal depth is 0-70 meters below sea level.
+
+
+Then I wanted to determine the total suitable area within each EEZ in order to rank specific zones/regions by priority. To do so, I found the total area of suitable locations within each EEZ using `crop` `mask` `expanse` and `rasterize`
+
+I found the total suitable area within each EEZ region, as seen from the plot below:
+![Total Suitable Area within each EEZ](suitable_area_by_rgn.png){width=100%}
+
+Then I cross-joined the data for suitable area by region on to the EEZ data and calculated the percentage of area using the total grid area calculated using `expanse`
+
+After all of that analysis, I have the data I need to plot, as indicated in the results section (above).
+
+## Sources:
