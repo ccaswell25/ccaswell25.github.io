@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Carly Caswell">
-<meta name="dcterms.date" content="2023-12-06">
+<meta name="dcterms.date" content="2023-12-07">
 <meta name="description" content="Visualizing changes in air quality index (AQI). A blog for EDS220: Working with Environmental Datasets">
 
-<title>Carly Caswell - Analyzing Santa Barbara County’s Thomas Fire</title>
+<title>Carly Caswell - Understanding Air Quality Impacts of Santa Barbara County’s Thomas Fire</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -148,7 +148,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-page-left">
-      <h1 class="title">Analyzing Santa Barbara County’s Thomas Fire</h1>
+      <h1 class="title">Understanding Air Quality Impacts of Santa Barbara County’s Thomas Fire</h1>
                   <div>
         <div class="description">
           Visualizing changes in air quality index (AQI). A blog for EDS220: Working with Environmental Datasets
@@ -168,7 +168,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="quarto-title-meta-heading">Affiliation</div>
     
       <div class="quarto-title-meta-contents">
-      <p class="author"><a href="https://ccaswell25.github.io/">Carly Caswell</a> </p>
+      <p class="author"><a href="true">Carly Caswell</a> </p>
     </div>
       <div class="quarto-title-meta-contents">
           <p class="affiliation">
@@ -185,7 +185,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">December 6, 2023</p>
+        <p class="date">December 7, 2023</p>
       </div>
     </div>
     
@@ -201,7 +201,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#about-this-project" id="toc-about-this-project" class="nav-link active" data-scroll-target="#about-this-project">About this Project</a>
+  <li><a href="#about-this-project" id="toc-about-this-project" class="nav-link active" data-scroll-target="#about-this-project">About This Project</a>
   <ul class="collapse">
   <li><a href="#analysis-highlights" id="toc-analysis-highlights" class="nav-link" data-scroll-target="#analysis-highlights">Analysis Highlights:</a></li>
   <li><a href="#about-the-data" id="toc-about-the-data" class="nav-link" data-scroll-target="#about-the-data">About the Data:</a></li>
@@ -211,7 +211,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#data-analysis" id="toc-data-analysis" class="nav-link" data-scroll-target="#data-analysis">Data Analysis</a>
   <ul class="collapse">
   <li><a href="#calculating-the-rolling-averages" id="toc-calculating-the-rolling-averages" class="nav-link" data-scroll-target="#calculating-the-rolling-averages">Calculating the Rolling Averages</a></li>
-  <li><a href="#creating-a-false-image-of-the-california-thomas-fire-burn-area" id="toc-creating-a-false-image-of-the-california-thomas-fire-burn-area" class="nav-link" data-scroll-target="#creating-a-false-image-of-the-california-thomas-fire-burn-area">Creating a False Image of the California Thomas Fire Burn Area</a></li>
+  <li><a href="#creating-a-map-of-ca-thomas-fire" id="toc-creating-a-map-of-ca-thomas-fire" class="nav-link" data-scroll-target="#creating-a-map-of-ca-thomas-fire">Creating a Map of CA Thomas Fire</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -222,39 +222,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<p>Project Repository: https://github.com/ccaswell25/eds220-hwk4-task3</p>
+<p><a href="https://github.com/ccaswell25/eds220-hwk4-task3">Project Repository Located Here With More Details</a></p>
 <section id="about-this-project" class="level2">
-<h2 class="anchored" data-anchor-id="about-this-project">About this Project</h2>
-<p>-add details about the thomas fire and what i’m intending to do- I will create a false color image to show the location of the Thomas fire in 2017 and the impact of air quality on that specific area during the time period of the fire.</p>
-<p>-add a thomas fire picture with caption-</p>
+<h2 class="anchored" data-anchor-id="about-this-project">About This Project</h2>
+<p>The Thomas Fire was a wildfire that occured in December 2017 in Santa Barbara County and it had devastating impacts on the community. Knowing the risks, dangers, and effects of wildfires on populated areas, my analysis aims to visualize data surrounding key aspects of wildfires: the damage to the physical area and the air quality. In order to to do this, I will create a false color image to understand the burn area of the Thomas fire in 2017 as well as create a visualization to show the impact of air quality in Santa Barbara during the time period of the fire.</p>
+<p><img src="tm_fire.png" class="img-fluid" style="width:50.0%"></p>
+<p><em>Pictured: Thousands of Acres Burn Across Santa Barbara County. Sourced by Al Seib of the Los Angeles Times</em></p>
+<p><a href="https://en.wikipedia.org/wiki/Thomas_Fire">Click here for more details on the Thomas Fire</a></p>
 <section id="analysis-highlights" class="level3">
 <h3 class="anchored" data-anchor-id="analysis-highlights">Analysis Highlights:</h3>
-<p>-Geospatial data exploration</p>
+<p>-Geospatial data exploration using pandas</p>
 <p>-Data wrangling and manipulation of raster and tabular data</p>
-<p>-Data analysis calculate moving averages for air quality index during the period of the Thomas Fire (2017)</p>
+<p>-Data analysis to calculate moving averages for air quality index during the period of the Thomas Fire (2017)</p>
 <p>-Creating and customizing a map of the Thomas Fire burn area and AQI moving averages from 2017-2018</p>
 </section>
 <section id="about-the-data" class="level3">
 <h3 class="anchored" data-anchor-id="about-the-data">About the Data:</h3>
-<p><strong>Dataset 1</strong></p>
-<p>A simplified collection of bands (red, green, blue, near-infrared and shortwave infrared) from the Landsat Collection 2 Level-2 atmosperically corrected surface reflectance data, collected by the Landsat 8 satellite.</p>
-<p>Information about Landsat bands from USGS:</p>
-<p><a href="https://www.usgs.gov/faqs/what-are-band-designations-landsat-satellites">What are the band designations for the Landsat satellites?</a></p>
-<p><a href="https://www.usgs.gov/media/images/common-landsat-band-combinations">Common Landsat Band Combinations</a></p>
-<p><a href="https://www.usgs.gov/faqs/how-do-i-use-a-scale-factor-landsat-level-2-science-products">How do I use a scale factor with Landsat Level-2 science products?</a></p>
-<p>The data was accessed and pre-processed in the Microsoft Planetary Computer to remove data outside land and coarsen the spatial resolution (<a href="https://planetarycomputer.microsoft.com/dataset/landsat-c2-l2">Landsat Collection in MPC</a>). Data should be used for visualization purposes only.</p>
-<p><strong>Dataset 2</strong></p>
-<p>A shapefile of fire perimeters in California during 2017. The <a href="https://gis.data.ca.gov/datasets/CALFIRE-Forestry::california-fire-perimeters-all-1/about">complete file can be accessed in the CA state geoportal</a>.</p>
-<p><strong>Dataset 3</strong></p>
-<p>We are using <a href="https://www.airnow.gov/aqi/aqi-basics/">Air Quality Index (AQI)</a> data from the <a href="https://www.epa.gov">US Environmental Protection Agency</a> to visualize the impact on the AQI of the 2017 <a href="https://en.wikipedia.org/wiki/Thomas_Fire">Thomas Fire</a> in Santa Barbara County.</p>
+<p><strong>Dataset 1: Landsat Data</strong></p>
+<p>A simplified collection of bands (red, green, blue, near-infrared and shortwave infrared) from the Landsat Collection 2 Level-2 atmosperically corrected surface reflectance data, collected by the Landsat 8 satellite. For more information on Landsat bands, reference: (https://www.usgs.gov/faqs/what-are-band-designations-landsat-satellites)</p>
+<p><a href="https://planetarycomputer.microsoft.com/dataset/landsat-c2-l2">Click here for the data source</a></p>
+<p><strong>Dataset 2: CA Fires</strong></p>
+<p>A shapefile of fire perimeters in California during 2017.</p>
+<p><a href="https://gis.data.ca.gov/datasets/CALFIRE-Forestry::california-fire-perimeters-all-1/about">Click here for the data source</a></p>
+<p><strong>Dataset 3: AQI</strong></p>
+<p>National Air Quality Index (AQI) data from the US Environmental Protection Agency. I am specifically going to analyze AQI data for 2017 and 2018 in Santa Barbara County.</p>
+<p><a href="https://aqs.epa.gov/aqsweb/airdata/download_files.html#AQI">Click here for the data source</a></p>
 </section>
 </section>
-<section id="importing" class="level2">
-<h2 class="anchored" data-anchor-id="importing">Importing</h2>
+<section id="importing" class="level1">
+<h1>Importing</h1>
 <div class="cell" data-execution_count="79">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Importing Libraries I Will Need</span></span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Importing Libraries</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -291,11 +291,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Let’s update the datasets and clean anything that may need updated and wrangle the data to be more aligned with what we’re hoping to analyze.</p>
 <ol type="1">
 <li><p>We want to simplify the columns in the datasets and make sure we do not have any extra dimensions in our bands dataframe.</p></li>
-<li><p>Then, we want to combine our aqi_17 and aqi_18 dataframes into one and wrangle the data so we only have the location and columns we care about.</p></li>
-<li><p>We then want to narrow our data focus and update it to specifically look at the Thomas Fire and Santa Barbara county.</p></li>
-<li><p>Lastly, we need to make sure our mapping data is in the same CRS so we can project it on the same scale.</p></li>
+<li><p>Then, we want to combine our 2017 and 2018 dataframes into one and wrangle the data so we only have the location and columns we care about.</p></li>
+<li><p>We then want to narrow our data focus and update it to specifically look at the Thomas Fire and Santa Barbara County.</p></li>
+<li><p>Lastly, we need to make sure all mapping data is in the same CRS so we can project it on the same scale.</p></li>
 </ol>
-<div class="cell" data-execution_count="69">
+<div class="cell">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fl">1.</span> <span class="co">## Making the CA Fires columns lowercase </span></span>
@@ -307,53 +307,74 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>bands <span class="op">=</span> bands.drop(<span class="st">'band'</span>)</span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(bands.dims, <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>, bands.coords, <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>) <span class="co">#checking the band was removed from our dataframe</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Frozen({'y': 731, 'x': 870}) 
- Coordinates:
-  * y            (y) float64 3.952e+06 3.952e+06 ... 3.756e+06 3.755e+06
-  * x            (x) float64 1.213e+05 1.216e+05 ... 3.557e+05 3.559e+05
-    spatial_ref  int64 0 
-</code></pre>
 </div>
-</div>
-<div class="cell" data-execution_count="70">
+<div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fl">2.</span> <span class="co">#Updating AQI Data:</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Combining the dataframes into one</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>aqi <span class="op">=</span> pd.concat([aqi_17, aqi_18])</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># We also want to reset the index</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>aqi <span class="op">=</span> aqi.reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(aqi.index) <span class="co">#yes we can confirm this looks right</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Checking the columns:</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(aqi.columns, <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">#We want to make them lowercase now:</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>aqi.columns <span class="op">=</span> aqi.columns.<span class="bu">str</span>.lower()</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(aqi.columns, <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">#We still see that there are spaces in the names, so lets replace with a '_'</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>aqi.columns <span class="op">=</span> aqi.columns.<span class="bu">str</span>.replace(<span class="st">' '</span>,<span class="st">'_'</span>)</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(aqi.columns) </span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co">#Nice, the columns look good! </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fl">2.</span> <span class="co">#Updating AQI Data:</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Combining the dataframes into one</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>aqi <span class="op">=</span> pd.concat([aqi_17, aqi_18])</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># We also want to reset the index</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>aqi <span class="op">=</span> aqi.reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(aqi.index) <span class="co">#yes we can confirm this looks right</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Checking the columns:</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(aqi.columns, <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">#We want to make them lowercase now:</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>aqi.columns <span class="op">=</span> aqi.columns.<span class="bu">str</span>.lower()</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(aqi.columns, <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co">#We still see that there are spaces in the names, so lets replace with a '_'</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>aqi.columns <span class="op">=</span> aqi.columns.<span class="bu">str</span>.replace(<span class="st">' '</span>,<span class="st">'_'</span>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(aqi.columns) </span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co">#Nice, the columns look good! </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>RangeIndex(start=0, stop=654338, step=1)
-Index(['State Name', 'county Name', 'State Code', 'County Code', 'Date', 'AQI',
-       'Category', 'Defining Parameter', 'Defining Site',
-       'Number of Sites Reporting'],
-      dtype='object') 
-
-Index(['state name', 'county name', 'state code', 'county code', 'date', 'aqi',
-       'category', 'defining parameter', 'defining site',
-       'number of sites reporting'],
-      dtype='object') 
-
-Index(['state_name', 'county_name', 'state_code', 'county_code', 'date', 'aqi',
-       'category', 'defining_parameter', 'defining_site',
-       'number_of_sites_reporting'],
-      dtype='object')</code></pre>
 </div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#3. Looking at just the Thomas Fire and Santa Barbara county. </span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#AQI DATA</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Selecting data from 'Santa Barbara' county</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>aqi_sb <span class="op">=</span> aqi[aqi[<span class="st">'county_name'</span>] <span class="op">==</span> <span class="st">'Santa Barbara'</span>].copy()</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Dropping specified columns</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>columns_to_drop <span class="op">=</span> [<span class="st">'state_name'</span>, <span class="st">'county_name'</span>, <span class="st">'state_code'</span>, <span class="st">'county_code'</span>]</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>aqi_sb.drop(columns_to_drop, inplace<span class="op">=</span><span class="va">True</span>, axis <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Checking data types of the columns</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(aqi_sb.dtypes)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">#The data column is stored as an object and it needs to be converted to datetime!</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Updating the date column to a datetime object</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>aqi_sb[<span class="st">'date'</span>] <span class="op">=</span> pd.to_datetime(aqi_sb[<span class="st">'date'</span>])</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Setting the index to be the date column</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>aqi_sb.set_index(<span class="st">'date'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Checking the updated DataFrame</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(aqi_sb.index)</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="co">#the data type is datetime, which looks correct! </span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="co"># CA FIRES DATA</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Making sure I have just the Thomas Fire data:</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>ca_fires_new <span class="op">=</span> ca_fires[ca_fires.fire_name <span class="op">==</span> <span class="st">"THOMAS"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Updating the CRS's:</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ca_fires.crs)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(bands.rio.crs)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#I noticed they are different so I'm going to convert the CA crs</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>ca_fires_new <span class="op">=</span> ca_fires_new.to_crs(<span class="dv">32611</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#checking to make sure the crs is updated:</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>ca_fires_new.crs <span class="op">==</span> bands.rio.crs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 <section id="data-analysis" class="level1">
@@ -364,90 +385,69 @@ Index(['state_name', 'county_name', 'state_code', 'county_code', 'date', 'aqi',
 <div class="cell" data-execution_count="73">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Selecting only data from 'Santa Barbara' county</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>aqi_sb <span class="op">=</span> aqi[aqi[<span class="st">'county_name'</span>] <span class="op">==</span> <span class="st">'Santa Barbara'</span>].copy()</span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Calculating rolling window for the AQI_SB data:</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>aqi_sb.aqi.rolling(<span class="st">'5D'</span>).mean()</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Dropping columns we don't need</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>columns_to_drop <span class="op">=</span> [<span class="st">'state_name'</span>, <span class="st">'county_name'</span>, <span class="st">'state_code'</span>, <span class="st">'county_code'</span>]</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>aqi_sb.drop(columns_to_drop, inplace<span class="op">=</span><span class="va">True</span>, axis <span class="op">=</span> <span class="dv">1</span>)</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Updating the date column to a datetime object</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>aqi_sb[<span class="st">'date'</span>] <span class="op">=</span> pd.to_datetime(aqi_sb[<span class="st">'date'</span>])</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Setting the index to be the date column</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>aqi_sb.set_index(<span class="st">'date'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculating the rolling window for the AQI_SB data:</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>aqi_sb.aqi.rolling(<span class="st">'5D'</span>).mean()</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding a new column with the 5-day rolling mean:</span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>aqi_sb[<span class="st">'five_day_average'</span>] <span class="op">=</span> aqi_sb.aqi.rolling(<span class="st">'5D'</span>).mean()</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="co">#Now we can plot the rolling averages! </span></span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>plt.plot(aqi_sb.index, aqi_sb[<span class="st">'aqi'</span>], label<span class="op">=</span><span class="st">'Daily AQI'</span>, color<span class="op">=</span><span class="st">'cornflowerblue'</span>)</span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>plt.plot(aqi_sb.index, aqi_sb[<span class="st">'five_day_average'</span>], label<span class="op">=</span><span class="st">'5-Day Average'</span>, color<span class="op">=</span><span class="st">'salmon'</span>)</span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'AQI and 5-Day Average'</span>)</span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Date'</span>)</span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'AQI'</span>)</span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding a new column with the 5-day rolling mean:</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>aqi_sb[<span class="st">'five_day_average'</span>] <span class="op">=</span> aqi_sb.aqi.rolling(<span class="st">'5D'</span>).mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section>
-<section id="creating-a-false-image-of-the-california-thomas-fire-burn-area" class="level2">
-<h2 class="anchored" data-anchor-id="creating-a-false-image-of-the-california-thomas-fire-burn-area">Creating a False Image of the California Thomas Fire Burn Area</h2>
-<p>We want to evaluate the change in air quality from before, during, and after the fire in 2017 and 2018. To do this, we need to calculate a 5 day rolling average of the air quality index data. To do this, we first need to make sure we are only looking at Santa Barbara County data, combine our 2017 and 2018 data, and clean up any fields necessary. Then we can calculate moving averages and plot the data to evaluate any impacts of the Thomas Fire on Santa Barbara County.</p>
-<div class="cell" data-execution_count="80">
+<p>Now we can plot the rolling averages!</p>
+<div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Making sure I have just the Thomas Fire data:</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>ca_fires_new <span class="op">=</span> ca_fires[ca_fires.fire_name <span class="op">==</span> <span class="st">"THOMAS"</span>]</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Updating the CRS's:</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ca_fires.crs)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(bands.rio.crs)</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#I noticed they are different so I'm going to convert the CA crs</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>ca_fires_new <span class="op">=</span> ca_fires_new.to_crs(<span class="dv">32611</span>)</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">#checking to make sure the crs is updated:</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>ca_fires_new.crs <span class="op">==</span> bands.rio.crs</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co">#Creating a false color image </span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>bands[[<span class="st">"swir22"</span>, <span class="st">"nir08"</span>, <span class="st">"red"</span>]].to_array()</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co">#Now we have our image we can graph this with our Thomas Fire perimeter</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Now we can plot!</span></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>size <span class="op">=</span> <span class="dv">6</span> <span class="co">#height in of plot </span></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>aspect <span class="op">=</span> bands.rio.width<span class="op">/</span>bands.rio.height</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>fig.set_size_inches(size, size<span class="op">*</span>aspect) <span class="co">#why? bc cannot use ax and size aspect together</span></span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>bands[[<span class="st">"swir22"</span>, <span class="st">"nir08"</span>, <span class="st">"red"</span>]].to_array().plot.imshow(ax<span class="op">=</span>ax, robust <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>ca_fires_new .plot(ax<span class="op">=</span>ax,facecolor<span class="op">=</span><span class="st">'none'</span>, edgecolor<span class="op">=</span><span class="st">'red'</span>, linewidth<span class="op">=</span><span class="dv">2</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="co">## Set plot title</span></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Map of the Thomas Fire Perimeter (2017) in California'</span>)</span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove the axes</span></span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">'off'</span>)</span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Set legend with linestyle='None'</span></span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>legend_elements <span class="op">=</span> [mlines.Line2D([<span class="dv">0</span>], [<span class="dv">0</span>], color<span class="op">=</span><span class="st">'red'</span>, marker <span class="op">=</span> <span class="st">'_'</span>, linestyle<span class="op">=</span><span class="st">'None'</span>, markersize<span class="op">=</span><span class="dv">10</span>, label<span class="op">=</span><span class="st">'Thomas Fire'</span>)]</span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Add legend</span></span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>ax.legend(handles<span class="op">=</span>legend_elements)</span>
-<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a><span class="co">## Showing the plot</span></span>
-<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Plotting the AQI 5-day average:</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>plt.plot(aqi_sb.index, aqi_sb[<span class="st">'aqi'</span>], label<span class="op">=</span><span class="st">'Daily AQI'</span>, color<span class="op">=</span><span class="st">'cornflowerblue'</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>plt.plot(aqi_sb.index, aqi_sb[<span class="st">'five_day_average'</span>], label<span class="op">=</span><span class="st">'5-Day Average'</span>, color<span class="op">=</span><span class="st">'salmon'</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'AQI and 5-Day Average'</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Date'</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'AQI'</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display">
-<p><img src="eds220-finalblog_files/figure-html/cell-7-output-1.png" class="img-fluid"></p>
 </div>
-<div class="cell-output cell-output-display">
-<p><img src="eds220-finalblog_files/figure-html/cell-7-output-2.png" class="img-fluid"></p>
+<p><img src="aqi.png" class="img-fluid" style="width:80.0%"></p>
+</section>
+<section id="creating-a-map-of-ca-thomas-fire" class="level2">
+<h2 class="anchored" data-anchor-id="creating-a-map-of-ca-thomas-fire">Creating a Map of CA Thomas Fire</h2>
+<p>We also want to understand the impacts of the Thomas Fire on Santa Barbara County through mapping. To do this, we are going to create a false color image of Santa Barbara County with the landsat bands data and map this with our Thomas fire perimeter to understand where in California the fire spanned and how large it was.</p>
+<div class="cell" data-tags="[]">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Creating a false color image </span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>bands[[<span class="st">"swir22"</span>, <span class="st">"nir08"</span>, <span class="st">"red"</span>]].to_array()</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Now we have our image we can graph this with our Thomas Fire perimeter</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Plotting the shapefile</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>size <span class="op">=</span> <span class="dv">6</span> <span class="co">#height in of plot </span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>aspect <span class="op">=</span> bands.rio.width<span class="op">/</span>bands.rio.height</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>fig.set_size_inches(size, size<span class="op">*</span>aspect) <span class="co">#why? bc cannot use ax and size aspect together</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>bands[[<span class="st">"swir22"</span>, <span class="st">"nir08"</span>, <span class="st">"red"</span>]].to_array().plot.imshow(ax<span class="op">=</span>ax, robust <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>ca_fires_new .plot(ax<span class="op">=</span>ax,facecolor<span class="op">=</span><span class="st">'none'</span>, edgecolor<span class="op">=</span><span class="st">'red'</span>, linewidth<span class="op">=</span><span class="dv">2</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">## Set plot title</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Map of the Thomas Fire Perimeter (2017) in California'</span>)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove the axes</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">'off'</span>)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Set legend with linestyle='None'</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>legend_elements <span class="op">=</span> [mlines.Line2D([<span class="dv">0</span>], [<span class="dv">0</span>], color<span class="op">=</span><span class="st">'red'</span>, marker <span class="op">=</span> <span class="st">'_'</span>, linestyle<span class="op">=</span><span class="st">'None'</span>, markersize<span class="op">=</span><span class="dv">10</span>, label<span class="op">=</span><span class="st">'Thomas Fire'</span>)]</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Add legend</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>ax.legend(handles<span class="op">=</span>legend_elements)</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="co">## Showing the plot</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
+<p><img src="thomas_map.png" class="img-fluid" style="width:50.0%"></p>
 
 
 </section>
