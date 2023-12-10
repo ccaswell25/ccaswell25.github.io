@@ -155,7 +155,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">[GIS, R, MEDS]</div>
+                <div class="quarto-category">GIS</div>
+                <div class="quarto-category">R</div>
+                <div class="quarto-category">MEDS</div>
               </div>
                   </div>
   </div>
@@ -217,9 +219,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><a href="https://github.com/eds223-fall-2023-org/assignment-4-ccaswell25/blob/main/assignment4.Rmd">Project Repository Located Here</a></p>
 <section id="about-this-project" class="level2">
 <h2 class="anchored" data-anchor-id="about-this-project">About This Project</h2>
-<p>A surprising fact (cited). This is an important problem to consider because</p>
-<p>This is where marine aquaculture can play an important role, which is defined as….</p>
-<p>With the global food supply crisis, sustainable protein alternatives to meat production have proven to be sufficiently important in the future of our food supply. In order to consider planning for future marine aquaculture projects and initiatives, we need to consider a few important implications, such as ocean depth, temperatures, logistics traffic, etc.</p>
+<p>“As the human population looks set to reach 10 billion people by 2050, our food systems will be under intense pressure to produce animal protein for an increasing population,”(Gentry). This is an important problem to consider because, with scarcity of animal-rich protein sources, we need to turn to other alternatives. This is where marine aquaculture can play an important role, which is defined as the breeding, rearing, and harvesting of aquatic plants and animals (NOAA). Sustainable seafood production can be a signfiicant contributor to this global food supply crisis, and in order to plan for future marine aquaculture projects and initiatives, we need to consider a few important implications, such as ocean depth, temperatures, logistics traffic, protected areas, etc.</p>
 <p>In this analysis, given a species input, I am going to analyze what the determined Exclusive Economic Zones (EEZ) are on the West Coast of the United States that would be best suited to developing marine aquaculture for that species of interest.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -242,7 +242,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="about-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="about-the-data">About the Data:</h2>
-<p>When considering suitability for marine aquaculture for a specific species, we need to consider two primary conditions: Depth and Temperature. When finding suitable EEZ regions, we are going to need data on the depth and surface temperature details (datasets 1 and 2). We can then find suitable regions using the Exclusive Economic Zones (EEZ, dataset 3), which are…..</p>
+<p>When considering suitability for marine aquaculture of a specific species, we need to consider two primary conditions: Depth and Temperature. When finding suitable EEZ regions, we are going to need data on the depth and surface temperature details (datasets 1 and 2). We can then find suitable regions using the Exclusive Economic Zones (dataset 3), which are specific zones that the United States and coastal nations have rights and jurisdiction over the resources in those waters. More details can be found in the shared link above.</p>
 <p><strong>Dataset 1: Sea Surface Temperature</strong></p>
 <p>This data is average annual sea surface temperature (SST) from the years 2008 to 2012. This will be used to characterize the average sea surface temperature within the EEZ region.To find the averages for each year, I created a raster stack of each year titled <code>sst</code> (sea surface temperature).</p>
 <p>This data was generated from <a href="https://coralreefwatch.noaa.gov/product/5km/index_5km_ssta.php">NOAA’s 5km Daily Global Satellite Sea Surface Temperature Anomaly v3.1</a></p>
@@ -250,20 +250,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This data is raster data characterizing the depth of the ocean, defined as a raster titled <code>depth</code>.</p>
 <p>This data was generated from <a href="https://www.gebco.net/data_and_products/gridded_bathymetry_data/#area">General Bathymetric Chart of the Oceans (GEBCO)</a>.</p>
 <p><strong>Dataset 3: Exclusive Economic Zones</strong></p>
-<p>To narrow the focus for this analysis, I will just be focusing on West Coast US Exclusive Economic Zones. These zones serve as ………</p>
+<p>To narrow the focus for this analysis, I will just be focusing on West Coast US Exclusive Economic Zones.</p>
 <p>This data was used as a shapefile titled <code>wc_eez</code>.</p>
 <p>This data was generated from <a href="https://www.marineregions.org/eez.php">Marineregions.org</a>.</p>
 </section>
 <section id="final-results" class="level2">
 <h2 class="anchored" data-anchor-id="final-results">Final Results</h2>
 <p>I created a function (outlined below) that utilizes the following inputs:</p>
-<p><code>species_name</code>: your species of interest. Note: this should be a realistic species for human commerical consumption.</p>
+<p><code>species_name</code>: your species of interest. Note: this should be a realistic species for human commercial consumption.</p>
 <p><code>min_temp</code>: minimum suitable temperature in Celsius, found on <a href="https://www.sealifebase.ca/search.php">SeaLifeBase</a></p>
 <p><code>max_temp</code>: maximum suitable temperature in Celsius, found on <a href="https://www.sealifebase.ca/search.php">SeaLifeBase</a></p>
 <p><code>min_depth</code>: minimum meters below sea level for optimal growth, found on <a href="https://www.sealifebase.ca/search.php">SeaLifeBase</a></p>
 <p><code>max_depth</code>: maximum meters below sea level for optimal growth, found on <a href="https://www.sealifebase.ca/search.php">SeaLifeBase</a></p>
-<p>….figure out how to hide this output so it’s a dropdown in the blog….</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>species_function <span class="ot">=</span> <span class="cf">function</span>(species_name, min_temp, max_temp, min_depth, max_depth){</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># read in the shapefile for the West Coast EEZ</span></span>
@@ -355,6 +356,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(map2)</span>
 <span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>The outputs of the function create two maps showcasing the total suitable area for the species’ growth as well as the percentage (%) of suitable area for the species’ growth.</p>
 <p>In the examples below, this output is showing results for species of oysters:</p>
@@ -362,31 +364,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<p>To conclude, I am able to indicate…..add results and conclusions. Discussion of conclusions, including any potential caveats or future directions</p>
+<p>To conclude, I am able to indicate that the largest area of suitable habitat for oysters in the EEZ region is in Central California. The percentage of suitable area indicates….This data is helpful for guiding actions or policies on sustainable marine aquaculture for oyster species, indicating those projects should occur in those regions for the best results.</p>
+<p>In a future analysis, I would aim to look at existing population data of oysters or other species in this area to help drive decisions on likely size, requirements, and budgets for a marine aquaculture project on oyster species.</p>
 </section>
 <section id="details-of-the-data-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="details-of-the-data-analysis">Details of the Data Analysis</h2>
-<p>For my data analysis, I had to take a number of steps to getting complete suitable areas mapped.</p>
+<p>For my data analysis, I completed a number of steps before getting to mapped suitable areas. These steps included cleaning, wrangling, plotting, and manipulating the datasets that I had.</p>
 <ol type="1">
-<li>first needed to do some basic data cleaning such as reprojecting to make sure all fields were using the same coordinate reference system (so we can accurately compare and layer maps).</li>
+<li><p>First, I needed to do some basic data cleaning. This included reprojecting my data to make sure all was using the same coordinate reference system to accurately compare and layer maps.</p></li>
+<li><p>Second, I calculated the mean sea surface temperature over the raster stacks and converted it to Celsius. This provided me with a raster of means for the entire West Coast. In order to just look at our Exclusive Economic Zones, I used <code>crop</code> to reduce the raster data to our area of interest. Then, because the resolution of the data did not match, I also the nearest neighbor method using <code>resample</code> to make sure the resolutions matched and checked the coordinate reference systems were the same.</p></li>
+<li><p>Third, I plotted the data. In the visualization below, I can see the variation in average sea surface temperatures in Celsius for the West Coast EEZ.</p></li>
 </ol>
-<p>I then took the mean sea surface temperature over the raster stacks and converted it to Celsius.This provided me with a raster of means for the entire West Coast. In order to just look at our Exclusive Economic Zones, I used <code>crop</code> to reduce the ratser data to our area of interest. Because the resolution of the data do not match, I also the nearest neighbor method using <code>resample</code> to make sure the resolutions match and checked the coordinate reference systems were the same.</p>
-<p>In the visualization below, I can see the variation in average sea surface temperatures in Celsius for the West Coast EEZ.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="resampled_sst_avg.png" class="img-fluid figure-img" style="width:100.0%"></p>
 <figcaption class="figure-caption">Sea Surface Temperature in Celsius</figcaption>
 </figure>
 </div>
-<p>Next, I need to reclassify the data (using <code>reclassify</code>) to meet both depth and sea temperature specifications for the species of interest. As an example in this analysis, I will use oysters, however the function created as part of this analysis will showcase any species of choosing.</p>
-<p>Given I want to understand suitable oyster regions, I found information on species depth and temperature requirements on <a href="https://www.sealifebase.ca/search.php">SeaLifeBase</a>. This was used to find information on oyster’s suitable sea surface temperature and depth specifications which was determined to be between 11 and 30 degrees celsius and optimal depth is 0-70 meters below sea level.</p>
-<p>Then I wanted to determine the total suitable area within each EEZ in order to rank specific zones/regions by priority. To do so, I found the total area of suitable locations within each EEZ using <code>crop</code> <code>mask</code> <code>expanse</code> and <code>rasterize</code></p>
-<p>I found the total suitable area within each EEZ region, as seen from the plot below: <img src="suitable_area_by_rgn.png" class="img-fluid" style="width:100.0%" alt="Total Suitable Area within each EEZ"></p>
-<p>Then I cross-joined the data for suitable area by region on to the EEZ data and calculated the percentage of area using the total grid area calculated using <code>expanse</code></p>
-<p>After all of that analysis, I have the data I need to plot, as indicated in the results section (above).</p>
+<ol start="4" type="1">
+<li><p>Fourth, I needed to reclassify the data (using <code>reclassify</code>) to meet both depth and sea temperature specifications for the species of interest. As an example in this analysis, I will use oysters, however the function created as part of this analysis will represent any species of choosing. Given I wanted to understand suitable oyster regions, I found information on species depth and temperature requirements on <a href="https://www.sealifebase.ca/search.php">SeaLifeBase</a>. This was used to find information on oyster’s suitable sea surface temperature and depth specifications which was determined to be between 11 and 30 degrees Celsius and an optimal depth of 0-70 meters below sea level.</p></li>
+<li><p>Fifth, I wanted to determine the total suitable area within each EEZ in order to rank specific zones/regions by priority. To do so, I found the total area of suitable locations within each EEZ using <code>crop</code>, <code>mask</code>, <code>expanse</code>, and <code>rasterize</code>. I could then find the total suitable area within each EEZ region, as seen from the plot below: <img src="suitable_area_by_rgn.png" class="img-fluid" style="width:100.0%" alt="Total Suitable Area within each EEZ"></p></li>
+<li><p>Lastly, I cross-joined the data for suitable area by region on to the EEZ data to plot them in the same map and calculated the percentage of area using the total grid area of the West Coast EEZ (calculated using <code>expanse</code>).</p></li>
+</ol>
+<p>After all of the six steps in the analysis, I had the data in order to plot my final results (as seen above).</p>
 </section>
 <section id="sources" class="level2">
 <h2 class="anchored" data-anchor-id="sources">Sources:</h2>
+<p>Gentry, R.R., Froehlich, H.E., Grimm, D. et al.&nbsp;Mapping the global potential for marine aquaculture. Nat Ecol Evol 1, 1317–1324 (2017). https://doi.org/10.1038/s41559-017-0257-9</p>
+<p>National Oceanic and Atmospheric Administration (NOAA). Understanding Marine Aquaculture. Retrieved from https://www.fisheries.noaa.gov/insight/understanding-marine-aquaculture#:~:text=Marine%20aquaculture%20refers%20to%20the,salmon%2C%20and%20other%20marine%20fish.</p>
+<p>National Oceanic and Atmospheric Administration. (NOAA). 2023. Exclusive Economic Zone (EEZ). Retrieved from https://oceanservice.noaa.gov/facts/eez.html</p>
 
 
 </section>
