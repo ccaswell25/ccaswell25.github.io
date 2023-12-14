@@ -2,10 +2,10 @@
 title: "Modeling Suitable Growth Areas for Marine Species on the West Coast of the United States"
 description: "Determining growth suitability for developing marine aquaculture on the West Coast the United States Exclusive Economic Zones (EEZ)."
 author:
- - name: Carly Caswell
-   url: https://ccaswell25.github.io/
-   affiliation: Master of Environmental Data Science Program \@ The Bren School (UCSB) & The National Center for Ecological Analysis & Synthesis
-   affiliation-url: https://ucsb-meds.github.io/
+- name: Carly Caswell
+  url: https://ccaswell25.github.io/
+  affiliation: Master of Environmental Data Science Program @ The Bren School (UCSB) & The National Center for Ecological Analysis & Synthesis
+  affiliation-url: https://ucsb-meds.github.io/
 date: 12-09-2023
 categories: [GIS, R, MEDS] 
 image: eez.png

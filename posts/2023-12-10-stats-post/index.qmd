@@ -3,34 +3,32 @@ title: "Evaluating the Impact of Climate Change on Snowfall Trends in Vermont"
 description: "A statistical time series analysis of snowfall over 2001 - 2022"
 author:
  - name: Carly Caswell
- url: https://ccaswell25.github.io/
- affiliation: Master of Environmental Data Science Program \\\@ The Bren School (UCSB) & The National Center for Ecological Analysis & Synthesis
- affiliation-url: https://ucsb-meds.github.io/
+ - url: https://ccaswell25.github.io/
+ - affiliation: Master of Environmental Data Science Program \\\@ The Bren School (UCSB) & The National Center for Ecological Analysis & Synthesis
+ - affiliation-url: https://ucsb-meds.github.io/
 date: 12-09-2023
 categories: \[Climate, R, Statistics, MEDS\] 
 image: eez.png
 draft: false
 format:
- html:
- code-fold: true
- code-summary: "Show the code"
-
+  html:
+    code-fold: true
+    code-summary: "Show the code"
 ---
 
 [Project Repository Located Here](https://github.com/ccaswell25/eds222-final)
 
 ## About This Project
 
--crazy fact-
-This is an important problem to consider because...
+-crazy fact- This is an important problem to consider because...
 
 I am interested in the trend of snowfall over time in Vermont and how the trend may be influencing the ski industry, Vermont's tourism economy, and potential wildlife and habitat implications that rely on snowfall to migrate and find food. Snowfall also largely helps water sources in the Spring, providing water to agriculture, wildlife, and for human consumption. I am specifically hoping to answer the question: are seasonal temperature differences causing snowfall patterns later in the year (ski resorts opening later or earlier) in Vermont? Are the more recent years of snowfall statistically significant given previous years of data?
 
 I am also interested in the relationship between temperature changes and snowfall trends due to climate change and will be evaluating both temperature and snowfall variables in Vermont.
 
-In this analysis I am going to.... 
+In this analysis I am going to....
 
-![Pictured: The US Exclusive Economic Zones (EEZ). Sourced by the National Oceanic and Atmospheric Association](eez.png){width=50%}
+![Pictured: The US Exclusive Economic Zones (EEZ). Sourced by the National Oceanic and Atmospheric Association](eez.png){width="50%"}
 
 [Click here for more details on the EEZ Zones](https://oceanservice.noaa.gov/facts/eez.html)
 
@@ -45,12 +43,11 @@ In this analysis I am going to....
 
 ## About the Data:
 
-I gathered daily snow depth and temperature data from the USDA\'s Natural Resources Conservation Service and National Water and Climate Center (<https://nwcc-apps.sc.egov.usda.gov/site-plots/#VT>). This data source contains two datasets:
+I gathered daily snow depth and temperature data from the USDA's Natural Resources Conservation Service and National Water and Climate Center (<https://nwcc-apps.sc.egov.usda.gov/site-plots/#VT>). This data source contains two datasets:
 
 Dataset 1 - Titled `vt_temps` , this dataset contains daily temperature data (in degrees Fahrenheit) from the years 2001 - 2023. These data points were collected from a weather station at the Mount Mansfield SCAN Site numbered 2041. Mount Mansfield is Vermont's largest mountain peak, located in the Green Mountains at an elevation of 4395'.
 
 Dataset 2 - Titled `vt_snow` , this dataset contains daily snowfall data (in inches) from the years 2001 - 2023. These data points were collected from a weather station at the Mount Mansfield SCAN Site numbered 2041. Mount Mansfield is Vermont's largest mountain peak, located in the Green Mountains at an elevation of 4395'.
-
 
 **Dataset 1: Sea Surface Temperature**
 
@@ -60,11 +57,12 @@ This data was generated from [NOAA's 5km Daily Global Satellite Sea Surface Temp
 
 **Dataset 2: Bathymetry**
 
-This data is raster data characterizing the depth of the ocean, defined as a raster titled `depth`. 
+This data is raster data characterizing the depth of the ocean, defined as a raster titled `depth`.
 
 This data was generated from [General Bathymetric Chart of the Oceans (GEBCO)](https://www.gebco.net/data_and_products/gridded_bathymetry_data/#area).
 
 ## Final Results
+
 I did x with the following inputs:
 
 `species_name`: your species of interest. Note: this should be a realistic species for human commercial consumption.
@@ -77,32 +75,32 @@ I did x with the following inputs:
 
 `max_depth`: maximum meters below sea level for optimal growth, found on [SeaLifeBase](https://www.sealifebase.ca/search.php)
 
-The outputs of this analysis create...... 
+The outputs of this analysis create......
 
 In the example below, I am showing results for:
 
-![Total Suitable Area](area_suitable.png){width=100%}
+![Total Suitable Area](area_suitable.png){width="100%"}
 
 ## Conclusion
-To conclude, I am able to indicate that.... 
 
-In a future analysis, I would aim to look at existing population data of oysters or other species in this area to help drive decisions on likely size, requirements, and budgets for a marine aquaculture project on oyster species. 
+To conclude, I am able to indicate that....
 
+In a future analysis, I would aim to look at existing population data of oysters or other species in this area to help drive decisions on likely size, requirements, and budgets for a marine aquaculture project on oyster species.
 
-## Details of the Data Analysis 
+## Details of the Data Analysis
 
-For my data analysis, I completed a number of steps before getting to.... mapped suitable areas. These steps included cleaning, wrangling, plotting, and manipulating the datasets that I had. 
+For my data analysis, I completed a number of steps before getting to.... mapped suitable areas. These steps included cleaning, wrangling, plotting, and manipulating the datasets that I had.
 
-1. First, I needed to do some basic data cleaning. This included re-projecting my data to make sure all was using the same coordinate reference system to accurately compare and layer maps.  
+1.  First, I needed to do some basic data cleaning. This included re-projecting my data to make sure all was using the same coordinate reference system to accurately compare and layer maps.
 
-2. Second, I calculated the mean sea surface temperature over the raster stacks and converted it to Celsius. This provided me with a raster of means for the entire West Coast. In order to just look at our Exclusive Economic Zones, I used `crop` to reduce the raster data to our area of interest. Then, because the resolution of the data did not match, I also used the nearest neighbor method using `resample` to make sure the resolutions matched and checked that the coordinate reference systems were the same.  
+2.  Second, I calculated the mean sea surface temperature over the raster stacks and converted it to Celsius. This provided me with a raster of means for the entire West Coast. In order to just look at our Exclusive Economic Zones, I used `crop` to reduce the raster data to our area of interest. Then, because the resolution of the data did not match, I also used the nearest neighbor method using `resample` to make sure the resolutions matched and checked that the coordinate reference systems were the same.
 
-3. Third, I plotted the data. In the visualization below, I can see the variation in average sea surface temperatures in Celsius for the West Coast EEZ.
+3.  Third, I plotted the data. In the visualization below, I can see the variation in average sea surface temperatures in Celsius for the West Coast EEZ.
 
 ## Sources:
 
-Gentry, R.R., Froehlich, H.E., Grimm, D. et al. Mapping the global potential for marine aquaculture. Nat Ecol Evol 1, 1317–1324 (2017). https://doi.org/10.1038/s41559-017-0257-9
+Gentry, R.R., Froehlich, H.E., Grimm, D. et al. Mapping the global potential for marine aquaculture. Nat Ecol Evol 1, 1317--1324 (2017). https://doi.org/10.1038/s41559-017-0257-9
 
-National Oceanic and Atmospheric Administration (NOAA). Understanding Marine Aquaculture. Retrieved from https://www.fisheries.noaa.gov/insight/understanding-marine-aquaculture#:~:text=Marine%20aquaculture%20refers%20to%20the,salmon%2C%20and%20other%20marine%20fish.
+National Oceanic and Atmospheric Administration (NOAA). Understanding Marine Aquaculture. Retrieved from https://www.fisheries.noaa.gov/insight/understanding-marine-aquaculture#:\~:text=Marine%20aquaculture%20refers%20to%20the,salmon%2C%20and%20other%20marine%20fish.
 
 National Oceanic and Atmospheric Administration. (NOAA). 2023. Exclusive Economic Zone (EEZ). Retrieved from https://oceanservice.noaa.gov/facts/eez.html
