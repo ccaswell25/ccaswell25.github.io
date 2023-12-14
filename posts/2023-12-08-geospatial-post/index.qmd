@@ -16,7 +16,7 @@ format:
     code-summary: "Show the code"
 ---
 
-[Project Repository Located Here](https://github.com/eds223-fall-2023-org/assignment-4-ccaswell25/blob/main/assignment4.Rmd)
+[Project Repository Located Here](https://github.com/ccaswell25/eez-suitable-areas)
 
 ## About This Project
 
@@ -24,7 +24,7 @@ format:
 
 In this analysis, given a species input, I am going to analyze what the determined Exclusive Economic Zones (EEZ) are on the West Coast of the United States that would be best suited to developing marine aquaculture for that species of interest.
 
-![Pictured: The US Exclusive Economic Zones (EEZ). Sourced by the National Oceanic and Atmospheric Association](eez.png){width=50%}
+![Pictured: The US Exclusive Economic Zones (EEZ). Sourced by the National Oceanic and Atmospheric Association](eez.png){width="50%"}
 
 [Click here for more details on the EEZ Zones](https://oceanservice.noaa.gov/facts/eez.html)
 
@@ -49,19 +49,20 @@ This data was generated from [NOAA's 5km Daily Global Satellite Sea Surface Temp
 
 **Dataset 2: Bathymetry**
 
-This data is raster data characterizing the depth of the ocean, defined as a raster titled `depth`. 
+This data is raster data characterizing the depth of the ocean, defined as a raster titled `depth`.
 
 This data was generated from [General Bathymetric Chart of the Oceans (GEBCO)](https://www.gebco.net/data_and_products/gridded_bathymetry_data/#area).
 
 **Dataset 3: Exclusive Economic Zones**
 
-To narrow the focus for this analysis, I will just be focusing on West Coast US Exclusive Economic Zones. 
+To narrow the focus for this analysis, I will just be focusing on West Coast US Exclusive Economic Zones.
 
-This data was used as a shapefile titled `wc_eez`. 
+This data was used as a shapefile titled `wc_eez`.
 
 This data was generated from [Marineregions.org](https://www.marineregions.org/eez.php).
 
 ## Final Results
+
 I created a function (outlined below) that utilizes the following inputs:
 
 `species_name`: your species of interest. Note: this should be a realistic species for human commercial consumption.
@@ -73,7 +74,6 @@ I created a function (outlined below) that utilizes the following inputs:
 `min_depth`: minimum meters below sea level for optimal growth, found on [SeaLifeBase](https://www.sealifebase.ca/search.php)
 
 `max_depth`: maximum meters below sea level for optimal growth, found on [SeaLifeBase](https://www.sealifebase.ca/search.php)
-
 
 ```{r}
 species_function = function(species_name, min_temp, max_temp, min_depth, max_depth){
@@ -169,48 +169,42 @@ print(map2)
 }
 ```
 
-The outputs of the function create two maps showcasing the total suitable area for the species' growth as well as the percentage (%) of suitable area for the species' growth. 
+The outputs of the function create two maps showcasing the total suitable area for the species' growth as well as the percentage (%) of suitable area for the species' growth.
 
 In the examples below, this output is showing results for species of oysters:
 
-![Total Suitable Area](area_suitable.png){width=100%}
-![Total Percentage of Suitable Area](perc_area_suitable.png){width=100%}
-
+![Total Suitable Area](area_suitable.png){width="100%"} ![Total Percentage of Suitable Area](perc_area_suitable.png){width="100%"}
 
 ## Conclusion
-To conclude, I am able to indicate that the largest area of suitable habitat for oysters in the EEZ region is in Central California. The percentage of suitable area indicates....This data is helpful for guiding actions or policies on sustainable marine aquaculture for oyster species, indicating those projects should occur in those regions for the best results. 
 
-In a future analysis, I would aim to look at existing population data of oysters or other species in this area to help drive decisions on likely size, requirements, and budgets for a marine aquaculture project on oyster species. 
+To conclude, I am able to indicate that the largest area of suitable habitat for oysters in the EEZ region is in Central California. The percentage of suitable area indicates the highest percentage of suitable area is in the Washington region of the West Coast EEZ. This data is helpful for guiding actions or policies on sustainable marine aquaculture for oyster species, indicating those projects should occur in those regions for the best results.
 
+In a future analysis, I would aim to look at existing population data of oysters or other species in this area to help drive decisions on likely size, requirements, and budgets for a marine aquaculture project on oyster species.
 
-## Details of the Data Analysis 
+## Details of the Data Analysis
 
-For my data analysis, I completed a number of steps before getting to mapped suitable areas. These steps included cleaning, wrangling, plotting, and manipulating the datasets that I had. 
+For my data analysis, I completed a number of steps before getting to mapped suitable areas. These steps included cleaning, wrangling, plotting, and manipulating the datasets that I had.
 
-1. First, I needed to do some basic data cleaning. This included reprojecting my data to make sure all was using the same coordinate reference system to accurately compare and layer maps.  
+1.  First, I needed to do some basic data cleaning. This included re-projecting my data to make sure all was using the same coordinate reference system to accurately compare and layer maps.
 
-2. Second, I calculated the mean sea surface temperature over the raster stacks and converted it to Celsius. This provided me with a raster of means for the entire West Coast. In order to just look at our Exclusive Economic Zones, I used `crop` to reduce the raster data to our area of interest. Then, because the resolution of the data did not match, I also the nearest neighbor method using `resample` to make sure the resolutions matched and checked the coordinate reference systems were the same.  
+2.  Second, I calculated the mean sea surface temperature over the raster stacks and converted it to Celsius. This provided me with a raster of means for the entire West Coast. In order to just look at our Exclusive Economic Zones, I used `crop` to reduce the raster data to our area of interest. Then, because the resolution of the data did not match, I also used the nearest neighbor method using `resample` to make sure the resolutions matched and checked that the coordinate reference systems were the same.
 
-3. Third, I plotted the data. In the visualization below, I can see the variation in average sea surface temperatures in Celsius for the West Coast EEZ.
+3.  Third, I plotted the data. In the visualization below, I can see the variation in average sea surface temperatures in Celsius for the West Coast EEZ.
 
-![Sea Surface Temperature in Celsius](resampled_sst_avg.png){width=100%}
+![Sea Surface Temperature in Celsius](resampled_sst_avg.png){width="100%"}
 
+4.  Fourth, I needed to reclassify the data (using `reclassify`) to meet both depth and sea temperature specifications for the species of interest. As an example in this analysis, I will use oysters, however the function created as part of this analysis will represent any species of choosing. Given I wanted to understand suitable oyster regions, I found information on species depth and temperature requirements on [SeaLifeBase](https://www.sealifebase.ca/search.php).This was used to find information on oyster's suitable sea surface temperature and depth specifications which was determined to be between 11 and 30 degrees Celsius and an optimal depth of 0-70 meters below sea level.
 
-4. Fourth, I needed to reclassify the data (using `reclassify`) to meet both depth and sea temperature specifications for the species of interest. As an example in this analysis, I will use oysters, however the function created as part of this analysis will represent any species of choosing. Given I wanted to understand suitable oyster regions, I found information on species depth and temperature requirements on [SeaLifeBase](https://www.sealifebase.ca/search.php). This was used to find information on oyster's suitable sea surface temperature and depth specifications which was determined to be between 11 and 30 degrees Celsius and an optimal depth of 0-70 meters below sea level.
+5.  Fifth, I wanted to determine the total suitable area within each EEZ in order to rank specific zones/regions by priority. To do so, I found the total area of suitable locations within each EEZ using `crop`, `mask`, `expanse`, and `rasterize`. I could then find the total suitable area within each EEZ region, as seen from the plot below: ![Total Suitable Area within each EEZ](suitable_area_by_rgn.png){width="100%"}
 
-
-5. Fifth, I wanted to determine the total suitable area within each EEZ in order to rank specific zones/regions by priority. To do so, I found the total area of suitable locations within each EEZ using `crop`, `mask`, `expanse`, and `rasterize`. I could then find the total suitable area within each EEZ region, as seen from the plot below:
-![Total Suitable Area within each EEZ](suitable_area_by_rgn.png){width=100%}
-
-6. Lastly, I cross-joined the data for suitable area by region on to the EEZ data to plot them in the same map and calculated the percentage of area using the total grid area of the West Coast EEZ (calculated using `expanse`). 
+6.  Lastly, I cross-joined the data for suitable area by region on to the EEZ data to plot them in the same map and calculated the percentage of area using the total grid area of the West Coast EEZ (calculated using `expanse`).
 
 After all of the six steps in the analysis, I had the data in order to plot my final results (as seen above).
 
-
 ## Sources:
 
-Gentry, R.R., Froehlich, H.E., Grimm, D. et al. Mapping the global potential for marine aquaculture. Nat Ecol Evol 1, 1317–1324 (2017). https://doi.org/10.1038/s41559-017-0257-9
+Gentry, R.R., Froehlich, H.E., Grimm, D. et al. Mapping the global potential for marine aquaculture. Nat Ecol Evol 1, 1317--1324 (2017). https://doi.org/10.1038/s41559-017-0257-9
 
-National Oceanic and Atmospheric Administration (NOAA). Understanding Marine Aquaculture. Retrieved from https://www.fisheries.noaa.gov/insight/understanding-marine-aquaculture#:~:text=Marine%20aquaculture%20refers%20to%20the,salmon%2C%20and%20other%20marine%20fish.
+National Oceanic and Atmospheric Administration (NOAA). Understanding Marine Aquaculture. Retrieved from https://www.fisheries.noaa.gov/insight/understanding-marine-aquaculture#:\~:text=Marine%20aquaculture%20refers%20to%20the,salmon%2C%20and%20other%20marine%20fish.
 
 National Oceanic and Atmospheric Administration. (NOAA). 2023. Exclusive Economic Zone (EEZ). Retrieved from https://oceanservice.noaa.gov/facts/eez.html
