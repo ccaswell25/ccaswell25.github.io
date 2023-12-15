@@ -8,7 +8,7 @@ author:
  - affiliation-url: https://ucsb-meds.github.io/
 date: 12-09-2023
 categories: \[Climate, R, Statistics, MEDS\] 
-image: eez.png
+image: ski_vt.png
 draft: false
 format:
   html:
