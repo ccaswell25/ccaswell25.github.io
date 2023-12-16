@@ -7,13 +7,13 @@ author:
  - affiliation: Master of Environmental Data Science Program \\\@ The Bren School (UCSB) & The National Center for Ecological Analysis & Synthesis
  - affiliation-url: https://ucsb-meds.github.io/
 date: 12-09-2023
-categories: \[Climate, R, Statistics, Time Series, MEDS\] 
+categories: [Climate, R, Statistics, Time Series, MEDS] 
 image: ski_vt.png
 draft: false
+editor: visual
 format:
-  html:
+  html: 
     code-fold: true
-    code-summary: "Show the code"
 ---
 
 [Project Repository Located Here](https://github.com/ccaswell25/eds222-final)
@@ -50,7 +50,7 @@ For my data analysis, I completed a number of steps before getting to my final r
 
 #### Reading in the Data
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE, eval = FALSE}
 knitr::opts_chunk$set(echo = FALSE, eval = TRUE, results = 'hide', warning = FALSE)
 ```
 

@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2023-12-09">
+<meta name="description" content="A statistical time series analysis of snowfall and temperature between the years 2001 - 2022">
+
+<title>Carly Caswell - Evaluating the Impact of Climate Change on Snowfall Trends in Vermont</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="../../site_libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="../../site_libs/plotly-binding-4.10.2/plotly.js"></script>
+<script src="../../site_libs/typedarray-0.1/typedarray.min.js"></script>
+<script src="../../site_libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="../../site_libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="../../site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="../../site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="../../site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Carly Caswell</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../resources.html" rel="" target="">
+ <span class="menu-text">Resources</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts.html" rel="" target="">
+ <span class="menu-text">My Blog</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-page-left">
+      <h1 class="title">Evaluating the Impact of Climate Change on Snowfall Trends in Vermont</h1>
+                  <div>
+        <div class="description">
+          A statistical time series analysis of snowfall and temperature between the years 2001 - 2022
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">Climate</div>
+                <div class="quarto-category">R</div>
+                <div class="quarto-category">Statistics</div>
+                <div class="quarto-category">Time Series</div>
+                <div class="quarto-category">MEDS</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">December 9, 2023</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#about-this-project" id="toc-about-this-project" class="nav-link active" data-scroll-target="#about-this-project">About This Project</a></li>
+  <li><a href="#research-question" id="toc-research-question" class="nav-link" data-scroll-target="#research-question">Research Question</a></li>
+  <li><a href="#analysis-highlights" id="toc-analysis-highlights" class="nav-link" data-scroll-target="#analysis-highlights">Analysis Highlights:</a></li>
+  <li><a href="#about-the-data" id="toc-about-the-data" class="nav-link" data-scroll-target="#about-the-data">About the Data:</a></li>
+  <li><a href="#preliminary-data-analysis" id="toc-preliminary-data-analysis" class="nav-link" data-scroll-target="#preliminary-data-analysis">Preliminary Data Analysis</a></li>
+  <li><a href="#my-statistical-analyses" id="toc-my-statistical-analyses" class="nav-link" data-scroll-target="#my-statistical-analyses">My Statistical Analyses</a>
+  <ul class="collapse">
+  <li><a href="#summary-statistics" id="toc-summary-statistics" class="nav-link" data-scroll-target="#summary-statistics">Summary Statistics</a></li>
+  <li><a href="#checking-ols-assumptions" id="toc-checking-ols-assumptions" class="nav-link" data-scroll-target="#checking-ols-assumptions">Checking OLS Assumptions</a></li>
+  <li><a href="#hypothesis-testing" id="toc-hypothesis-testing" class="nav-link" data-scroll-target="#hypothesis-testing">Hypothesis Testing</a></li>
+  <li><a href="#linear-regression" id="toc-linear-regression" class="nav-link" data-scroll-target="#linear-regression">Linear Regression</a></li>
+  </ul></li>
+  <li><a href="#conclusion-future-considerations" id="toc-conclusion-future-considerations" class="nav-link" data-scroll-target="#conclusion-future-considerations">Conclusion &amp; Future Considerations</a></li>
+  <li><a href="#sources" id="toc-sources" class="nav-link" data-scroll-target="#sources">Sources:</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+
+
+
+
+<p><a href="https://github.com/ccaswell25/eds222-final">Project Repository Located Here</a></p>
+<section id="about-this-project" class="level2">
+<h2 class="anchored" data-anchor-id="about-this-project">About This Project</h2>
+<p>“Since 2000, the number of days with snow cover globally has declined as Earths climate warms, and southern New England has lost nearly a month of its annual snow cover,”(Boston Globe). With climate change being a major contributor in rising temperatures across the globe, lack of snowfall has become a serious problem that researchers, scientists, economists, and industry experts are working to solve. Snowfall is an important climate change indicator because of it’s influence on the larger environmental community. Snowfall provides water sources in the Springtime for wildlife, the agriculture industry, and for human consumption. It is also a key contributor to the ski and tourism industry, which impacts the economy for some states that significantly rely on ski and snow tourism.</p>
+<p>Vermont is one state that relies heavily on its winter tourism, so my aim was to analyze the changes in snowfall in this state. I have personally felt the impacts on lack of snow in recent years in this state, with limitations to skiing and ski resorts having to make more snow than ever before. My aim is to understand if there are seasonal temperature and snowfall differences in Vermont’s yearly snow patterns by comparing data from the last 22 years.</p>
+</section>
+<section id="research-question" class="level2">
+<h2 class="anchored" data-anchor-id="research-question">Research Question</h2>
+<p>Is there a statistically significant difference between the long-term trends in average snowfall and temperature changes in Vermont?</p>
+</section>
+<section id="analysis-highlights" class="level2">
+<h2 class="anchored" data-anchor-id="analysis-highlights">Analysis Highlights:</h2>
+<ol type="1">
+<li>Tidy and wrangle snowfall and temperature data</li>
+<li>Visualize my data</li>
+<li>Check for normality</li>
+<li>Run two hypothesis tests</li>
+<li>Complete a regression analysis</li>
+</ol>
+</section>
+<section id="about-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="about-the-data">About the Data:</h2>
+<p>I gathered daily snow depth and temperature data from the USDA’s Natural Resources Conservation Service and National Water and Climate Center (<a href="https://nwcc-apps.sc.egov.usda.gov/site-plots/#VT" class="uri">https://nwcc-apps.sc.egov.usda.gov/site-plots/#VT</a>). This data source contains two datasets:</p>
+<p>Dataset 1 - Titled <code>vt_temps</code> , this dataset contains daily temperature data (in degrees Fahrenheit) from the years 2001 - 2023. These data points were collected from a weather station at the Mount Mansfield SCAN Site numbered 2041. Mount Mansfield is Vermont’s largest mountain peak, located in the Green Mountains at an elevation of 4395’.</p>
+<p>Dataset 2 - Titled <code>vt_snow</code> , this dataset contains daily snowfall data (in inches) from the years 2001 - 2023. These data points were collected from a weather station at the Mount Mansfield SCAN Site numbered 2041. Mount Mansfield is Vermont’s largest mountain peak, located in the Green Mountains at an elevation of 4395’.</p>
+</section>
+<section id="preliminary-data-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="preliminary-data-analysis">Preliminary Data Analysis</h2>
+<p>For my data analysis, I completed a number of steps before getting to my final results. Those steps included cleaning, wrangling, visualizing, and analyzing the datasets that I had.</p>
+<section id="reading-in-the-data" class="level4">
+<h4 class="anchored" data-anchor-id="reading-in-the-data">Reading in the Data</h4>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co">#for tidying my data</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tufte)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(feasts)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co">#for wrangling</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dotwhisker) <span class="co">#for pretty plotting</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly) <span class="co">#for plotting</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate) <span class="co">#for extracting specific years/months in the data</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggmap)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tmap)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(zoo) <span class="co">#moving averages</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Setting my filepath here:</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>rootdir <span class="ot">&lt;-</span> (<span class="st">"~/Documents/MEDS/Fall_Q2/EDS-222-Stats/Assignments"</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>datadir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(rootdir,<span class="st">"eds222-final"</span>,<span class="st">"data"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>vt_temps <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(datadir,<span class="st">"Mount_Mansfield_temps.csv"</span>))    </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>vt_snow <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(datadir,<span class="st">"Mount_Mansfield_snow.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="data-cleaning" class="level4">
+<h4 class="anchored" data-anchor-id="data-cleaning">Data Cleaning</h4>
+<p>After reading in the data, I noticed both datasets were not tidy, so I completed a number of steps to tidy the data into a usable format.</p>
+<section id="temperature-data-updates" class="level5">
+<h5 class="anchored" data-anchor-id="temperature-data-updates">Temperature Data Updates</h5>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Making this data tidy using pivot_longer</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>tidy_vt_temps <span class="ot">&lt;-</span> vt_temps <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="st">'2001'</span>, <span class="st">'2002'</span>, <span class="st">'2003'</span>, <span class="st">'2004'</span>, <span class="st">'2005'</span>, <span class="st">'2006'</span>, <span class="st">'2007'</span>, <span class="st">'2011'</span>, <span class="st">'2012'</span>, <span class="st">'2013'</span>, <span class="st">'2014'</span>, <span class="st">'2015'</span>, <span class="st">'2016'</span>, <span class="st">'2017'</span>, <span class="st">'2018'</span>, <span class="st">'2021'</span>, <span class="st">'2022'</span>, <span class="st">'2023'</span>), <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="at">values_to =</span> <span class="st">"value"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="st">'2009'</span>, <span class="sc">-</span><span class="st">'2010'</span>, <span class="sc">-</span><span class="st">'2019'</span>, <span class="sc">-</span><span class="st">'2024'</span>) </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Creating a combined date column since year and date are currently separate</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>tidy_vt_temps<span class="sc">$</span>date <span class="ot">&lt;-</span> <span class="fu">paste</span>(tidy_vt_temps<span class="sc">$</span>year, tidy_vt_temps<span class="sc">$</span>date, <span class="at">sep =</span> <span class="st">"-"</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(tidy_vt_temps<span class="sc">$</span>date) <span class="co">#this column is still a character so this needs to be updated to a date</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>tidy_vt_temps<span class="sc">$</span>date <span class="ot">&lt;-</span> <span class="fu">ymd</span>(tidy_vt_temps<span class="sc">$</span>date)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(tidy_vt_temps<span class="sc">$</span>date) <span class="co">#nice, using lubridate worked to make a date column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="snowfall-data-updates" class="level5">
+<h5 class="anchored" data-anchor-id="snowfall-data-updates">Snowfall Data Updates</h5>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Making this data tidy using pivot_longer</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>tidy_vt_snow <span class="ot">&lt;-</span> vt_snow <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="st">'2001'</span>, <span class="st">'2002'</span>, <span class="st">'2003'</span>, <span class="st">'2004'</span>, <span class="st">'2005'</span>, <span class="st">'2006'</span>, <span class="st">'2007'</span>, <span class="st">'2011'</span>, <span class="st">'2012'</span>, <span class="st">'2013'</span>, <span class="st">'2015'</span>, <span class="st">'2016'</span>, <span class="st">'2017'</span>, <span class="st">'2018'</span>, <span class="st">'2022'</span>, <span class="st">'2023'</span>), <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="at">values_to =</span> <span class="st">"value"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="st">'2009'</span>, <span class="sc">-</span><span class="st">'2010'</span>, <span class="sc">-</span><span class="st">'2020'</span>, <span class="sc">-</span><span class="st">'2024'</span>) </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Creating a combined date column since year and date are currently separate</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>tidy_vt_snow<span class="sc">$</span>date <span class="ot">&lt;-</span> <span class="fu">paste</span>(tidy_vt_snow<span class="sc">$</span>year, tidy_vt_snow<span class="sc">$</span>date, <span class="at">sep =</span> <span class="st">"-"</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(tidy_vt_snow<span class="sc">$</span>date) <span class="co">#it's still a character so this needs to be updated</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>tidy_vt_snow<span class="sc">$</span>date <span class="ot">&lt;-</span> <span class="fu">ymd</span>(tidy_vt_snow<span class="sc">$</span>date)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(tidy_vt_snow<span class="sc">$</span>date) <span class="co">#nice, it's now a date column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+</section>
+<section id="data-wrangling" class="level4">
+<h4 class="anchored" data-anchor-id="data-wrangling">Data Wrangling</h4>
+<p>After tidying the data, I wanted to take a look at it visually and narrow down the data I am going to work with:</p>
+<section id="temperature-data-updates-1" class="level5">
+<h5 class="anchored" data-anchor-id="temperature-data-updates-1">Temperature Data Updates</h5>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Plotting a few years of data:</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tidy_vt_temps, <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> value)) <span class="sc">+</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#I have data for all months of the year</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#I've decided I want to compare just months November - December for this analysis</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#First need to create a month column:</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>tidy_vt_temps_winter <span class="ot">&lt;-</span> tidy_vt_temps <span class="sc">%&gt;%</span> </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">mutate</span>(<span class="at">month =</span> <span class="fu">month</span>(date)) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">temp =</span> value)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Now I can filter for only the months I want:</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>tidy_vt_temp_winter_years <span class="ot">&lt;-</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>tidy_vt_temps_winter <span class="sc">%&gt;%</span> </span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(month <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">11</span>,<span class="dv">12</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">month_day =</span> <span class="fu">sprintf</span>(<span class="st">"%02d-%02d"</span>, <span class="fu">month</span>(date), <span class="fu">day</span>(date)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="snowfall-data-updates-1" class="level5">
+<h5 class="anchored" data-anchor-id="snowfall-data-updates-1">Snowfall Data Updates</h5>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Plotting a few years of data:</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tidy_vt_snow, <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> value)) <span class="sc">+</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#I have data for all months of the year</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#I've decided I want to compare just months November - December for this analysis</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#First need to create a month column:</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>tidy_vt_snow_winter <span class="ot">&lt;-</span> tidy_vt_snow <span class="sc">%&gt;%</span> </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">month =</span> <span class="fu">month</span>(tidy_vt_snow<span class="sc">$</span>date)) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">snowfall =</span> value)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Now I can filter for only the months I want:</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>tidy_vt_snow_winter_years <span class="ot">&lt;-</span> </span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>tidy_vt_snow_winter <span class="sc">%&gt;%</span> </span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>   <span class="fu">filter</span>(month <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">11</span>,<span class="dv">12</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">month_day =</span> <span class="fu">sprintf</span>(<span class="st">"%02d-%02d"</span>, <span class="fu">month</span>(date), <span class="fu">day</span>(date))) <span class="co">#also making a new column for graphing purposes later</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+</section>
+<section id="data-visualization" class="level4">
+<h4 class="anchored" data-anchor-id="data-visualization">Data Visualization</h4>
+<p>I’m now going to take a look at multiple years of snowfall and temperature data in order to have visual evidence of any key trends I can gather from November and December between 2001 and 2023.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="newplot.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption class="figure-caption">Pictured: Comparing Snowfall on Mount Mansfield in November and December</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="newplottemp.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption class="figure-caption">Pictured: Comparing Temperature on Mount Mansfield in November and December</figcaption>
+</figure>
+</div>
+<p>Details on the code used to create these plots can be found below:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Taking a look at daily snowfall from 2001 - 2023</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ly</span>(tidy_vt_snow_winter_years, </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="sc">~</span>month_day, </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="sc">~</span>snowfall, </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> <span class="sc">~</span><span class="fu">as.factor</span>(year), </span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">type =</span> <span class="st">"scatter"</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">mode =</span> <span class="st">"lines+markers"</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">line =</span> <span class="fu">list</span>(<span class="at">width =</span> <span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">layout</span>(<span class="at">title =</span> <span class="st">"Comparison of Snowfall on Mount Mansfield from 2001 to 2022"</span>,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">xaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Dates"</span>),</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">yaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Snowfall (in inches)"</span>),</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">legend =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Year"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in RColorBrewer::brewer.pal(N, "Set2"): n too large, allowed maximum for palette Set2 is 8
+Returning the palette you asked for with that many colors
+
+Warning in RColorBrewer::brewer.pal(N, "Set2"): n too large, allowed maximum for palette Set2 is 8
+Returning the palette you asked for with that many colors</code></pre>
+</div>
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-c2dea167870f36b6c670" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-c2dea167870f36b6c670">{"x":{"visdat":{"1423c250f3eeb":["function () ","plotlyVisDat"]},"cur_data":"1423c250f3eeb","attrs":{"1423c250f3eeb":{"x":{},"y":{},"mode":"lines+markers","line":{"width":1},"color":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Comparison of Snowfall on Mount Mansfield from 2001 to 2022","xaxis":{"domain":[0,1],"automargin":true,"title":"Dates","type":"category","categoryorder":"array","categoryarray":["11-01","11-02","11-03","11-04","11-05","11-06","11-07","11-08","11-09","11-10","11-11","11-12","11-13","11-14","11-15","11-16","11-17","11-18","11-19","11-20","11-21","11-22","11-23","11-24","11-25","11-26","11-27","11-28","11-29","11-30","12-01","12-02","12-03","12-04","12-05","12-06","12-07","12-08","12-09","12-10","12-11","12-12","12-13","12-14","12-15","12-16","12-17","12-18","12-19","12-20","12-21","12-22","12-23","12-24","12-25","12-26","12-27","12-28","12-29","12-30","12-31"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"Snowfall (in inches)"},"legend":{"title":"Year"},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["11-01","11-02","11-03","11-04","11-05","11-06","11-07","11-08","11-09","11-10","11-11","11-12","11-13","11-14","11-15","11-16","11-17","11-18","11-19","11-20","11-21","11-22","11-23","11-24","11-25","11-26","11-27","11-28","11-29","11-30","12-01","12-02","12-03","12-04","12-05","12-06","12-07","12-08","12-09","12-10","12-11","12-12","12-13","12-14","12-15","12-16","12-17","12-18","12-19","12-20","12-21","12-22","12-23","12-24","12-25","12-26","12-27","12-28","12-29","12-30","12-31"],"y":[16,16,16,6,5,4,3,2,2,1,1,0,0,0,0,0,0,0,0,0,0,0,3,7,8,10,10,4,4,3,2,1,1,1,1,1,3,7,8,11,11,12,13,13,14,14,15,6,6,6,5,4,4,4,4,7,8,10,11,12,13],"mode":"lines+markers","line":{"color":"rgba(102,194,165,1)","width":1},"type":"scatter","name":"2001","marker":{"color":"rgba(102,194,165,1)","line":{"color":"rgba(102,194,165,1)"}},"textfont":{"color":"rgba(102,194,165,1)"},"error_y":{"color":"rgba(102,194,165,1)"},"error_x":{"color":"rgba(102,194,165,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["11-01","11-02","11-03","11-04","11-05","11-06","11-07","11-08","11-09","11-10","11-11","11-12","11-13","11-14","11-15","11-16","11-17","11-18","11-19","11-20","11-21","11-22","11-23","11-24","11-25","11-26","11-27","11-28","11-29","11-30","12-01","12-02","12-03","12-04","12-05","12-06","12-07","12-08","12-09","12-10","12-11","12-12","12-13","12-14","12-15","12-16","12-17","12-18","12-19","12-20","12-21","12-22","12-23","12-24","12-25","12-26","12-27","12-28","12-29","12-30","12-31"],"y":[12,12,13,13,14,14,14,14,14,14,14,14,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,1,1,1,7,9,10,12,13,13,14,15,15,15,16,16,16],"mode":"lines+markers","line":{"color":"rgba(189,173,133,1)","width":1},"type":"scatter","name":"2002","marker":{"color":"rgba(189,173,133,1)","line":{"color":"rgba(189,173,133,1)"}},"textfont":{"color":"rgba(189,173,133,1)"},"error_y":{"color":"rgba(189,173,133,1)"},"error_x":{"color":"rgba(189,173,133,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["11-01","11-02","11-03","11-04","11-05","11-06","11-07","11-08","11-09","11-10","11-11","11-12","11-13","11-14","11-15","11-16","11-17","11-18","11-19","11-20","11-21","11-22","11-23","11-24","11-25","11-26","11-27","11-28","11-29","11-30","12-01","12-02","12-03","12-04","12-05","12-06","12-07","12-08","12-09","12-10","12-11","12-12","12-13","12-14","12-15","12-16","12-17","12-18","12-19","12-20","12-21","12-22","12-23","12-24","12-25","12-26","12-27","12-28","12-29","12-30","12-31"],"y":[0,2,3,1,3,3,3,4,3,1,0,0,0,0,0,0,1,2,9,9,7,6,3,14,13,12,12,13,15,20,21,24,23,22,20,19,19,18,21,20,19,18,17,17,16,17,18,17,17,16,12,14,13,18,17,17,18,18,18,19,18],"mode":"lines+markers","line":{"color":"rgba(245,146,102,1)","width":1},"type":"scatter","name":"2003","marker":{"color":"rgba(245,146,102,1)","line":{"color":"rgba(245,146,102,1)"}},"textfont":{"color":"rgba(245,146,102,1)"},"error_y":{"color":"rgba(245,146,102,1)"},"error_x":{"color":"rgba(245,146,102,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["11-01","11-02","11-03","11-04","11-05","11-06","11-07","11-08","11-09","11-10","11-11","11-12","11-13","11-14","11-15","11-16","11-17","11-18","11-19","11-20","11-21","11-22","11-23","11-24","11-25","11-26","11-27","11-28","11-29","11-30","12-01","12-02","12-03","12-04","12-05","12-06","12-07","12-08","12-09","12-10","12-11","12-12","12-13","12-14","12-15","12-16","12-17","12-18","12-19","12-20","12-21","12-22","12-23","12-24","12-25","12-26","12-27","12-28","12-29","12-30","12-31"],"y":[0,0,0,0,0,0,0,0,1,1,0,0,0,7,13,12,10,8,4,0,2,1,1,0,0,1,1,0,0,1,1,2,4,4,6,4,11,22,19,16,13,6,6,6,9,19,17,22,28,26,26,26,24,21,11,17,23,22,20,18,16],"mode":"lines+markers","line":{"color":"rgba(217,150,141,1)","width":1},"type":"scatter","name":"2004","marker":{"color":"rgba(217,150,141,1)","line":{"color":"rgba(217,150,141,1)"}},"textfont":{"color":"rgba(217,150,141,1)"},"error_y":{"color":"rgba(217,150,141,1)"},"error_x":{"color":"rgba(217,150,141,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["11-01","11-02","11-03","11-04","11-05","11-06","11-07","11-08","11-09","11-10","11-11","11-12","11-13","11-14","11-15","11-16","11-17","11-18","11-19","11-20","11-21","11-22","11-23","11-24","11-25","11-26","11-27","11-28","11-29","11-30","12-01","12-02","12-03","12-04","12-05","12-06","12-07","12-08","12-09","12-10","12-11","12-12","12-13","12-14","12-15","12-16","12-17","12-18","12-19","12-20","12-21","12-22","12-23","12-24","12-25","12-26",null,"12-28","12-29","12-30","12-31"],"y":[0,0,0,0,1,0,1,0,0,3,2,1,1,1,1,1,1,1,1,0,1,0,1,1,0,1,2,1,0,1,0,2,2,3,3,3,4,3,3,3,6,6,7,10,15,12,10,10,10,10,11,10,9,3,3,4,null,8,8,8,8],"mode":"lines+markers","line":{"color":"rgba(162,158,189,1)","width":1},"type":"scatter","name":"2005","marker":{"color":"rgba(162,158,189,1)","line":{"color":"rgba(162,158,189,1)"}},"textfont":{"color":"rgba(162,158,189,1)"},"error_y":{"color":"rgba(162,158,189,1)"},"error_x":{"color":"rgba(162,158,189,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["11-01","11-02","11-03","11-04","11-05","11-06","11-07","11-08","11-09","11-10","11-11","11-12","11-13","11-14","11-15","11-16","11-17","11-18",null,"11-23","11-24","11-25","11-26","11-27","11-28","11-29","11-30","12-01","12-02","12-03","12-04"],"y":[4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,null,9,10,12,10,12,8,3,0,0,0,8,6],"mode":"lines+markers","line":{"color":"rgba(175,154,200,1)","width":1},"type":"scatter","name":"2006","marker":{"color":"rgba(175,154,200,1)","line":{"color":"rgba(175,154,200,1)"}},"textfont":{"color":"rgba(175,154,200,1)"},"error_y":{"color":"rgba(175,154,200,1)"},"error_x":{"color":"rgba(175,154,200,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["11-02","11-03","11-04","11-05","11-06","11-07","11-08","11-09","11-10","11-11","11-12","11-13","11-14","11-15","11-16","11-17","11-18","11-19","11-20","11-21","11-22","11-23","11-24","11-25","11-26","11-27","11-28","11-29","11-30","12-01","12-02","12-03","12-04",null,"12-09",null,"12-11",null,"12-15","12-16","12-17","12-18","12-19","12-20","12-21","12-22","12-23","12-24","12-25",null,"12-27","12-28",null,"12-30"],"y":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,null,8,null,5,null,1,0,1,1,0,2,1,2,1,0,0,null,2,1,null,3],"mode":"lines+markers","line":{"color":"rgba(215,144,197,1)","width":1},"type":"scatter","name":"2007","marker":{"color":"rgba(215,144,197,1)","line":{"color":"rgba(215,144,197,1)"}},"textfont":{"color":"rgba(215,144,197,1)"},"error_y":{"color":"rgba(215,144,197,1)"},"error_x":{"color":"rgba(215,144,197,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["11-01","11-02","11-03","11-04","11-05","11-06","11-07","11-08","11-09","11-10","11-11","11-12","11-13","11-14","11-15","11-16","11-17","11-18","11-19","11-20","11-21","11-22","11-23","11-24",null,"11-30","12-01","12-02","12-03","12-04","12-05","12-06","12-07","12-08","12-09","12-10","12-11",null,"12-13","12-14","12-15","12-16","12-17","12-18","12-19","12-20","12-21","12-22","12-23","12-24","12-25","12-26","12-27"],"y":[3,3,3,2,1,0,0,0,1,1,1,0,0,0,0,0,0,1,0,1,1,1,0,0,null,2,1,1,0,1,3,5,17,29,26,21,18,null,12,10,12,12,14,13,12,13,12,12,17,20,19,18,18],"mode":"lines+markers","line":{"color":"rgba(219,162,168,1)","width":1},"type":"scatter","name":"2011","marker":{"color":"rgba(219,162,168,1)","line":{"color":"rgba(219,162,168,1)"}},"textfont":{"color":"rgba(219,162,168,1)"},"error_y":{"color":"rgba(219,162,168,1)"},"error_x":{"color":"rgba(219,162,168,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["11-01","11-02","11-03","11-04","11-05","11-06",null,"11-08","11-09",null,"11-11","11-12","11-13","11-14",null,"11-16",null,"11-18","11-19",null,"11-22","11-23","11-24","11-25","11-26","11-27","11-28","11-29","11-30",null,"12-02","12-03","12-04","12-05","12-06","12-07","12-08","12-09","12-10","12-11","12-12",null,"12-16"],"y":[0,0,0,0,0,0,null,0,0,null,0,0,0,0,null,0,null,0,0,null,0,1,7,6,5,3,1,0,0,null,0,2,1,1,0,0,2,4,3,4,4,null,0],"mode":"lines+markers","line":{"color":"rgba(189,198,118,1)","width":1},"type":"scatter","name":"2012","marker":{"color":"rgba(189,198,118,1)","line":{"color":"rgba(189,198,118,1)"}},"textfont":{"color":"rgba(189,198,118,1)"},"error_y":{"color":"rgba(189,198,118,1)"},"error_x":{"color":"rgba(189,198,118,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["11-03",null,"11-05",null,"11-07","11-08","11-09",null,"11-11","11-12","11-13",null,"11-15","11-16","11-17",null,"11-25",null,"11-29",null,"12-02","12-03",null,"12-06",null,"12-08","12-09","12-10",null,"12-13","12-14",null,"12-16","12-17","12-18","12-19","12-20","12-21","12-22","12-23",null,"12-25","12-26","12-27",null,"12-29","12-30","12-31"],"y":[1,null,4,null,3,4,2,null,2,0,0,null,0,1,2,null,2,null,4,null,7,1,null,0,null,1,1,0,null,1,1,null,2,3,3,3,10,10,9,21,null,19,15,14,null,20,21,25],"mode":"lines+markers","line":{"color":"rgba(186,217,78,1)","width":1},"type":"scatter","name":"2013","marker":{"color":"rgba(186,217,78,1)","line":{"color":"rgba(186,217,78,1)"}},"textfont":{"color":"rgba(186,217,78,1)"},"error_y":{"color":"rgba(186,217,78,1)"},"error_x":{"color":"rgba(186,217,78,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["11-01","11-02","11-03","11-04","11-05","11-06","11-07","11-08","11-09","11-10","11-11","11-12","11-13","11-14","11-15","11-16","11-17","11-18","11-19","11-20","11-21","11-22","11-23","11-24","11-25","11-26","11-27","11-28","11-29","11-30","12-01","12-02","12-03","12-04","12-05","12-06","12-07","12-08","12-09","12-10","12-11","12-12","12-13","12-14","12-15","12-16","12-17","12-18","12-19","12-20","12-21","12-22","12-23","12-24","12-25","12-26","12-27","12-28","12-29","12-30","12-31"],"y":[0,0,0,0,0,0,0,4,3,3,2,2,2,2,2,2,2,2,2,2,2,4,3,4,4,4,7,5,8,6,2,2,2,2,2,2,3,3,3,7,12,13,14,14,13,12,11,10,14,13,12,12,12,12,4,3,3,3,3,3,3],"mode":"lines+markers","line":{"color":"rgba(227,217,62,1)","width":1},"type":"scatter","name":"2015","marker":{"color":"rgba(227,217,62,1)","line":{"color":"rgba(227,217,62,1)"}},"textfont":{"color":"rgba(227,217,62,1)"},"error_y":{"color":"rgba(227,217,62,1)"},"error_x":{"color":"rgba(227,217,62,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["11-01","11-02","11-03","11-04","11-05","11-06","11-07","11-08","11-09","11-10","11-11","11-12","11-13","11-14","11-15","11-16","11-17","11-18","11-19","11-20","11-21","11-22","11-23","11-24","11-25","11-26","11-27","11-28","11-29","11-30","12-01","12-02","12-03","12-04","12-05","12-06","12-07","12-08","12-09","12-10","12-11","12-12","12-13","12-14","12-15","12-16","12-17","12-18","12-19","12-20","12-21","12-22","12-23","12-24","12-25","12-26","12-27","12-28","12-29","12-30","12-31"],"y":[0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,7,13],"mode":"lines+markers","line":{"color":"rgba(252,214,66,1)","width":1},"type":"scatter","name":"2016","marker":{"color":"rgba(252,214,66,1)","line":{"color":"rgba(252,214,66,1)"}},"textfont":{"color":"rgba(252,214,66,1)"},"error_y":{"color":"rgba(252,214,66,1)"},"error_x":{"color":"rgba(252,214,66,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["11-01","11-02","11-03","11-04","11-05","11-06","11-07","11-08","11-09",null,"11-11","11-12","11-13","11-14","11-15","11-16",null,"11-18","11-19","11-20","11-21","11-22","11-23","11-24","11-25","11-26","11-27","11-28","11-29","11-30","12-01","12-02","12-03","12-04","12-05","12-06","12-07","12-08","12-09","12-10","12-11"],"y":[0,0,0,0,0,0,0,0,0,null,0,1,0,0,0,0,null,1,0,1,2,1,2,2,1,0,8,8,6,5,6,5,5,4,4,1,0,0,2,1,2],"mode":"lines+markers","line":{"color":"rgba(226,195,150,1)","width":1},"type":"scatter","name":"2018","marker":{"color":"rgba(226,195,150,1)","line":{"color":"rgba(226,195,150,1)"}},"textfont":{"color":"rgba(226,195,150,1)"},"error_y":{"color":"rgba(226,195,150,1)"},"error_x":{"color":"rgba(226,195,150,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["11-01","11-02","11-03","11-04","11-05","11-06","11-07","11-08","11-09","11-10","11-11","11-12","11-13","11-14","11-15","11-16","11-17","11-18","11-19","11-20","11-21","11-22","11-23","11-24","11-25","11-26","11-27","11-28","11-29","11-30","12-01","12-02","12-03","12-04","12-05","12-06","12-07","12-08","12-09","12-10","12-11","12-12","12-13","12-14","12-15","12-16","12-17","12-18","12-19","12-20","12-21","12-22","12-23","12-24","12-25","12-26","12-27","12-28","12-29","12-30","12-31"],"y":[0,0,0,2,1,1,1,0,0,0,0,0,0,0,0,4,3,2,0,0,0,0,0,2,0,0,10,8,8,7,7,8,6,7,9,9,4,3,2,4,4,0,0,0,1,0,0,0,3,6,4,4,2,3,3,3,4,3,3,4,4],"mode":"lines+markers","line":{"color":"rgba(204,187,165,1)","width":1},"type":"scatter","name":"2022","marker":{"color":"rgba(204,187,165,1)","line":{"color":"rgba(204,187,165,1)"}},"textfont":{"color":"rgba(204,187,165,1)"},"error_y":{"color":"rgba(204,187,165,1)"},"error_x":{"color":"rgba(204,187,165,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["11-01","11-02","11-03","11-04","11-05","11-06","11-07","11-08","11-09","11-10","11-11","11-12","11-13","11-14","11-15","11-16","11-17","11-18","11-19","11-20","11-21","11-22","11-23","11-24","11-25","11-26","11-27","11-28","11-29","11-30","12-01","12-02","12-03","12-04","12-05","12-06","12-07","12-08","12-09","12-10","12-11","12-12","12-13","12-14","12-15","12-16","12-17","12-18","12-19","12-20","12-21","12-22","12-23","12-24","12-25","12-26","12-27","12-28","12-29","12-30","12-31"],"y":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,2,1,2,3,3,2,2,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,2,4,4,4,3,4,8,13,12,11,11,10,12,14,10,10,9,10,11,9,6],"mode":"lines+markers","line":{"color":"rgba(179,179,179,1)","width":1},"type":"scatter","name":"2023","marker":{"color":"rgba(179,179,179,1)","line":{"color":"rgba(179,179,179,1)"}},"textfont":{"color":"rgba(179,179,179,1)"},"error_y":{"color":"rgba(179,179,179,1)"},"error_x":{"color":"rgba(179,179,179,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Taking a look at daily temperature from 2001 - 2023</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ly</span>(tidy_vt_temp_winter_years, </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="sc">~</span>month_day, </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="sc">~</span>temp, </span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> <span class="sc">~</span><span class="fu">as.factor</span>(year), </span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">type =</span> <span class="st">"scatter"</span>,</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">mode =</span> <span class="st">"lines+markers"</span>,</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">line =</span> <span class="fu">list</span>(<span class="at">width =</span> <span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">layout</span>(<span class="at">title =</span> <span class="st">"Comparison of Temperature Recorded on Mount Mansfield from 2001 to 2022"</span>,</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">xaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Dates"</span>),</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">yaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Temperature (in Fahrenheit)"</span>),</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">legend =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Year"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in RColorBrewer::brewer.pal(N, "Set2"): n too large, allowed maximum for palette Set2 is 8
+Returning the palette you asked for with that many colors
+
+Warning in RColorBrewer::brewer.pal(N, "Set2"): n too large, allowed maximum for palette Set2 is 8
+Returning the palette you asked for with that many colors</code></pre>
+</div>
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-8be117e76daf16e64d97" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-8be117e76daf16e64d97">{"x":{"visdat":{"1423c24ed67a6":["function () ","plotlyVisDat"]},"cur_data":"1423c24ed67a6","attrs":{"1423c24ed67a6":{"x":{},"y":{},"mode":"lines+markers","line":{"width":1},"color":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Comparison of Temperature Recorded on Mount Mansfield from 2001 to 2022","xaxis":{"domain":[0,1],"automargin":true,"title":"Dates","type":"category","categoryorder":"array","categoryarray":["11-01","11-02","11-03","11-04","11-05","11-06","11-07","11-08","11-09","11-10","11-11","11-12","11-13","11-14","11-15","11-16","11-17","11-18","11-19","11-20","11-21","11-22","11-23","11-24","11-25","11-26","11-27","11-28","11-29","11-30","12-01","12-02","12-03","12-04","12-05","12-06","12-07","12-08","12-09","12-10","12-11","12-12","12-13","12-14","12-15","12-16","12-17","12-18","12-19","12-20","12-21","12-22","12-23","12-24","12-25","12-26","12-27","12-28","12-29","12-30","12-31"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"Temperature (in Fahrenheit)"},"legend":{"title":"Year"},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["11-01","11-02","11-03","11-04","11-05","11-06","11-07","11-08","11-09","11-10","11-11","11-12","11-13","11-14","11-15","11-16","11-17","11-18","11-19","11-20","11-21","11-22","11-23","11-24","11-25","11-26","11-27","11-28","11-29","11-30","12-01","12-02","12-03","12-04","12-05","12-06","12-07","12-08","12-09","12-10","12-11","12-12","12-13","12-14","12-15","12-16","12-17","12-18","12-19","12-20","12-21","12-22","12-23","12-24","12-25","12-26","12-27","12-28","12-29","12-30"],"y":[32.539999999999999,40.82,44.240000000000002,41.899999999999999,32,30.559999999999999,34.880000000000003,36.68,45.5,46.039999999999999,39.200000000000003,30.02,34.880000000000003,38.119999999999997,28.399999999999999,30.02,28.940000000000001,22.100000000000001,24.440000000000001,26.059999999999999,22.82,15.800000000000001,11.119999999999999,7.3399999999999999,23.359999999999999,35.240000000000002,33.079999999999998,31.280000000000001,29.66,26.960000000000001,17.780000000000001,11.300000000000001,14,20.66,24.079999999999998,8.0600000000000005,6.7999999999999998,-0.40000000000000002,3.9199999999999999,17.780000000000001,28.219999999999999,28.219999999999999,4.8200000000000003,18.68,14.720000000000001,27.32,42.979999999999997,20.66,18.859999999999999,11.48,12.02,15.800000000000001,6.0800000000000001,10.220000000000001,-2.2000000000000002,1.3999999999999999,7.3399999999999999,2.2999999999999998,9.6799999999999997,17.420000000000002],"mode":"lines+markers","line":{"color":"rgba(102,194,165,1)","width":1},"type":"scatter","name":"2001","marker":{"color":"rgba(102,194,165,1)","line":{"color":"rgba(102,194,165,1)"}},"textfont":{"color":"rgba(102,194,165,1)"},"error_y":{"color":"rgba(102,194,165,1)"},"error_x":{"color":"rgba(102,194,165,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["11-01","11-02","11-03","11-04","11-05","11-06","11-07","11-08","11-09","11-10","11-11","11-12","11-13","11-14","11-15","11-16","11-17","11-18","11-19","11-20","11-21","11-22","11-23","11-24","11-25","11-26","11-27","11-28","11-29","11-30","12-01","12-02","12-03","12-04","12-05","12-06","12-07","12-08","12-09","12-10","12-11","12-12","12-13","12-14","12-15","12-16","12-17","12-18","12-19","12-20","12-21","12-22","12-23","12-24","12-25","12-26","12-27","12-28","12-29","12-30","12-31"],"y":[48.380000000000003,56.479999999999997,45.32,37.219999999999999,30.739999999999998,29.120000000000001,33.079999999999998,35.960000000000001,27.32,29.84,22.460000000000001,20.300000000000001,25.34,34.700000000000003,42.619999999999997,38.840000000000003,25.699999999999999,41,48.740000000000002,29.48,25.52,31.460000000000001,39.020000000000003,44.960000000000001,50.359999999999999,42.799999999999997,39.020000000000003,28.760000000000002,34.159999999999997,50.18,44.060000000000002,35.960000000000001,37.219999999999999,40.280000000000001,45.859999999999999,47.840000000000003,31.100000000000001,21.920000000000002,23.719999999999999,27.140000000000001,30.379999999999999,33.979999999999997,39.560000000000002,34.520000000000003,19.940000000000001,16.34,26.600000000000001,24.079999999999998,26.600000000000001,29.300000000000001,18.5,12.92,25.699999999999999,27.68,21.199999999999999,19.219999999999999,15.98,16.52,17.059999999999999,15.08,14.539999999999999],"mode":"lines+markers","line":{"color":"rgba(181,176,137,1)","width":1},"type":"scatter","name":"2002","marker":{"color":"rgba(181,176,137,1)","line":{"color":"rgba(181,176,137,1)"}},"textfont":{"color":"rgba(181,176,137,1)"},"error_y":{"color":"rgba(181,176,137,1)"},"error_x":{"color":"rgba(181,176,137,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["11-01","11-02",null,"11-04","11-05","11-06","11-07","11-08","11-09","11-10","11-11","11-12","11-13","11-14","11-15","11-16","11-17","11-18","11-19","11-20","11-21","11-22","11-23","11-24","11-25","11-26","11-27","11-28","11-29","11-30","12-01","12-02","12-03","12-04","12-05","12-06","12-07","12-08","12-09","12-10","12-11","12-12","12-13","12-14","12-15","12-16","12-17","12-18","12-19","12-20","12-21","12-22","12-23","12-24","12-25","12-26","12-27","12-28","12-29","12-30","12-31"],"y":[25.52,14,null,27.5,26.780000000000001,29.84,15.619999999999999,33.979999999999997,45.5,53.060000000000002,54.140000000000001,39.560000000000002,33.979999999999997,35.960000000000001,32.539999999999999,20.84,28.579999999999998,21.920000000000002,24.800000000000001,32.539999999999999,37.759999999999998,37.939999999999998,22.640000000000001,25.699999999999999,25.879999999999999,22.640000000000001,14.359999999999999,11.119999999999999,20.66,29.300000000000001,12.56,11.300000000000001,1.5800000000000001,4.8200000000000003,13.460000000000001,17.420000000000002,21.199999999999999,15.98,0.68000000000000005,15.619999999999999,27.5,30.559999999999999,31.640000000000001,32.18,24.260000000000002,17.239999999999998,8.9600000000000009,19.039999999999999,31.100000000000001,40.82,25.879999999999999,28.039999999999999,24.260000000000002,16.16,17.780000000000001,13.82,15.08,21.199999999999999,19.219999999999999,14,34.340000000000003],"mode":"lines+markers","line":{"color":"rgba(233,153,110,1)","width":1},"type":"scatter","name":"2003","marker":{"color":"rgba(233,153,110,1)","line":{"color":"rgba(233,153,110,1)"}},"textfont":{"color":"rgba(233,153,110,1)"},"error_y":{"color":"rgba(233,153,110,1)"},"error_x":{"color":"rgba(233,153,110,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["11-01","11-02","11-03","11-04","11-05","11-06","11-07","11-08","11-09","11-10","11-11",null,"11-13","11-14","11-15","11-16","11-17","11-18","11-19","11-20","11-21","11-22","11-23","11-24","11-25","11-26","11-27","11-28","11-29","11-30","12-01","12-02","12-03","12-04","12-05","12-06","12-07","12-08","12-09","12-10","12-11","12-12","12-13","12-14","12-15",null,"12-17","12-18","12-19","12-20","12-21","12-22","12-23","12-24","12-25","12-26","12-27","12-28","12-29","12-30","12-31"],"y":[51.079999999999998,38.659999999999997,41,32.359999999999999,47.840000000000003,34.700000000000003,33.439999999999998,14.9,18.140000000000001,27.32,33.439999999999998,null,32.719999999999999,14.539999999999999,14.9,21.199999999999999,29.120000000000001,37.759999999999998,48.740000000000002,32.18,37.579999999999998,34.520000000000003,44.960000000000001,49.82,24.800000000000001,26.960000000000001,33.979999999999997,41.18,28.760000000000002,26.420000000000002,24.260000000000002,7.1600000000000001,6.9800000000000004,10.039999999999999,7.5199999999999996,10.58,10.220000000000001,12.92,17.059999999999999,30.199999999999999,35.960000000000001,16.879999999999999,2.6600000000000001,12.92,15.800000000000001,null,31.460000000000001,18.68,16.16,11.300000000000001,13.640000000000001,26.059999999999999,37.219999999999999,44.960000000000001,29.66,21.379999999999999,22.100000000000001,31.640000000000001,40.100000000000001,34.159999999999997,26.239999999999998],"mode":"lines+markers","line":{"color":"rgba(232,146,123,1)","width":1},"type":"scatter","name":"2004","marker":{"color":"rgba(232,146,123,1)","line":{"color":"rgba(232,146,123,1)"}},"textfont":{"color":"rgba(232,146,123,1)"},"error_y":{"color":"rgba(232,146,123,1)"},"error_x":{"color":"rgba(232,146,123,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["11-01","11-02","11-03","11-04","11-05","11-06","11-07","11-08","11-09","11-10","11-11","11-12","11-13","11-14","11-15","11-16","11-17","11-18","11-19","11-20","11-21","11-22","11-23","11-24","11-25","11-26","11-27","11-28","11-29","11-30","12-01","12-02","12-03","12-04","12-05","12-06","12-07","12-08","12-09","12-10","12-11","12-12","12-13","12-14","12-15","12-16","12-17","12-18","12-19","12-20","12-21","12-22","12-23","12-24","12-25","12-26","12-27","12-28","12-29","12-30","12-31"],"y":[32.359999999999999,37.939999999999998,29.300000000000001,32.539999999999999,30.739999999999998,33.079999999999998,39.380000000000003,23.18,16.34,21.559999999999999,31.100000000000001,20.48,18.5,26.780000000000001,32.539999999999999,33.259999999999998,37.039999999999999,39.380000000000003,36.32,33.259999999999998,37.939999999999998,32.359999999999999,36.140000000000001,42.259999999999998,38.659999999999997,15.619999999999999,28.039999999999999,35.060000000000002,25.16,28.039999999999999,32.539999999999999,22.100000000000001,21.199999999999999,18.68,17.059999999999999,14.18,25.34,30.920000000000002,28.039999999999999,31.280000000000001,30.920000000000002,21.199999999999999,25.34,7.1600000000000001,6.9800000000000004,19.940000000000001,14.359999999999999,16.52,21.02,-14.08,5.7199999999999998,29.66,39.920000000000002,12.199999999999999,8.0600000000000005,9.5,-0.22,9.5,19.760000000000002,19.039999999999999,34.880000000000003],"mode":"lines+markers","line":{"color":"rgba(191,154,166,1)","width":1},"type":"scatter","name":"2005","marker":{"color":"rgba(191,154,166,1)","line":{"color":"rgba(191,154,166,1)"}},"textfont":{"color":"rgba(191,154,166,1)"},"error_y":{"color":"rgba(191,154,166,1)"},"error_x":{"color":"rgba(191,154,166,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["11-01","11-02","11-03","11-04","11-05","11-06","11-07","11-08","11-09","11-10","11-11","11-12","11-13","11-14","11-15","11-16","11-17","11-18","11-19","11-20","11-21","11-22","11-23","11-24","11-25","11-26","11-27","11-28","11-29","11-30","12-01","12-02","12-03","12-04","12-05","12-06","12-07","12-08",null,"12-10","12-11","12-12","12-13","12-14","12-15","12-16","12-17","12-18","12-19","12-20","12-21","12-22","12-23","12-24","12-25","12-26","12-27","12-28","12-29","12-30","12-31"],"y":[46.039999999999999,33.439999999999998,41.539999999999999,45.5,50.719999999999999,52.880000000000003,39.200000000000003,32.18,31.82,30.920000000000002,21.559999999999999,29.120000000000001,47.119999999999997,39.380000000000003,36.68,49.280000000000001,28.039999999999999,16.879999999999999,24.800000000000001,32.899999999999999,38.299999999999997,28.940000000000001,10.4,15.98,12.02,17.059999999999999,24.98,42.439999999999998,50.719999999999999,38.659999999999997,27.859999999999999,24.260000000000002,14,17.059999999999999,19.219999999999999,16.34,7.7000000000000002,7.3399999999999999,null,20.48,20.84,11.84,0.85999999999999999,3.2000000000000002,14.9,23.18,21.02,19.760000000000002,15.08,14,6.4400000000000004,11.66,25.16,29.66,34.520000000000003,28.039999999999999,14.359999999999999,25.52,37.939999999999998,13.640000000000001,11.300000000000001],"mode":"lines+markers","line":{"color":"rgba(147,159,203,1)","width":1},"type":"scatter","name":"2006","marker":{"color":"rgba(147,159,203,1)","line":{"color":"rgba(147,159,203,1)"}},"textfont":{"color":"rgba(147,159,203,1)"},"error_y":{"color":"rgba(147,159,203,1)"},"error_x":{"color":"rgba(147,159,203,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["11-01","11-02","11-03","11-04","11-05","11-06","11-07","11-08","11-09","11-10","11-11","11-12","11-13","11-14","11-15","11-16","11-17","11-18","11-19","11-20","11-21","11-22","11-23","11-24","11-25","11-26","11-27","11-28","11-29","11-30","12-01","12-02","12-03","12-04","12-05","12-06","12-07","12-08","12-09","12-10","12-11","12-12",null,"12-14","12-15","12-16","12-17",null,"12-19","12-20","12-21","12-22","12-23","12-24","12-25","12-26","12-27","12-28","12-29","12-30"],"y":[37.579999999999998,30.739999999999998,26.600000000000001,25.879999999999999,29.66,35.780000000000001,41.359999999999999,45.140000000000001,46.399999999999999,36.5,44.060000000000002,34.340000000000003,48.200000000000003,46.039999999999999,46.219999999999999,54.32,47.659999999999997,29.48,25.699999999999999,20.84,22.640000000000001,29.84,40.640000000000001,32.359999999999999,37.939999999999998,41.719999999999999,44.060000000000002,37.219999999999999,44.780000000000001,51.799999999999997,38.479999999999997,26.239999999999998,24.800000000000001,16.699999999999999,12.380000000000001,23.539999999999999,24.260000000000002,4.8200000000000003,18.859999999999999,26.059999999999999,29.300000000000001,28.760000000000002,null,38.479999999999997,39.020000000000003,29.66,33.259999999999998,null,79.340000000000003,74.659999999999997,69.439999999999998,39.380000000000003,24.260000000000002,35.600000000000001,44.960000000000001,37.399999999999999,65.120000000000005,66.019999999999996,46.219999999999999,55.399999999999999],"mode":"lines+markers","line":{"color":"rgba(187,151,199,1)","width":1},"type":"scatter","name":"2007","marker":{"color":"rgba(187,151,199,1)","line":{"color":"rgba(187,151,199,1)"}},"textfont":{"color":"rgba(187,151,199,1)"},"error_y":{"color":"rgba(187,151,199,1)"},"error_x":{"color":"rgba(187,151,199,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["11-01","11-02","11-03","11-04","11-05","11-06","11-07","11-08","11-09","11-10","11-11","11-12","11-13","11-14","11-15","11-16","11-17","11-18","11-19","11-20","11-21","11-22","11-23",null,"11-29","11-30","12-01","12-02","12-03","12-04","12-05","12-06","12-07","12-08","12-09","12-10",null,"12-12","12-13","12-14","12-15","12-16","12-17","12-18","12-19","12-20","12-21","12-22","12-23","12-24","12-25","12-26"],"y":[27.32,26.239999999999998,30.379999999999999,35.060000000000002,33.619999999999997,28.039999999999999,25.52,25.34,33.619999999999997,33.079999999999998,41.899999999999999,42.259999999999998,43.700000000000003,48.200000000000003,40.280000000000001,42.259999999999998,40.82,29.66,22.460000000000001,27.68,21.379999999999999,38.299999999999997,44.420000000000002,null,31.460000000000001,39.380000000000003,39.740000000000002,27.140000000000001,24.260000000000002,18.68,14.720000000000001,14.18,13.279999999999999,8.9600000000000009,5,9.5,null,32.719999999999999,28.219999999999999,5,3.2000000000000002,10.4,13.279999999999999,20.120000000000001,16.16,13.1,16.34,19.940000000000001,19.039999999999999,13.640000000000001,9.1400000000000006,6.7999999999999998],"mode":"lines+markers","line":{"color":"rgba(222,141,196,1)","width":1},"type":"scatter","name":"2011","marker":{"color":"rgba(222,141,196,1)","line":{"color":"rgba(222,141,196,1)"}},"textfont":{"color":"rgba(222,141,196,1)"},"error_y":{"color":"rgba(222,141,196,1)"},"error_x":{"color":"rgba(222,141,196,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["11-01","11-02","11-03","11-04","11-05",null,"11-07","11-08",null,"11-10","11-11","11-12","11-13",null,"11-15",null,"11-17","11-18",null,"11-21","11-22","11-23","11-24","11-25","11-26","11-27","11-28","11-29",null,"12-01","12-02","12-03","12-04","12-05","12-06","12-07","12-08","12-09","12-10","12-11"],"y":[37.579999999999998,41.539999999999999,42.979999999999997,28.219999999999999,30.199999999999999,null,43.159999999999997,48.380000000000003,null,45.5,29.66,31.82,44.600000000000001,null,43.340000000000003,null,30.379999999999999,26.059999999999999,null,23.539999999999999,25.34,27.32,26.420000000000002,36.68,40.280000000000001,46.939999999999998,46.759999999999998,53.960000000000001,null,24.98,28.039999999999999,24.260000000000002,38.119999999999997,42.979999999999997,36.5,31.100000000000001,22.460000000000001,26.960000000000001,20.84,20.48],"mode":"lines+markers","line":{"color":"rgba(217,164,165,1)","width":1},"type":"scatter","name":"2012","marker":{"color":"rgba(217,164,165,1)","line":{"color":"rgba(217,164,165,1)"}},"textfont":{"color":"rgba(217,164,165,1)"},"error_y":{"color":"rgba(217,164,165,1)"},"error_x":{"color":"rgba(217,164,165,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["11-01",null,"11-03","11-04","11-05","11-06","11-07","11-08",null,"11-10","11-11","11-12",null,"11-14","11-15","11-16",null,"11-23","11-24",null,"11-27",null,"12-01","12-02","12-03","12-04","12-05",null,"12-07","12-08","12-09","12-10","12-11","12-12","12-13","12-14",null,"12-16","12-17","12-18",null,"12-20","12-21","12-22","12-23","12-24","12-25","12-26","12-27",null,"12-29","12-30","12-31"],"y":[37.039999999999999,null,30.559999999999999,27.140000000000001,23,20.84,23.539999999999999,26.600000000000001,null,31.460000000000001,45.140000000000001,57.020000000000003,null,25.879999999999999,24.440000000000001,28.219999999999999,null,45.140000000000001,25.699999999999999,null,22.100000000000001,null,24.800000000000001,39.740000000000002,33.439999999999998,45.5,29.48,null,33.439999999999998,35.780000000000001,28.039999999999999,37.759999999999998,21.379999999999999,22.460000000000001,25.52,27.140000000000001,null,26.420000000000002,29.66,30.02,null,23.899999999999999,26.420000000000002,16.879999999999999,15.08,14,14.720000000000001,16.52,20.84,null,17.960000000000001,6.0800000000000001,17.059999999999999],"mode":"lines+markers","line":{"color":"rgba(191,196,121,1)","width":1},"type":"scatter","name":"2013","marker":{"color":"rgba(191,196,121,1)","line":{"color":"rgba(191,196,121,1)"}},"textfont":{"color":"rgba(191,196,121,1)"},"error_y":{"color":"rgba(191,196,121,1)"},"error_x":{"color":"rgba(191,196,121,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["11-01","11-02","11-03","11-04","11-05","11-06","11-07","11-08","11-09","11-10","11-11","11-12","11-13","11-14","11-15","11-16","11-17","11-18","11-19","11-20","11-21","11-22","11-23","11-24","11-25","11-26","11-27","11-28","11-29","11-30","12-01","12-02","12-03","12-04","12-05","12-06","12-07","12-08","12-09","12-10","12-11","12-12","12-13","12-14","12-15","12-16","12-17","12-18","12-19","12-20","12-21","12-22","12-23","12-24","12-25","12-26","12-27","12-28","12-29","12-30","12-31"],"y":[53.600000000000001,38.659999999999997,22.82,23.899999999999999,35.600000000000001,44.780000000000001,38.840000000000003,26.600000000000001,27.859999999999999,32.359999999999999,27.859999999999999,16.879999999999999,16.52,26.600000000000001,31.640000000000001,37.219999999999999,47.119999999999997,43.340000000000003,21.739999999999998,20.120000000000001,31.640000000000001,33.619999999999997,21.199999999999999,6.6200000000000001,10.94,26.600000000000001,31.460000000000001,11.84,8.7799999999999994,12.56,26.600000000000001,32.18,29.66,27.140000000000001,43.700000000000003,29.66,18.140000000000001,14.539999999999999,24.620000000000001,19.399999999999999,11.66,3.5600000000000001,1.9399999999999999,-1.48,14.720000000000001,0.85999999999999999,5.9000000000000004,17.239999999999998,22.460000000000001,31.640000000000001,39.200000000000003,36.32,32.359999999999999,8.9600000000000009,2.48,17.059999999999999,18.140000000000001,25.16,31.460000000000001,10.039999999999999,3.02],"mode":"lines+markers","line":{"color":"rgba(178,216,80,1)","width":1},"type":"scatter","name":"2014","marker":{"color":"rgba(178,216,80,1)","line":{"color":"rgba(178,216,80,1)"}},"textfont":{"color":"rgba(178,216,80,1)"},"error_y":{"color":"rgba(178,216,80,1)"},"error_x":{"color":"rgba(178,216,80,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["11-01","11-02","11-03","11-04","11-05","11-06","11-07","11-08","11-09","11-10","11-11","11-12","11-13","11-14","11-15","11-16","11-17","11-18","11-19","11-20","11-21","11-22","11-23","11-24","11-25","11-26","11-27","11-28","11-29","11-30","12-01","12-02","12-03","12-04","12-05","12-06","12-07","12-08","12-09","12-10","12-11","12-12","12-13","12-14","12-15","12-16","12-17","12-18","12-19","12-20","12-21","12-22","12-23","12-24","12-25","12-26","12-27","12-28","12-29","12-30","12-31"],"y":[31.82,26.239999999999998,30.02,44.780000000000001,44.060000000000002,36.859999999999999,27.32,26.420000000000002,32.18,36.859999999999999,48.020000000000003,40.640000000000001,27.5,22.100000000000001,20.84,26.420000000000002,32.18,19.219999999999999,16.699999999999999,19.399999999999999,13.82,24.260000000000002,36.859999999999999,51.799999999999997,37.399999999999999,25.34,19.039999999999999,15.26,18.859999999999999,35.960000000000001,28.940000000000001,15.619999999999999,32.539999999999999,16.699999999999999,22.100000000000001,30.199999999999999,7.8799999999999999,17.420000000000002,31.460000000000001,29.300000000000001,25.16,22.280000000000001,22.280000000000001,25.34,23,30.379999999999999,33.619999999999997,24.620000000000001,15.44,17.420000000000002,20.300000000000001,26.420000000000002,33.439999999999998,44.780000000000001,37.579999999999998,31.100000000000001,34.520000000000003,31.82,15.44,4.6399999999999997,7.8799999999999999],"mode":"lines+markers","line":{"color":"rgba(215,217,67,1)","width":1},"type":"scatter","name":"2015","marker":{"color":"rgba(215,217,67,1)","line":{"color":"rgba(215,217,67,1)"}},"textfont":{"color":"rgba(215,217,67,1)"},"error_y":{"color":"rgba(215,217,67,1)"},"error_x":{"color":"rgba(215,217,67,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["11-01","11-02","11-03","11-04","11-05","11-06","11-07","11-08","11-09","11-10","11-11","11-12","11-13","11-14","11-15","11-16","11-17","11-18","11-19","11-20","11-21","11-22","11-23","11-24","11-25","11-26","11-27","11-28","11-29","11-30","12-01","12-02","12-03","12-04","12-05","12-06","12-07","12-08","12-09","12-10","12-11","12-12","12-13","12-14","12-15","12-16","12-17","12-18","12-19","12-20","12-21","12-22","12-23","12-24","12-25","12-26","12-27","12-28","12-29","12-30","12-31"],"y":[42.979999999999997,41.719999999999999,47.119999999999997,48.200000000000003,57.740000000000002,56.119999999999997,39.920000000000002,32.899999999999999,37.759999999999998,43.700000000000003,44.060000000000002,44.240000000000002,37.759999999999998,24.620000000000001,32,32,28.039999999999999,41.719999999999999,48.380000000000003,37.039999999999999,31.100000000000001,34.520000000000003,19.940000000000001,21.739999999999998,30.199999999999999,40.82,46.939999999999998,24.440000000000001,19.940000000000001,18.5,33.619999999999997,42.079999999999998,30.02,29.66,32.899999999999999,34.159999999999997,30.559999999999999,28.940000000000001,35.060000000000002,40.100000000000001,44.240000000000002,38.299999999999997,36.68,50.359999999999999,39.200000000000003,28.579999999999998,40.460000000000001,30.02,22.280000000000001,19.399999999999999,34.159999999999997,41.719999999999999,45.140000000000001,50.539999999999999,38.840000000000003,33.079999999999998,30.379999999999999,10.4,23.359999999999999,31.640000000000001,28.579999999999998],"mode":"lines+markers","line":{"color":"rgba(250,217,50,1)","width":1},"type":"scatter","name":"2016","marker":{"color":"rgba(250,217,50,1)","line":{"color":"rgba(250,217,50,1)"}},"textfont":{"color":"rgba(250,217,50,1)"},"error_y":{"color":"rgba(250,217,50,1)"},"error_x":{"color":"rgba(250,217,50,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["11-01","11-02","11-03","11-04"],"y":[38.840000000000003,46.219999999999999,43.340000000000003,29.300000000000001],"mode":"lines+markers","line":{"color":"rgba(247,209,91,1)","width":1},"type":"scatter","name":"2017","marker":{"color":"rgba(247,209,91,1)","line":{"color":"rgba(247,209,91,1)"}},"textfont":{"color":"rgba(247,209,91,1)"},"error_y":{"color":"rgba(247,209,91,1)"},"error_x":{"color":"rgba(247,209,91,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["11-01","11-02","11-03","11-04","11-05","11-06","11-07","11-08","11-09","11-10","11-11","11-12","11-13","11-14","11-15","11-16","11-17","11-18","11-19","11-20","11-21","11-22","11-23","11-24","11-25","11-26","11-27","11-28","11-29","11-30","12-01","12-02","12-03","12-04","12-05","12-06","12-07","12-08","12-09","12-10"],"y":[37.219999999999999,51.259999999999998,47.299999999999997,33.619999999999997,43.159999999999997,45.140000000000001,26.600000000000001,28.940000000000001,32.899999999999999,15.08,13.640000000000001,24.620000000000001,27.5,28.039999999999999,29.84,36.32,19.579999999999998,30.739999999999998,31.280000000000001,17.059999999999999,35.060000000000002,30.559999999999999,17.600000000000001,30.920000000000002,38.299999999999997,22.640000000000001,16.52,27.140000000000001,31.460000000000001,30.739999999999998,30.199999999999999,27.859999999999999,28.579999999999998,31.640000000000001,39.020000000000003,29.66,24.800000000000001,21.559999999999999,22.280000000000001,21.02],"mode":"lines+markers","line":{"color":"rgba(236,201,129,1)","width":1},"type":"scatter","name":"2018","marker":{"color":"rgba(236,201,129,1)","line":{"color":"rgba(236,201,129,1)"}},"textfont":{"color":"rgba(236,201,129,1)"},"error_y":{"color":"rgba(236,201,129,1)"},"error_x":{"color":"rgba(236,201,129,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["11-01","11-02","11-03","11-04","11-05","11-06","11-07","11-08","11-09","11-10","11-11","11-12","11-13","11-14","11-15","11-16","11-17","11-18","11-19","11-20","11-21","11-22","11-23","11-24","11-25","11-26","11-27","11-28","11-29","11-30","12-01","12-02","12-03","12-04","12-05","12-06","12-07","12-08","12-09","12-10","12-11","12-12","12-13","12-14","12-15","12-16","12-17","12-18","12-19","12-20","12-21","12-22","12-23","12-24","12-25","12-26","12-27","12-28","12-29","12-30","12-31"],"y":[39.920000000000002,33.259999999999998,29.66,26.960000000000001,28.219999999999999,31.640000000000001,36.68,42.259999999999998,45.140000000000001,39.920000000000002,36.5,40.460000000000001,36.5,31.100000000000001,29.48,24.440000000000001,28.399999999999999,42.259999999999998,27.68,27.140000000000001,33.439999999999998,31.460000000000001,17.239999999999998,20.300000000000001,32.18,30.559999999999999,17.420000000000002,15.619999999999999,15.98,19.579999999999998,23.539999999999999,32.899999999999999,19.219999999999999,16.879999999999999,21.199999999999999,38.479999999999997,20.66,17.780000000000001,14,25.16,43.159999999999997,29.84,32.359999999999999,27.140000000000001,29.66,44.780000000000001,35.600000000000001,23,15.26,12.56,23.899999999999999,26.239999999999998,6.4400000000000004,15.619999999999999,30.199999999999999,20.66,17.059999999999999,25.879999999999999,25.699999999999999,30.920000000000002,32.539999999999999],"mode":"lines+markers","line":{"color":"rgba(201,186,167,1)","width":1},"type":"scatter","name":"2022","marker":{"color":"rgba(201,186,167,1)","line":{"color":"rgba(201,186,167,1)"}},"textfont":{"color":"rgba(201,186,167,1)"},"error_y":{"color":"rgba(201,186,167,1)"},"error_x":{"color":"rgba(201,186,167,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["11-01","11-02","11-03","11-04","11-05","11-06","11-07","11-08","11-09","11-10","11-11","11-12","11-13","11-14","11-15","11-16","11-17","11-18","11-19","11-20","11-21","11-22","11-23","11-24","11-25","11-26","11-27","11-28","11-29","11-30","12-01","12-02","12-03","12-04","12-05","12-06","12-07","12-08","12-09","12-10","12-11","12-12","12-13","12-14","12-15","12-16","12-17","12-18","12-19","12-20","12-21","12-22","12-23","12-24","12-25","12-26","12-27","12-28","12-29","12-30","12-31"],"y":[51.259999999999998,44.060000000000002,48.740000000000002,53.780000000000001,59.899999999999999,61.700000000000003,48.020000000000003,30.920000000000002,35.960000000000001,50.359999999999999,54.32,50.719999999999999,32.359999999999999,21.739999999999998,23,28.940000000000001,20.84,21.02,21.739999999999998,16.16,17.059999999999999,24.800000000000001,24.98,27.32,32.719999999999999,30.559999999999999,36.32,28.579999999999998,22.100000000000001,32,23.18,28.760000000000002,37.399999999999999,22.460000000000001,30.739999999999998,39.740000000000002,43.700000000000003,28.940000000000001,20.300000000000001,14.359999999999999,23.899999999999999,14.359999999999999,17.059999999999999,15.26,29.66,28.219999999999999,26.420000000000002,21.739999999999998,20.300000000000001,19.039999999999999,19.219999999999999,24.260000000000002,29.84,1.22,8.2400000000000002,13.1,14.9,21.199999999999999,32.18,41.539999999999999,42.979999999999997],"mode":"lines+markers","line":{"color":"rgba(179,179,179,1)","width":1},"type":"scatter","name":"2023","marker":{"color":"rgba(179,179,179,1)","line":{"color":"rgba(179,179,179,1)"}},"textfont":{"color":"rgba(179,179,179,1)"},"error_y":{"color":"rgba(179,179,179,1)"},"error_x":{"color":"rgba(179,179,179,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>I noticed that for temperature (in Fahrenheit), recent years of lowest values (specifically 2021 and 2022) that have been recorded are significantly higher than the lows measured in non-recent years (specifically 2001 and 2002). I also noticed that the peaks for snowfall recorded (in inches) tend to be much higher in the non-recent years (specifically 2001 and 2002). These two generalizations indicates that there may indeed be some differences in snowfall and temperature over the duration of time I have plotted.</p>
+<p>I also noticed that there are a few years where data is missing, so I will omit those years from my analysis.</p>
+<p>With these conclusions, I’m able to narrow down my focus to sample and group a number of years to compare in my hypothesis testing. To do this, I will categorize my years into “recent” and “non-recent” based on the data that is available.Given there was quite sparse data for many years, with some years not even being in the dataset, I was limited to working with the years that did have complete data. Interestingly, I could not find information on the organization’s website about why there were years missing or there were many NAs in the years that did have data.</p>
+<p>Therefore, for this analysis, I will indicate the “recent” grouping as years 2015, 2016, and 2022 since those years have the most data. The “non-recent” grouping I will indicate as years 2001, 2022, and 2003 due to completeness in the data. Time to do some statistical analyses!</p>
+</section>
+</section>
+<section id="my-statistical-analyses" class="level2">
+<h2 class="anchored" data-anchor-id="my-statistical-analyses">My Statistical Analyses</h2>
+<p>For my question, I will consider differences in climate conditions (snowfall and temperature) in Vermont and conduct summary statistics, a simple hypothesis test, a linear regression model, and a decomposition. I am aiming to determine if there is a statistically significant difference between the recent and non-recent years for both snowfall and temperature variables.</p>
+<section id="summary-statistics" class="level3">
+<h3 class="anchored" data-anchor-id="summary-statistics">Summary Statistics</h3>
+<p>By bucketing my data into two groups, recent and non-recent (more information on why and how below), I can do an initial comparison of my two sample groups:</p>
+<p>Snowfall Table:</p>
+<table class="table">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 24%">
+<col style="width: 24%">
+<col style="width: 24%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Years</th>
+<th>Mean (inches)</th>
+<th>Standard Deviation (inches)</th>
+<th>Median (inches)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Recent (2015,2016, 2022)</td>
+<td>3.92</td>
+<td>8.37</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>Non-Recent (2001, 2002, 2003)</td>
+<td>8.61</td>
+<td>11.48</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>Temperature Table:</p>
+<table class="table">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 24%">
+<col style="width: 24%">
+<col style="width: 24%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Years</th>
+<th>Mean (F)</th>
+<th>Standard Deviation (F)</th>
+<th>Median (F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Recent (2015,2016, 2022)</td>
+<td>42.28</td>
+<td>18.83</td>
+<td>44.06</td>
+</tr>
+<tr class="even">
+<td>Non-Recent (2001, 2002, 2003)</td>
+<td>39.64</td>
+<td>19.43</td>
+<td>41.18</td>
+</tr>
+</tbody>
+</table>
+<p>With these initial summary statistics, I can already see differences in the means, standard deviation, and median for my two groups. Taking a look at the snowfall data, the mean and standard deviation snowfall values (in inches) are much lower in the recent years grouping than non-recent. This aligns with my initial assumption that snowfall in recent years is, on average, much more sparse than previous years. When comparing the temperature statistics, I also noted mean temperature values (in Fahrenheit) to be much higher in the recent years grouping than the non-recent years. This also aligns with my initial assumption that temperatures are increasing. Given temperature and snowfall are highly correlated due to our understanding of snowfall’s reliance on the temperature threshold of 32 degrees Fahrenheit, it would make sense that with higher average temperature values the average snowfall would decrease since they are inversely related. Now that I have some initial summary statistics, I am going to run my hypothesis test!</p>
+<p>Code for calculating these values below:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I'm going to join my two datasets together first:</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>vt_data <span class="ot">&lt;-</span> <span class="fu">merge</span>(tidy_vt_snow_winter, tidy_vt_temps_winter, <span class="at">by =</span> <span class="st">'date'</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Cleaning my datasets</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>vt_data <span class="ot">&lt;-</span> vt_data <span class="sc">%&gt;%</span> </span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="st">"Min.x"</span>, <span class="sc">-</span><span class="st">"10%.x"</span>,<span class="sc">-</span><span class="st">"30%.x"</span>, <span class="sc">-</span><span class="st">"70%.x"</span>, <span class="sc">-</span><span class="st">"90%.x"</span>, <span class="sc">-</span><span class="st">"Max.x"</span>, <span class="sc">-</span><span class="st">"Median (POR).x"</span>, <span class="sc">-</span><span class="st">"year.x"</span>, <span class="sc">-</span><span class="st">"month.x"</span>, <span class="sc">-</span><span class="st">"Min.y"</span>,<span class="sc">-</span><span class="st">"10%.y"</span>, <span class="sc">-</span><span class="st">"30%.y"</span>,<span class="sc">-</span><span class="st">"70%.y"</span>,<span class="sc">-</span><span class="st">"90%.y"</span>,<span class="sc">-</span><span class="st">"Max.y"</span>,<span class="sc">-</span><span class="st">"Median (POR).y"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">year =</span> <span class="st">"year.y"</span>, <span class="at">month =</span> <span class="st">"month.y"</span>) <span class="sc">%&gt;%</span>  <span class="co">#removing and renaming columns to tidy this dataframe </span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>( year <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">'2001'</span>, <span class="st">'2002'</span>, <span class="st">'2003'</span>, <span class="st">'2015'</span>, <span class="st">'2016'</span>,<span class="st">'2022'</span>))</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>vt_data</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="co">#Summarizing the snowfall and temperature data for recent years:</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>vt_recent <span class="ot">&lt;-</span> </span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  vt_data <span class="sc">%&gt;%</span> </span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">'2015'</span>, <span class="st">'2016'</span>, <span class="st">'2022'</span>))</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>vt_recent_stats <span class="ot">&lt;-</span> vt_recent <span class="sc">%&gt;%</span> </span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(<span class="at">snow_mean =</span> <span class="fu">mean</span>(snowfall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">snow_sd =</span> <span class="fu">sd</span>(snowfall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">snow_median =</span> <span class="fu">median</span>(snowfall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),<span class="at">temp_mean =</span> <span class="fu">mean</span>(temp, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">temp_sd =</span> <span class="fu">sd</span>(temp, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">temp_median =</span> <span class="fu">median</span>(temp, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="co">#visualizing the stats table:</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>vt_recent_stats</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a><span class="co">#Summarizing the snowfall and temperature data before for non-recent years:</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>vt_non_recent <span class="ot">&lt;-</span> </span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>  vt_data <span class="sc">%&gt;%</span> </span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">'2001'</span>, <span class="st">'2002'</span>, <span class="st">'2003'</span>))</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>vt_non_recent_stats <span class="ot">&lt;-</span> vt_non_recent <span class="sc">%&gt;%</span> </span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(<span class="at">snow_mean =</span> <span class="fu">mean</span>(snowfall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">snow_sd =</span> <span class="fu">sd</span>(snowfall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">snow_median =</span> <span class="fu">median</span>(snowfall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),<span class="at">temp_mean =</span> <span class="fu">mean</span>(temp, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">temp_sd =</span> <span class="fu">sd</span>(temp, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">temp_median =</span> <span class="fu">median</span>(temp, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a><span class="co">#visualizing the stats table:</span></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>vt_non_recent_stats</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="checking-ols-assumptions" class="level3">
+<h3 class="anchored" data-anchor-id="checking-ols-assumptions">Checking OLS Assumptions</h3>
+<p>I am aiming to draw conclusions about the Vermont snow climate using this sample from Mount Mansfield of temperature and snowfall observations. In order to move forward with my statistical analyses and draw conclusions, I need to check my OLS assumptions. To do that, I am going to plot the distribution of my snowfall and temperature samples to check for normality before continuing.</p>
+<section id="temperature-distribution" class="level4">
+<h4 class="anchored" data-anchor-id="temperature-distribution">Temperature Distribution</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="temp_hist.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption class="figure-caption">Pictured: Visualizing Temperature Distribution</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="temp_qq.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption class="figure-caption">Pictured: Visualizing Temperature QQ Plot</figcaption>
+</figure>
+</div>
+<p>The temperature data is fairly symmetric and this distribution looks to be somewhat normally distributed, which means I’m not going to transform my data since it is relatively normal.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Temperature Distributions Check</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Non recent years</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>vt_hist_non <span class="ot">&lt;-</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(vt_non_recent) <span class="sc">+</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> temp)) <span class="sc">+</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Recent Temperature Distribution During November and December"</span>,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Temperature (in Fahrenheit)"</span>,</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Frequency"</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>vt_hist_non</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Recent years</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>vt_hist_recent <span class="ot">&lt;-</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(vt_non_recent) <span class="sc">+</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> temp)) <span class="sc">+</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Recent Temperature Distribution During November and December"</span>,</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Temperature (in Fahrenheit)"</span>,</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Frequency"</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>vt_hist_recent</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-10-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#QQ Plot for Temperature</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(vt_data, <span class="fu">aes</span>(<span class="at">sample =</span> temp)) <span class="sc">+</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Q-Q Plot for Temperature"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="snowfall-distribution" class="level4">
+<h4 class="anchored" data-anchor-id="snowfall-distribution">Snowfall Distribution</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="temp_hist.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption class="figure-caption">Pictured: Visualizing Snowfall Distribution</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snowfall_qq.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption class="figure-caption">Pictured: Transformed Snowfall QQ Plot</figcaption>
+</figure>
+</div>
+<p>Interesting! The snowfall data was is fairly skewed to the right and there is a large right tail. This makes sense given the sheer volume of zeros in the data. Given this does not show me a normal distribution, I transformed the data using log() and created a QQ plot to see how how this non-normal distribution fits. Although my QQ plot is not perfect, I am happy with moving forward given the number of low values in my dataset (0s and 1s) which makes sense contextually since we are dealing with daily snowfall.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Creating histograms of my snowfall distribution to check for normality:</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Snowfall Distributions Check</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Non recent years</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>vt_hist_non <span class="ot">&lt;-</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(vt_non_recent) <span class="sc">+</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> snowfall)) <span class="sc">+</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Recent Snowfall Distribution During November and December"</span>,</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Snowfall (inches)"</span>,</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Frequency"</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>vt_hist_non</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Recent years</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>vt_hist_recent <span class="ot">&lt;-</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(vt_non_recent) <span class="sc">+</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> snowfall)) <span class="sc">+</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Recent Snowfall Distribution During November and December"</span>,</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Snowfall (inches)"</span>,</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Frequency"</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>vt_hist_recent</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-12-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Both recent and non-recent look relatively similar in their underlying distributions, so I'm going to plot just recent data.</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="do">##QQ Plot for Snowfall</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(vt_recent, <span class="fu">aes</span>(<span class="at">sample =</span> snowfall)) <span class="sc">+</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Q-Q Plot for Snowfall"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="do">##Transformed QQ Plot for Snowfall</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>log_snowfall <span class="ot">&lt;-</span><span class="fu">log</span>(vt_recent<span class="sc">$</span>snowfall)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>log_snowfall_non <span class="ot">&lt;-</span> <span class="fu">log</span>(vt_non_recent<span class="sc">$</span>snowfall)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(vt_recent, <span class="fu">aes</span>(<span class="at">sample =</span> log_snowfall)) <span class="sc">+</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Q-Q Plot for Transformed Precipitation Data"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Now that I have checked for normality and updated data where it was needed, I’m going to go ahead and run my hypothesis tests.</p>
+</section>
+</section>
+<section id="hypothesis-testing" class="level3">
+<h3 class="anchored" data-anchor-id="hypothesis-testing">Hypothesis Testing</h3>
+<section id="snowfall-hypothesis" class="level4">
+<h4 class="anchored" data-anchor-id="snowfall-hypothesis">Snowfall Hypothesis</h4>
+<p>Is the mean snowfall in inches different in recent years than in previous years?</p>
+<p>My null and alternative hypotheses:</p>
+<p><span class="math display">\[H_{O}: \mu_{recent} - \mu_{nonrecent} = 0\]</span></p>
+<p><span class="math display">\[H_{A}: \mu_{recent} - \mu_{nonrecent} \neq 0\]</span></p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Categorizing data</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>vt_data<span class="sc">$</span>category <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(vt_data<span class="sc">$</span>year <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2015</span>, <span class="dv">2016</span>, <span class="dv">2020</span>), <span class="st">"recent"</span>, <span class="st">"not"</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Running a t.test on the filtered data:</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">t.test</span>(snowfall <span class="sc">~</span> category, <span class="at">data =</span> vt_data, <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(result)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Extracting my confidence interval</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>conf_interval <span class="ot">&lt;-</span> result<span class="sc">$</span>conf.int</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">'I am 95% confident the range'</span>, <span class="fu">round</span>(conf_interval[<span class="dv">1</span>], <span class="dv">2</span>), <span class="st">'and'</span>,  <span class="fu">round</span>(conf_interval[<span class="dv">2</span>], <span class="dv">2</span>), <span class="st">'contains the true population difference between recent and non recent years for average snowfall in inches on Mount Mansfield.'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snowfall_ttest.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption class="figure-caption">Pictured: Welch’s Two Sample T Test Results</figcaption>
+</figure>
+</div>
+<p><strong>To conclude, my Welch’s two sample t test generates a p value of .000000058 with a significance level of .05. In this case, I would reject the null hypothesis and this result is statistically significant at the .05 significance level. I have strong evidence to suggest that the observed difference between snowfall in recent years and non-recent years is unlikely to have occurred by random chance alone.</strong></p>
+<p>Considerations for other variables that could influence this analysis includes wind speeds at the weather station, el nino/la nina years, and the extraction of N/As. Given this analysis was completed using one weather station for duration of 20 years, I’d like to acknowledge that changes could have occurred to the monitor’s position, measurement variability, and quality since snowfall is a quite sensitive variable.</p>
+</section>
+<section id="temperature-hypothesis" class="level4">
+<h4 class="anchored" data-anchor-id="temperature-hypothesis">Temperature Hypothesis</h4>
+<p>Is the mean temperature in Fahrenheit different in recent years than in previous years?</p>
+<p>My null and alternative hypotheses:</p>
+<p><span class="math display">\[H_{O}: \mu_{recent} - \mu_{nonrecent} = 0\]</span></p>
+<p><span class="math display">\[H_{A}: \mu_{recent} - \mu_{nonrecent} \neq 0\]</span></p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Categorizing data</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>vt_data<span class="sc">$</span>category <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(vt_data<span class="sc">$</span>year <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2015</span>, <span class="dv">2016</span>, <span class="dv">2020</span>), <span class="st">"recent"</span>, <span class="st">"not"</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Running a t.test on the filtered data:</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">t.test</span>(temp <span class="sc">~</span> category, <span class="at">data =</span> vt_data, <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(result)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Extract confidence interval</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>conf_interval <span class="ot">&lt;-</span> result<span class="sc">$</span>conf.int</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">'I am 95% confident the range'</span>, <span class="fu">round</span>(conf_interval[<span class="dv">1</span>], <span class="dv">2</span>), <span class="st">'and'</span>,  <span class="fu">round</span>(conf_interval[<span class="dv">2</span>], <span class="dv">2</span>), <span class="st">'contains the true population difference between recent and non recent years for average temperature in F on Mount Mansfield.'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><img src="temp_ttest.png" class="img-fluid" style="width:100.0%" alt="Pictured: Welch's Two Sample T Test Results"> <strong>To conclude, my Welch’s two sample t test generates a p value of .3706 with a significance level of .05. In this case, I would fail to reject the null hypothesis with this result not being statistically significant at the .05 significance level. I do not have strong evidence to suggest that the observed difference between snowfall in recent years and non-recent years is unlikely to have occurred by random chance alone.</strong></p>
+<p>Considerations for other variables that could influence this analysis includes percipitation at the weather station, el nino/la nina years, relative humidity, and the extraction of N/As. Given this analysis was completed using one weather station for duration of 20 years, I’d like to acknowledge that changes could have occurred to the monitor’s position, measurement variability, and quality since snowfall is a quite sensitive variable.</p>
+</section>
+</section>
+<section id="linear-regression" class="level3">
+<h3 class="anchored" data-anchor-id="linear-regression">Linear Regression</h3>
+<p>I decided to expand my dataset again and include all years to compare the relationship between snowfall and temperature. Knowing that this relationship should be fairly intuitive since snowfall relies on a temperature threshold to exist (proven scientifically), I wanted to see the relationship that is present in this data.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lm_results.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<figcaption class="figure-caption">Pictured: Running a Linear Regression with Results</figcaption>
+</figure>
+</div>
+<p><strong>Intercept: When the average temperature is 0 degrees Fahrenheit, the snowfall is, on average, 20.6 inches between 2001-2023.</strong></p>
+<p><strong>Slope: For every 1 degree increase in temperature each day, the rate of snowfall decreases by .35.</strong></p>
+<p><strong>R-Squared: With an r-squared value of .40, I can conclude that 40% of snowfall in inches can be explained by temperature alone.</strong></p>
+<p>Code for this analysis below:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I'm going to join my larger datasets together first:</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>vt_all_years_data <span class="ot">&lt;-</span> <span class="fu">merge</span>(tidy_vt_snow_winter, tidy_vt_temps_winter, <span class="at">by =</span> <span class="st">'date'</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co">#taking a look at the data:</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>vt_all_years_data <span class="ot">&lt;-</span> vt_all_years_data <span class="sc">%&gt;%</span> </span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="st">"Min.x"</span>, <span class="sc">-</span><span class="st">"10%.x"</span>,<span class="sc">-</span><span class="st">"30%.x"</span>, <span class="sc">-</span><span class="st">"70%.x"</span>, <span class="sc">-</span><span class="st">"90%.x"</span>, <span class="sc">-</span><span class="st">"Max.x"</span>, <span class="sc">-</span><span class="st">"Median (POR).x"</span>, <span class="sc">-</span><span class="st">"year.x"</span>, <span class="sc">-</span><span class="st">"month.x"</span>, <span class="sc">-</span><span class="st">"Min.y"</span>,<span class="sc">-</span><span class="st">"10%.y"</span>, <span class="sc">-</span><span class="st">"30%.y"</span>,<span class="sc">-</span><span class="st">"70%.y"</span>,<span class="sc">-</span><span class="st">"90%.y"</span>,<span class="sc">-</span><span class="st">"Max.y"</span>,<span class="sc">-</span><span class="st">"Median (POR).y"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">year =</span> <span class="st">"year.y"</span>, <span class="at">month =</span> <span class="st">"month.y"</span>)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>vt_all_years_data</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="co">#aggregating all years of data for snowfall and temp:</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="co">#running a simple regression on snowfall and temperature variables for my sampling years</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(snowfall <span class="sc">~</span> temp, <span class="at">data =</span> vt_all_years_data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+</section>
+<section id="conclusion-future-considerations" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion-future-considerations">Conclusion &amp; Future Considerations</h2>
+<p>To conclude, and as shown above, there is no evidence to conclude statistically significant changes in average temperature data on Mount Mansfield from the years 2001 - 2023. There is evidence to suggest statistically significant changes in average snowfall in inches on Mount Mansfield from 2001 - 2023. However, as I also outlined above, there are a number of considerations with this data that could limit making any conclusions, including other variables present when gathering this data and missing years of data.</p>
+<p>These conclusions align with my initial presumption that snowfall was declining in Vermont through my experiences skiing in recent years and also aligns with recent news stating the winter tourism industry is suffering from lack of snow. This analysis could be helpful for future ski industry stakeholders in determining how to budget and maintain mountains in the future. This analysis could also be helpful in determining mitigation plans for areas where snowfall is a significant contributor to spring water sources for agriculture, wildlife, and humans. It’s important we acknowledge these changes to our environment and consider what the future of our world may look like with less snowfall.</p>
+<p>In a future analysis, this data would be helpful in doing the following:</p>
+<ul>
+<li><p>Time series forecasting to predict future snowfall patterns</p></li>
+<li><p>Event analysis by understanding specific events in the time series like massive storms, El Niño/La Niña considerations&nbsp;</p></li>
+<li><p>A seasonal decomposition with a larger time frame of data</p></li>
+<li><p>Expanding the analysis regionally, nationally, or globally with more data<br>
+</p></li>
+</ul>
+</section>
+<section id="sources" class="level2">
+<h2 class="anchored" data-anchor-id="sources">Sources:</h2>
+<p>The Boston Globe. (2023, August 3). Climate change and winter: What the future holds. https://www.bostonglobe.com/2023/08/03/science/climate-change-winter/</p>
+<p>U.S. Department of Agriculture, Natural Resources Conservation Service. (n.d.). NWCC Site Plots - Vermont. USDA. <a href="https://nwcc-apps.sc.egov.usda.gov/site-plots/#VT" class="uri">https://nwcc-apps.sc.egov.usda.gov/site-plots/#VT</a></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
