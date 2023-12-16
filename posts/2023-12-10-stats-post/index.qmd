@@ -121,7 +121,7 @@ After tidying the data, I wanted to take a look at it visually and narrow down t
 
 ##### Temperature Data Updates
 
-```{r warning = FALSE, results = 'hide'}
+```{r warning = FALSE, message = FALSE, results = 'hide'}
 #Plotting a few years of data:
 ggplot(tidy_vt_temps, aes(x = date, y = value)) +
   geom_line()
@@ -142,7 +142,7 @@ tidy_vt_temps_winter %>%
 
 ##### Snowfall Data Updates
 
-```{r warning = FALSE, results = 'hide'}
+```{r warning = FALSE, message = FALSE, results = 'hide'}
 #Plotting a few years of data:
 ggplot(tidy_vt_snow, aes(x = date, y = value)) +
   geom_line()
@@ -171,7 +171,7 @@ I'm now going to take a look at multiple years of snowfall and temperature data 
 
 Details on the code used to create these plots can be found below:
 
-```{r}
+```{r warning = FALSE, message = FALSE, results = 'hide'}
 #Taking a look at daily snowfall from 2001 - 2023
 plot_ly(tidy_vt_snow_winter_years, 
         x = ~month_day, 
@@ -186,7 +186,7 @@ plot_ly(tidy_vt_snow_winter_years,
          legend = list(title = "Year"))
 ```
 
-```{r}
+```{r warning = FALSE, message = FALSE, results = 'hide'}
 #Taking a look at daily temperature from 2001 - 2023
 plot_ly(tidy_vt_temp_winter_years, 
         x = ~month_day, 
