@@ -216,7 +216,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<p><a href="https://github.com/eds223-fall-2023-org/assignment-4-ccaswell25/blob/main/assignment4.Rmd">Project Repository Located Here</a></p>
+<p><a href="https://github.com/ccaswell25/eez-suitable-areas">Project Repository Located Here</a></p>
 <section id="about-this-project" class="level2">
 <h2 class="anchored" data-anchor-id="about-this-project">About This Project</h2>
 <p>“As the human population looks set to reach 10 billion people by 2050, our food systems will be under intense pressure to produce animal protein for an increasing population,”(Gentry). This is an important problem to consider because, with scarcity of animal-rich protein sources, we need to turn to other alternatives. This is where marine aquaculture can play an important role, which is defined as the breeding, rearing, and harvesting of aquatic plants and animals (NOAA). Sustainable seafood production can be a signfiicant contributor to this global food supply crisis, and in order to plan for future marine aquaculture projects and initiatives, we need to consider a few important implications, such as ocean depth, temperatures, logistics traffic, protected areas, etc.</p>
@@ -263,8 +263,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><code>min_depth</code>: minimum meters below sea level for optimal growth, found on <a href="https://www.sealifebase.ca/search.php">SeaLifeBase</a></p>
 <p><code>max_depth</code>: maximum meters below sea level for optimal growth, found on <a href="https://www.sealifebase.ca/search.php">SeaLifeBase</a></p>
 <div class="cell">
-<details>
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>species_function <span class="ot">=</span> <span class="cf">function</span>(species_name, min_temp, max_temp, min_depth, max_depth){</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># read in the shapefile for the West Coast EEZ</span></span>
@@ -356,7 +354,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(map2)</span>
 <span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <p>The outputs of the function create two maps showcasing the total suitable area for the species’ growth as well as the percentage (%) of suitable area for the species’ growth.</p>
 <p>In the examples below, this output is showing results for species of oysters:</p>
@@ -364,15 +361,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<p>To conclude, I am able to indicate that the largest area of suitable habitat for oysters in the EEZ region is in Central California. The percentage of suitable area indicates….This data is helpful for guiding actions or policies on sustainable marine aquaculture for oyster species, indicating those projects should occur in those regions for the best results.</p>
+<p>To conclude, I am able to indicate that the largest area of suitable habitat for oysters in the EEZ region is in Central California. The percentage of suitable area indicates the highest percentage of suitable area is in the Washington region of the West Coast EEZ. This data is helpful for guiding actions or policies on sustainable marine aquaculture for oyster species, indicating those projects should occur in those regions for the best results.</p>
 <p>In a future analysis, I would aim to look at existing population data of oysters or other species in this area to help drive decisions on likely size, requirements, and budgets for a marine aquaculture project on oyster species.</p>
 </section>
 <section id="details-of-the-data-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="details-of-the-data-analysis">Details of the Data Analysis</h2>
 <p>For my data analysis, I completed a number of steps before getting to mapped suitable areas. These steps included cleaning, wrangling, plotting, and manipulating the datasets that I had.</p>
 <ol type="1">
-<li><p>First, I needed to do some basic data cleaning. This included reprojecting my data to make sure all was using the same coordinate reference system to accurately compare and layer maps.</p></li>
-<li><p>Second, I calculated the mean sea surface temperature over the raster stacks and converted it to Celsius. This provided me with a raster of means for the entire West Coast. In order to just look at our Exclusive Economic Zones, I used <code>crop</code> to reduce the raster data to our area of interest. Then, because the resolution of the data did not match, I also the nearest neighbor method using <code>resample</code> to make sure the resolutions matched and checked the coordinate reference systems were the same.</p></li>
+<li><p>First, I needed to do some basic data cleaning. This included re-projecting my data to make sure all was using the same coordinate reference system to accurately compare and layer maps.</p></li>
+<li><p>Second, I calculated the mean sea surface temperature over the raster stacks and converted it to Celsius. This provided me with a raster of means for the entire West Coast. In order to just look at our Exclusive Economic Zones, I used <code>crop</code> to reduce the raster data to our area of interest. Then, because the resolution of the data did not match, I also used the nearest neighbor method using <code>resample</code> to make sure the resolutions matched and checked that the coordinate reference systems were the same.</p></li>
 <li><p>Third, I plotted the data. In the visualization below, I can see the variation in average sea surface temperatures in Celsius for the West Coast EEZ.</p></li>
 </ol>
 <div class="quarto-figure quarto-figure-center">
@@ -382,7 +379,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 <ol start="4" type="1">
-<li><p>Fourth, I needed to reclassify the data (using <code>reclassify</code>) to meet both depth and sea temperature specifications for the species of interest. As an example in this analysis, I will use oysters, however the function created as part of this analysis will represent any species of choosing. Given I wanted to understand suitable oyster regions, I found information on species depth and temperature requirements on <a href="https://www.sealifebase.ca/search.php">SeaLifeBase</a>. This was used to find information on oyster’s suitable sea surface temperature and depth specifications which was determined to be between 11 and 30 degrees Celsius and an optimal depth of 0-70 meters below sea level.</p></li>
+<li><p>Fourth, I needed to reclassify the data (using <code>reclassify</code>) to meet both depth and sea temperature specifications for the species of interest. As an example in this analysis, I will use oysters, however the function created as part of this analysis will represent any species of choosing. Given I wanted to understand suitable oyster regions, I found information on species depth and temperature requirements on <a href="https://www.sealifebase.ca/search.php">SeaLifeBase</a>.This was used to find information on oyster’s suitable sea surface temperature and depth specifications which was determined to be between 11 and 30 degrees Celsius and an optimal depth of 0-70 meters below sea level.</p></li>
 <li><p>Fifth, I wanted to determine the total suitable area within each EEZ in order to rank specific zones/regions by priority. To do so, I found the total area of suitable locations within each EEZ using <code>crop</code>, <code>mask</code>, <code>expanse</code>, and <code>rasterize</code>. I could then find the total suitable area within each EEZ region, as seen from the plot below: <img src="suitable_area_by_rgn.png" class="img-fluid" style="width:100.0%" alt="Total Suitable Area within each EEZ"></p></li>
 <li><p>Lastly, I cross-joined the data for suitable area by region on to the EEZ data to plot them in the same map and calculated the percentage of area using the total grid area of the West Coast EEZ (calculated using <code>expanse</code>).</p></li>
 </ol>
