@@ -122,10 +122,6 @@ After tidying the data, I wanted to take a look at it visually and narrow down t
 ##### Temperature Data Updates
 
 ```{r warning = FALSE, message = FALSE, results = 'hide'}
-#Plotting a few years of data:
-ggplot(tidy_vt_temps, aes(x = date, y = value)) +
-  geom_line()
-
 #I have data for all months of the year
 #I've decided I want to compare just months November - December for this analysis
 #First need to create a month column:
@@ -143,10 +139,6 @@ tidy_vt_temps_winter %>%
 ##### Snowfall Data Updates
 
 ```{r warning = FALSE, message = FALSE, results = 'hide'}
-#Plotting a few years of data:
-ggplot(tidy_vt_snow, aes(x = date, y = value)) +
-  geom_line()
-
 #I have data for all months of the year
 #I've decided I want to compare just months November - December for this analysis
 #First need to create a month column:
