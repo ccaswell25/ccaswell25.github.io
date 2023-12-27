@@ -2,16 +2,26 @@ project:
   type: website
   output-dir: docs
 website:
-  title: "Carly Caswell"
+  favicon: logo2.png
   navbar:
-    left:
+    title: false 
+    logo: logo2.png
+    logo-alt: "Alt text for logo"
+    right:
       - href: index.qmd
         text: Home
       - about.qmd
       - href: resources.qmd
         text: Resources
       - posts.qmd 
-
+      - icon: github 
+        href: https://github.com/ccaswell25
+      - icon: linkedin
+        href: https://www.linkedin.com/in/carlycaswell25/
+  page-footer:
+    background: light 
+    left:
+      - "Copyright 2023, Carly Caswell"
 format:
   html:
     theme: 
