@@ -1,10 +1,9 @@
 ---
-title: "My Blog"
+title: "Projects & Blog"
 
 listing: 
   contents: posts 
   type: grid 
   sort: "date desc" 
   categories: true
-
 ---

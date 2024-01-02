@@ -2,28 +2,31 @@ project:
   type: website
   output-dir: docs
 website:
-  favicon: logo2.png
+  title: "Carly Caswell"
+  favicon: 2.png
   navbar:
     title: false 
-    logo: logo2.png
-    logo-alt: "Alt text for logo"
+    logo: 2.png
+    collapse-below: lg
     right:
       - href: index.qmd
         text: Home
       - about.qmd
-      - href: resources.qmd
-        text: Resources
-      - posts.qmd 
+      - href: posts.qmd 
+        text: Projects & Blog
       - icon: github 
         href: https://github.com/ccaswell25
       - icon: linkedin
         href: https://www.linkedin.com/in/carlycaswell25/
+      - icon: envelope
+        href: mailto:ccaswell@bren.ucsb.edu
   page-footer:
     background: light 
     left:
       - "Copyright 2023, Carly Caswell"
 format:
   html:
+    link-external-newwindow: true
     theme: 
       light: flatly
       dark: solar
