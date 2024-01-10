@@ -24,7 +24,7 @@ Vermont is one state that relies heavily on its winter tourism, so my aim was to
 
 ## Research Question
 
-Is there a statistically significant difference between the long-term trends in average snowfall and temperature changes in Vermont?
+Is there a statistically significant difference between the recent versus older trends in average snowfall and temperature changes in Vermont?
 
 ## Analysis Highlights:
 
@@ -52,7 +52,6 @@ For my data analysis, I completed a number of steps before getting to my final r
 knitr::opts_chunk$set(echo = FALSE, eval = TRUE, results = 'hide', warning = FALSE)
 ```
 
-
 ```{r warning = FALSE, message = FALSE, results = 'hide'}
 library(tidyverse) #for tidying my data
 library(readr)
@@ -73,7 +72,6 @@ library(zoo) #moving averages
 rootdir <- ("~/Documents/MEDS/Fall_Q2/EDS-222-Stats/Assignments")
 datadir <- file.path(rootdir,"eds222-final","data")
 ```
-
 
 ```{r warning = FALSE, message = FALSE, results = 'hide'}
 vt_temps <- read_csv(file.path(datadir,"Mount_Mansfield_temps.csv"))    
@@ -212,14 +210,14 @@ By bucketing my data into two groups, recent and non-recent (more information on
 Snowfall Table:
 
 | Years                         | Mean (inches) | Standard Deviation (inches) | Median (inches) |
-|-------------------|------------------|------------------|------------------|
+|-------------------------------|---------------|-----------------------------|-----------------|
 | Recent (2015,2016, 2022)      | 3.92          | 8.37                        | 0               |
 | Non-Recent (2001, 2002, 2003) | 8.61          | 11.48                       | 0               |
 
 Temperature Table:
 
 | Years                         | Mean (F) | Standard Deviation (F) | Median (F) |
-|-------------------|------------------|------------------|------------------|
+|-------------------------------|----------|------------------------|------------|
 | Recent (2015,2016, 2022)      | 42.28    | 18.83                  | 44.06      |
 | Non-Recent (2001, 2002, 2003) | 39.64    | 19.43                  | 41.18      |
 
@@ -377,7 +375,7 @@ $$H_{A}: \mu_{recent} - \mu_{nonrecent} \neq 0$$
 
 ```{r warning = FALSE, message = FALSE, results = 'hide'}
 #Categorizing data
-vt_data$category <- ifelse(vt_data$year %in% c(2015, 2016, 2020), "recent", "not")
+vt_data$category <- ifelse(vt_data$year %in% c(2015, 2016, 2022), "recent", "not")
 
 #Running a t.test on the filtered data:
 result <- t.test(snowfall ~ category, data = vt_data, conf.level = 0.95)
@@ -407,7 +405,7 @@ $$H_{A}: \mu_{recent} - \mu_{nonrecent} \neq 0$$
 
 ```{r warning = FALSE, message = FALSE, results = 'hide'}
 #Categorizing data
-vt_data$category <- ifelse(vt_data$year %in% c(2015, 2016, 2020), "recent", "not")
+vt_data$category <- ifelse(vt_data$year %in% c(2015, 2016, 2022), "recent", "not")
 
 #Running a t.test on the filtered data:
 result <- t.test(temp ~ category, data = vt_data, conf.level = 0.95)
@@ -466,8 +464,6 @@ In a future analysis, this data would be helpful in doing the following:
 -   A seasonal decomposition with a larger time frame of data
 
 -   Expanding the analysis regionally, nationally, or globally with more data\
-
-
 
 ## Sources:
 

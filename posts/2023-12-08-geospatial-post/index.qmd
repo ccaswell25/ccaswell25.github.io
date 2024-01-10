@@ -89,8 +89,8 @@ depth <- rast(here("data2", "depth.tif"))
 
 # reproject any data not in the same projection
 sst <- project(sst, "EPSG:4326")
-st_crs(wc_eez) == st_crs(sst)
-st_crs(depth) == st_crs(sst)
+#st_crs(wc_eez) == st_crs(sst)
+#st_crs(depth) == st_crs(sst)
 
 #Finding the mean SST
 sst_mean <- app(sst, fun = "mean")
@@ -147,7 +147,7 @@ suitable_area <- cross_join(wc_eez, area_grid) %>%
 map1 <- 
   tm_shape(suitable_area) +
   tm_fill("area_km2",palette = (c("#90e0ef", "#48cae4", "#00b4d8", 
-                          "#0096c7", "#0077b6", "#023e8a")), title = "Area of Suitable Habitat (km^2) by EEZ Region") +  tm_layout("Suitable Area for Oysters by EEZ Region", legend.outside = TRUE) +
+                          "#0096c7", "#0077b6", "#023e8a")), title = "Area of Suitable Habitat (m^2) by EEZ Region") +  tm_layout("Suitable Area for Oysters by EEZ Region", legend.outside = TRUE) +
    tm_borders(col = "gray") +
   tm_basemap("OpenStreetMap") 
   
