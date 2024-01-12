@@ -6,7 +6,7 @@ website:
   favicon: 2.png
   navbar:
     title: false 
-    logo: 2.png
+    logo: test.png
     collapse-below: lg
     right:
       - href: index.qmd

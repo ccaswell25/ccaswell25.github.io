@@ -112,7 +112,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a href="../../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../../2.png" alt="" class="navbar-logo">
+    <img src="../../test.png" alt="" class="navbar-logo">
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -292,8 +292,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># reproject any data not in the same projection</span></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>sst <span class="ot">&lt;-</span> <span class="fu">project</span>(sst, <span class="st">"EPSG:4326"</span>)</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(wc_eez) <span class="sc">==</span> <span class="fu">st_crs</span>(sst)</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(depth) <span class="sc">==</span> <span class="fu">st_crs</span>(sst)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">#st_crs(wc_eez) == st_crs(sst)</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">#st_crs(depth) == st_crs(sst)</span></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">#Finding the mean SST</span></span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>sst_mean <span class="ot">&lt;-</span> <span class="fu">app</span>(sst, <span class="at">fun =</span> <span class="st">"mean"</span>)</span>
@@ -350,7 +350,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>map1 <span class="ot">&lt;-</span> </span>
 <span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(suitable_area) <span class="sc">+</span></span>
 <span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_fill</span>(<span class="st">"area_km2"</span>,<span class="at">palette =</span> (<span class="fu">c</span>(<span class="st">"#90e0ef"</span>, <span class="st">"#48cae4"</span>, <span class="st">"#00b4d8"</span>, </span>
-<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"#0096c7"</span>, <span class="st">"#0077b6"</span>, <span class="st">"#023e8a"</span>)), <span class="at">title =</span> <span class="st">"Area of Suitable Habitat (km^2) by EEZ Region"</span>) <span class="sc">+</span>  <span class="fu">tm_layout</span>(<span class="st">"Suitable Area for Oysters by EEZ Region"</span>, <span class="at">legend.outside =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"#0096c7"</span>, <span class="st">"#0077b6"</span>, <span class="st">"#023e8a"</span>)), <span class="at">title =</span> <span class="st">"Area of Suitable Habitat (m^2) by EEZ Region"</span>) <span class="sc">+</span>  <span class="fu">tm_layout</span>(<span class="st">"Suitable Area for Oysters by EEZ Region"</span>, <span class="at">legend.outside =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
 <span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>   <span class="fu">tm_borders</span>(<span class="at">col =</span> <span class="st">"gray"</span>) <span class="sc">+</span></span>
 <span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_basemap</span>(<span class="st">"OpenStreetMap"</span>) </span>
 <span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>  </span>

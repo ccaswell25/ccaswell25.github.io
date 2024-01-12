@@ -113,7 +113,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a href="../../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../../2.png" alt="" class="navbar-logo">
+    <img src="../../test.png" alt="" class="navbar-logo">
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -231,7 +231,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="research-question" class="level2">
 <h2 class="anchored" data-anchor-id="research-question">Research Question</h2>
-<p>Is there a statistically significant difference between the long-term trends in average snowfall and temperature changes in Vermont?</p>
+<p>Is there a statistically significant difference between the recent versus older trends in average snowfall and temperature changes in Vermont?</p>
 </section>
 <section id="analysis-highlights" class="level2">
 <h2 class="anchored" data-anchor-id="analysis-highlights">Analysis Highlights:</h2>
@@ -434,10 +434,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Snowfall Table:</p>
 <table class="table">
 <colgroup>
-<col style="width: 26%">
-<col style="width: 24%">
-<col style="width: 24%">
-<col style="width: 24%">
+<col style="width: 33%">
+<col style="width: 16%">
+<col style="width: 31%">
+<col style="width: 18%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -465,10 +465,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Temperature Table:</p>
 <table class="table">
 <colgroup>
-<col style="width: 26%">
-<col style="width: 24%">
-<col style="width: 24%">
-<col style="width: 24%">
+<col style="width: 40%">
+<col style="width: 12%">
+<col style="width: 31%">
+<col style="width: 15%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -696,7 +696,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Categorizing data</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>vt_data<span class="sc">$</span>category <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(vt_data<span class="sc">$</span>year <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2015</span>, <span class="dv">2016</span>, <span class="dv">2020</span>), <span class="st">"recent"</span>, <span class="st">"not"</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>vt_data<span class="sc">$</span>category <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(vt_data<span class="sc">$</span>year <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2015</span>, <span class="dv">2016</span>, <span class="dv">2022</span>), <span class="st">"recent"</span>, <span class="st">"not"</span>)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Running a t.test on the filtered data:</span></span>
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">t.test</span>(snowfall <span class="sc">~</span> category, <span class="at">data =</span> vt_data, <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span>
@@ -726,7 +726,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Categorizing data</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>vt_data<span class="sc">$</span>category <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(vt_data<span class="sc">$</span>year <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2015</span>, <span class="dv">2016</span>, <span class="dv">2020</span>), <span class="st">"recent"</span>, <span class="st">"not"</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>vt_data<span class="sc">$</span>category <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(vt_data<span class="sc">$</span>year <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2015</span>, <span class="dv">2016</span>, <span class="dv">2022</span>), <span class="st">"recent"</span>, <span class="st">"not"</span>)</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Running a t.test on the filtered data:</span></span>
 <span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">t.test</span>(temp <span class="sc">~</span> category, <span class="at">data =</span> vt_data, <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span>
