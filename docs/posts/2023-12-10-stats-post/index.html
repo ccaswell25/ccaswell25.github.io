@@ -434,10 +434,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Snowfall Table:</p>
 <table class="table">
 <colgroup>
-<col style="width: 33%">
-<col style="width: 16%">
-<col style="width: 31%">
-<col style="width: 18%">
+<col style="width: 29%">
+<col style="width: 21%">
+<col style="width: 27%">
+<col style="width: 21%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -465,10 +465,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Temperature Table:</p>
 <table class="table">
 <colgroup>
-<col style="width: 40%">
-<col style="width: 12%">
-<col style="width: 31%">
-<col style="width: 15%">
+<col style="width: 33%">
+<col style="width: 20%">
+<col style="width: 25%">
+<col style="width: 20%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -737,7 +737,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">'I am 95% confident the range'</span>, <span class="fu">round</span>(conf_interval[<span class="dv">1</span>], <span class="dv">2</span>), <span class="st">'and'</span>,  <span class="fu">round</span>(conf_interval[<span class="dv">2</span>], <span class="dv">2</span>), <span class="st">'contains the true population difference between recent and non recent years for average temperature in F on Mount Mansfield.'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p><img src="temp_ttest.png" class="img-fluid" style="width:100.0%" alt="Pictured: Welch's Two Sample T Test Results"> <strong>To conclude, my Welch’s two sample t test generates a p value of .3706 with a significance level of .05. In this case, I would fail to reject the null hypothesis with this result not being statistically significant at the .05 significance level. I do not have strong evidence to suggest that the observed difference between snowfall in recent years and non-recent years is unlikely to have occurred by random chance alone.</strong></p>
+<p><img src="temp_ttest.png" class="img-fluid" style="width:100.0%" alt="Pictured: Welch’s Two Sample T Test Results"> <strong>To conclude, my Welch’s two sample t test generates a p value of .3706 with a significance level of .05. In this case, I would fail to reject the null hypothesis with this result not being statistically significant at the .05 significance level. I do not have strong evidence to suggest that the observed difference between snowfall in recent years and non-recent years is unlikely to have occurred by random chance alone.</strong></p>
 <p>Considerations for other variables that could influence this analysis includes percipitation at the weather station, el nino/la nina years, relative humidity, and the extraction of N/As. Given this analysis was completed using one weather station for duration of 20 years, I’d like to acknowledge that changes could have occurred to the monitor’s position, measurement variability, and quality since snowfall is a quite sensitive variable.</p>
 </section>
 </section>

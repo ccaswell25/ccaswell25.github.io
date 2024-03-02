@@ -1,0 +1,30 @@
+---
+title: "Utilizing Strava Data to Evalute My Marathon Training "
+description: "An infographic analyzing Strava data when marathon training in 2023."
+author:
+ - name: Carly Caswell
+ - url: https://ccaswell25.github.io/
+ - affiliation: Master of Environmental Data Science Program \\\\\\\@ The Bren School (UCSB) & The National Center for Ecological Analysis & Synthesis
+ - affiliation-url: https://ucsb-meds.github.io/
+date: 3-09-2024
+categories: \[Strava, R, Data Visualization, MEDS\] 
+image: strava.png
+--- 
+
+[Project Repository Located Here](https://github.com/ccaswell25/eds222-final)
+
+## About This Project
+
+TBD
+
+## Research Questions
+
+
+## About the Data
+
+
+## Preliminary Data Analysis
+
+
+#### Reading in the Data
+

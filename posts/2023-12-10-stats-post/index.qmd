@@ -210,14 +210,14 @@ By bucketing my data into two groups, recent and non-recent (more information on
 Snowfall Table:
 
 | Years                         | Mean (inches) | Standard Deviation (inches) | Median (inches) |
-|-------------------------------|---------------|-----------------------------|-----------------|
+|----------------------|----------------|--------------------|----------------|
 | Recent (2015,2016, 2022)      | 3.92          | 8.37                        | 0               |
 | Non-Recent (2001, 2002, 2003) | 8.61          | 11.48                       | 0               |
 
 Temperature Table:
 
 | Years                         | Mean (F) | Standard Deviation (F) | Median (F) |
-|-------------------------------|----------|------------------------|------------|
+|-------------------------|---------------|-------------------|---------------|
 | Recent (2015,2016, 2022)      | 42.28    | 18.83                  | 44.06      |
 | Non-Recent (2001, 2002, 2003) | 39.64    | 19.43                  | 41.18      |
 
@@ -416,7 +416,7 @@ conf_interval <- result$conf.int
 print(paste('I am 95% confident the range', round(conf_interval[1], 2), 'and',  round(conf_interval[2], 2), 'contains the true population difference between recent and non recent years for average temperature in F on Mount Mansfield.'))
 ```
 
-![Pictured: Welch\'s Two Sample T Test Results](temp_ttest.png){width="100%"} **To conclude, my Welch's two sample t test generates a p value of .3706 with a significance level of .05. In this case, I would fail to reject the null hypothesis with this result not being statistically significant at the .05 significance level. I do not have strong evidence to suggest that the observed difference between snowfall in recent years and non-recent years is unlikely to have occurred by random chance alone.**
+![Pictured: Welch's Two Sample T Test Results](temp_ttest.png){width="100%"} **To conclude, my Welch's two sample t test generates a p value of .3706 with a significance level of .05. In this case, I would fail to reject the null hypothesis with this result not being statistically significant at the .05 significance level. I do not have strong evidence to suggest that the observed difference between snowfall in recent years and non-recent years is unlikely to have occurred by random chance alone.**
 
 Considerations for other variables that could influence this analysis includes percipitation at the weather station, el nino/la nina years, relative humidity, and the extraction of N/As. Given this analysis was completed using one weather station for duration of 20 years, I'd like to acknowledge that changes could have occurred to the monitor's position, measurement variability, and quality since snowfall is a quite sensitive variable.
 
