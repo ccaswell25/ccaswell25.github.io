@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="dcterms.date" content="2024-03-09">
-<meta name="description" content="An infographic analyzing Strava data when marathon training in 2023.">
+<meta name="description" content="An infographic analyzing and visualizing my Strava data when marathon training in 2023.">
 
 <title>Carly Caswell - Utilizing Strava Data to Evalute My Marathon Training</title>
 <style>
@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -128,11 +162,14 @@ ul.task-list li input[type="checkbox"] {
       <h1 class="title">Utilizing Strava Data to Evalute My Marathon Training</h1>
                   <div>
         <div class="description">
-          An infographic analyzing Strava data when marathon training in 2023.
+          An infographic analyzing and visualizing my Strava data when marathon training in 2023.
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">[Strava, R, Data Visualization, MEDS]</div>
+                <div class="quarto-category">Strava</div>
+                <div class="quarto-category">R</div>
+                <div class="quarto-category">Data Visualization</div>
+                <div class="quarto-category">MEDS</div>
               </div>
                   </div>
   </div>
@@ -160,10 +197,16 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#about-this-project" id="toc-about-this-project" class="nav-link active" data-scroll-target="#about-this-project">About This Project</a></li>
-  <li><a href="#research-questions" id="toc-research-questions" class="nav-link" data-scroll-target="#research-questions">Research Questions</a></li>
+  <li><a href="#my-motivating-questions" id="toc-my-motivating-questions" class="nav-link active" data-scroll-target="#my-motivating-questions">My Motivating Questions</a></li>
   <li><a href="#about-the-data" id="toc-about-the-data" class="nav-link" data-scroll-target="#about-the-data">About the Data</a></li>
+  <li><a href="#the-approach" id="toc-the-approach" class="nav-link" data-scroll-target="#the-approach">The Approach</a></li>
   <li><a href="#preliminary-data-analysis" id="toc-preliminary-data-analysis" class="nav-link" data-scroll-target="#preliminary-data-analysis">Preliminary Data Analysis</a></li>
+  <li><a href="#final-result" id="toc-final-result" class="nav-link" data-scroll-target="#final-result">Final Result</a>
+  <ul class="collapse">
+  <li><a href="#visualization-1" id="toc-visualization-1" class="nav-link" data-scroll-target="#visualization-1">Visualization 1</a></li>
+  <li><a href="#visualization-2" id="toc-visualization-2" class="nav-link" data-scroll-target="#visualization-2">Visualization 2</a></li>
+  <li><a href="#visualization-3" id="toc-visualization-3" class="nav-link" data-scroll-target="#visualization-3">Visualization 3</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -173,21 +216,59 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p><a href="https://github.com/ccaswell25/eds222-final">Project Repository Located Here</a></p>
-<section id="about-this-project" class="level2">
-<h2 class="anchored" data-anchor-id="about-this-project">About This Project</h2>
-<p>TBD</p>
-</section>
-<section id="research-questions" class="level2">
-<h2 class="anchored" data-anchor-id="research-questions">Research Questions</h2>
+<p><a href="https://github.com/ccaswell25/Caswell-eds240-HW4">Project Repository Located Here</a></p>
+<section id="my-motivating-questions" class="level2">
+<h2 class="anchored" data-anchor-id="my-motivating-questions">My Motivating Questions</h2>
+<p>My infographic (seen below) is a representation of my Strava data during marathon training. I started on this journey because I wanted to look back at my last marathon training and asked myself: How should I train for my next marathon?! Luckily, I had recorded all of my running data with the public online media platform called Strava. Strava has allowed me to keep all of my data on running and cross-training, which has been amazing to keep track of and learn about as I go. By analyzing my Strava data, some more detailed questions I will pursue are: When in my training should I ramp up my weekly mileage? What days during the week should I expect longer distances/need to allocate more time to running on those days? And lastly, what types of activities should I do to cross-train? I like to stay active beyond running, and wanted to look back at some of the other activities I’d done to balance getting miles in without road running.</p>
 </section>
 <section id="about-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="about-the-data">About the Data</h2>
+<p>This data comes from my personal Strava data documented on the Strava web application. This application is a social network for tracking physical exercise via activities. Each logged data point represents an activity I have done; these activities range from running, hiking, surfing, skiing, walking, strength training, etc. In order to get this data from the public Strava app, I referenced the Strava API . This includes utilizing the {{rStrava}} package. This package allowed me to scrape my data from the public Strava website by creating a Strava application and using authentication. Details on the scraped activity data included where I completed the activity, the duration of the activity, the type of activity, the title of the activity, the distance I went, the day/month/year I did the activity, the number of kudos received, and essentially anything recorded in a single Strava activity that I have access to. Then, I filtered my activity data down to my time period of interest, which was May to October 2023 (the time I was training for the marathon).</p>
+</section>
+<section id="the-approach" class="level2">
+<h2 class="anchored" data-anchor-id="the-approach">The Approach</h2>
+<p>TBD</p>
 </section>
 <section id="preliminary-data-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="preliminary-data-analysis">Preliminary Data Analysis</h2>
 <section id="reading-in-the-data" class="level4">
 <h4 class="anchored" data-anchor-id="reading-in-the-data">Reading in the Data</h4>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Loading Libraries ---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rStrava)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(paletteer) <span class="co">#for color palettes</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magick)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(png)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Reading in Data ---</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#strava_activities &lt;- read_csv("strava_activities.csv")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="data-wrangling" class="level4">
+<h4 class="anchored" data-anchor-id="data-wrangling">Data Wrangling</h4>
+</section>
+</section>
+<section id="final-result" class="level2">
+<h2 class="anchored" data-anchor-id="final-result">Final Result</h2>
+<section id="visualization-1" class="level3">
+<h3 class="anchored" data-anchor-id="visualization-1">Visualization 1</h3>
+</section>
+<section id="visualization-2" class="level3">
+<h3 class="anchored" data-anchor-id="visualization-2">Visualization 2</h3>
+</section>
+<section id="visualization-3" class="level3">
+<h3 class="anchored" data-anchor-id="visualization-3">Visualization 3</h3>
 
 
 </section>

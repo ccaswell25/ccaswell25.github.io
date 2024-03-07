@@ -1,30 +1,62 @@
 ---
-title: "Utilizing Strava Data to Evalute My Marathon Training "
-description: "An infographic analyzing Strava data when marathon training in 2023."
+title: "Utilizing Strava Data to Evalute My Marathon Training"
+description: "An infographic analyzing and visualizing my Strava data when marathon training in 2023."
 author:
  - name: Carly Caswell
  - url: https://ccaswell25.github.io/
  - affiliation: Master of Environmental Data Science Program \\\\\\\@ The Bren School (UCSB) & The National Center for Ecological Analysis & Synthesis
  - affiliation-url: https://ucsb-meds.github.io/
 date: 3-09-2024
-categories: \[Strava, R, Data Visualization, MEDS\] 
+categories: [Strava, R, Data Visualization, MEDS] 
 image: strava.png
+format:
+  html: 
+    code-fold: true
 --- 
 
-[Project Repository Located Here](https://github.com/ccaswell25/eds222-final)
+[Project Repository Located Here](https://github.com/ccaswell25/Caswell-eds240-HW4)
 
-## About This Project
+## My Motivating Questions
 
-TBD
-
-## Research Questions
-
+My infographic (seen below) is a representation of my Strava data during marathon training. I started on this journey because I wanted to look back at my last marathon training and asked myself: How should I train for my next marathon?! Luckily, I had recorded all of my running data with the public online media platform called Strava. Strava has allowed me to keep all of my data on running and cross-training, which has been amazing to keep track of and learn about as I go. By analyzing my Strava data, some more detailed questions I will pursue are: When in my training should I ramp up my weekly mileage? What days during the week should I expect longer distances/need to allocate more time to running on those days? And lastly, what types of activities should I do to cross-train? I like to stay active beyond running, and wanted to look back at some of the other activities I’d done to balance getting miles in without road running. 
 
 ## About the Data
 
+This data comes from my personal Strava data documented on the Strava web application. This application is a social network for tracking physical exercise via activities. Each logged data point represents an activity I have done; these activities range from running, hiking, surfing, skiing, walking, strength training, etc. In order to get this data from the public Strava app, I referenced the Strava API . This includes utilizing the {{rStrava}} package. This package allowed me to scrape my data from the public Strava website by creating a Strava application and using authentication. Details on the scraped activity data included where I completed the activity, the duration of the activity, the type of activity, the title of the activity, the distance I went, the day/month/year I did the activity, the number of kudos received, and essentially anything recorded in a single Strava activity that I have access to. Then, I filtered my activity data down to my time period of interest, which was May to October 2023 (the time I was training for the marathon). 
+
+## The Approach
+
+TBD
 
 ## Preliminary Data Analysis
 
-
 #### Reading in the Data
+
+```{r  message = FALSE, warning = FALSE}
+#Loading Libraries ---
+library(rStrava)
+library(tidyverse)
+library(dplyr)
+library(paletteer) #for color palettes
+library(patchwork)
+library(magick)
+library(ggpubr)
+library(png)
+```
+
+```{r  message = FALSE, warning = FALSE}
+#Reading in Data ---
+#strava_activities <- read_csv("strava_activities.csv")
+```
+
+
+#### Data Wrangling
+
+## Final Result
+
+### Visualization 1
+
+### Visualization 2 
+
+### Visualization 3
 

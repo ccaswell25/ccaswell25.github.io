@@ -4,7 +4,7 @@
     "href": "posts.html",
     "title": "Projects & Blog",
     "section": "",
-    "text": "Utilizing Strava Data to Evalute My Marathon Training\n\n\n\n[Strava, R, Data Visualization, MEDS]\n\n\n\nAn infographic analyzing Strava data when marathon training in 2023.\n\n\n\nCarly Caswell\n\n\nMar 9, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nModeling Suitable Growth Areas for Marine Species on the West Coast of the United States\n\n\n\nGIS\n\n\nR\n\n\nMEDS\n\n\n\nDetermining growth suitability for developing marine aquaculture on the West Coast the United States Exclusive Economic Zones (EEZ).\n\n\n\nCarly Caswell\n\n\nDec 9, 2023\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEvaluating the Impact of Climate Change on Snowfall Trends in Vermont\n\n\n\nClimate\n\n\nR\n\n\nStatistics\n\n\nTime Series\n\n\nMEDS\n\n\n\nA statistical time series analysis of snowfall and temperature between the years 2001 - 2022\n\n\n\nCarly Caswell\n\n\nDec 9, 2023\n\n\n\n\n\n\n\n\n\n\n\n\nUnderstanding Air Quality Impacts of Santa Barbara County’s Thomas Fire\n\n\n\nPython\n\n\nGIS\n\n\nClimate\n\n\nMEDS\n\n\n\nVisualizing changes in air quality index (AQI). A blog for EDS220: Working with Environmental Datasets\n\n\n\nCarly Caswell\n\n\nDec 7, 2023\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAnalyzing the Implications of Data, Documentation, and Decision-Making in Climate-Driven Artificial Intelligence\n\n\n\nAI\n\n\nEthics\n\n\nClimate\n\n\nMEDS\n\n\n\nA blog for EDS242: Ethics and Bias in Data Science\n\n\n\nCarly Caswell\n\n\nDec 6, 2023\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Utilizing Strava Data to Evalute My Marathon Training\n\n\n\nStrava\n\n\nR\n\n\nData Visualization\n\n\nMEDS\n\n\n\nAn infographic analyzing and visualizing my Strava data when marathon training in 2023.\n\n\n\nCarly Caswell\n\n\nMar 9, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nModeling Suitable Growth Areas for Marine Species on the West Coast of the United States\n\n\n\nGIS\n\n\nR\n\n\nMEDS\n\n\n\nDetermining growth suitability for developing marine aquaculture on the West Coast the United States Exclusive Economic Zones (EEZ).\n\n\n\nCarly Caswell\n\n\nDec 9, 2023\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEvaluating the Impact of Climate Change on Snowfall Trends in Vermont\n\n\n\nClimate\n\n\nR\n\n\nStatistics\n\n\nTime Series\n\n\nMEDS\n\n\n\nA statistical time series analysis of snowfall and temperature between the years 2001 - 2022\n\n\n\nCarly Caswell\n\n\nDec 9, 2023\n\n\n\n\n\n\n\n\n\n\n\n\nUnderstanding Air Quality Impacts of Santa Barbara County’s Thomas Fire\n\n\n\nPython\n\n\nGIS\n\n\nClimate\n\n\nMEDS\n\n\n\nVisualizing changes in air quality index (AQI). A blog for EDS220: Working with Environmental Datasets\n\n\n\nCarly Caswell\n\n\nDec 7, 2023\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAnalyzing the Implications of Data, Documentation, and Decision-Making in Climate-Driven Artificial Intelligence\n\n\n\nAI\n\n\nEthics\n\n\nClimate\n\n\nMEDS\n\n\n\nA blog for EDS242: Ethics and Bias in Data Science\n\n\n\nCarly Caswell\n\n\nDec 6, 2023\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
@@ -224,32 +224,39 @@
     "text": "Project Repository Located Here"
   },
   {
-    "objectID": "posts/2024-02-28-viz-post/index.html#about-this-project",
-    "href": "posts/2024-02-28-viz-post/index.html#about-this-project",
+    "objectID": "posts/2024-02-28-viz-post/index.html#my-motivating-questions",
+    "href": "posts/2024-02-28-viz-post/index.html#my-motivating-questions",
     "title": "Utilizing Strava Data to Evalute My Marathon Training",
-    "section": "About This Project",
-    "text": "About This Project\nTBD"
-  },
-  {
-    "objectID": "posts/2024-02-28-viz-post/index.html#research-questions",
-    "href": "posts/2024-02-28-viz-post/index.html#research-questions",
-    "title": "Utilizing Strava Data to Evalute My Marathon Training",
-    "section": "Research Questions",
-    "text": "Research Questions"
+    "section": "My Motivating Questions",
+    "text": "My Motivating Questions\nMy infographic (seen below) is a representation of my Strava data during marathon training. I started on this journey because I wanted to look back at my last marathon training and asked myself: How should I train for my next marathon?! Luckily, I had recorded all of my running data with the public online media platform called Strava. Strava has allowed me to keep all of my data on running and cross-training, which has been amazing to keep track of and learn about as I go. By analyzing my Strava data, some more detailed questions I will pursue are: When in my training should I ramp up my weekly mileage? What days during the week should I expect longer distances/need to allocate more time to running on those days? And lastly, what types of activities should I do to cross-train? I like to stay active beyond running, and wanted to look back at some of the other activities I’d done to balance getting miles in without road running."
   },
   {
     "objectID": "posts/2024-02-28-viz-post/index.html#about-the-data",
     "href": "posts/2024-02-28-viz-post/index.html#about-the-data",
     "title": "Utilizing Strava Data to Evalute My Marathon Training",
     "section": "About the Data",
-    "text": "About the Data"
+    "text": "About the Data\nThis data comes from my personal Strava data documented on the Strava web application. This application is a social network for tracking physical exercise via activities. Each logged data point represents an activity I have done; these activities range from running, hiking, surfing, skiing, walking, strength training, etc. In order to get this data from the public Strava app, I referenced the Strava API . This includes utilizing the {{rStrava}} package. This package allowed me to scrape my data from the public Strava website by creating a Strava application and using authentication. Details on the scraped activity data included where I completed the activity, the duration of the activity, the type of activity, the title of the activity, the distance I went, the day/month/year I did the activity, the number of kudos received, and essentially anything recorded in a single Strava activity that I have access to. Then, I filtered my activity data down to my time period of interest, which was May to October 2023 (the time I was training for the marathon)."
+  },
+  {
+    "objectID": "posts/2024-02-28-viz-post/index.html#the-approach",
+    "href": "posts/2024-02-28-viz-post/index.html#the-approach",
+    "title": "Utilizing Strava Data to Evalute My Marathon Training",
+    "section": "The Approach",
+    "text": "The Approach\nTBD"
   },
   {
     "objectID": "posts/2024-02-28-viz-post/index.html#preliminary-data-analysis",
     "href": "posts/2024-02-28-viz-post/index.html#preliminary-data-analysis",
     "title": "Utilizing Strava Data to Evalute My Marathon Training",
     "section": "Preliminary Data Analysis",
-    "text": "Preliminary Data Analysis\n\nReading in the Data"
+    "text": "Preliminary Data Analysis\n\nReading in the Data\n\n\nCode\n#Loading Libraries ---\nlibrary(rStrava)\nlibrary(tidyverse)\nlibrary(dplyr)\nlibrary(paletteer) #for color palettes\nlibrary(patchwork)\nlibrary(magick)\nlibrary(ggpubr)\nlibrary(png)\n\n\n\n\nCode\n#Reading in Data ---\n#strava_activities &lt;- read_csv(\"strava_activities.csv\")\n\n\n\n\nData Wrangling"
+  },
+  {
+    "objectID": "posts/2024-02-28-viz-post/index.html#final-result",
+    "href": "posts/2024-02-28-viz-post/index.html#final-result",
+    "title": "Utilizing Strava Data to Evalute My Marathon Training",
+    "section": "Final Result",
+    "text": "Final Result\n\nVisualization 1\n\n\nVisualization 2\n\n\nVisualization 3"
   },
   {
     "objectID": "projects.html",
