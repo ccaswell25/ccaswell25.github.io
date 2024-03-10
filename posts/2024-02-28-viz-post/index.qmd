@@ -274,7 +274,7 @@ weekly_distribution2 <- ggplot(total_by_training_week, aes(x = fct_rev(as.factor
   geom_col() + #defining a bar plot
 scale_fill_paletteer_d("calecopal::canary") + #specifying the color scheme
   labs(x = "Training Week", #adding labels to graph
-       y = "Total Distance (in miles)", fill = "Type of Activity", title = "Evaluating Total Weekly Training Peaks for Marathon Training", subtitle = "Utilizing Strava data to showcase a mix of cardio activities for physical strength and injury prevention.") + 
+       y = "Total Distance (in miles)", fill = "Type of Activity", title = "Cross-Training Options for Marathon Training", subtitle = "Utilizing Strava data to showcase a mix of cardio activities for physical strength and injury prevention.") + 
   coord_flip() + #flipping axes
   scale_y_discrete() + #adding breaks to my y axis
   theme(plot.background = element_rect(fill = "black"), #specifying my theme
