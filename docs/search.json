@@ -242,21 +242,21 @@
     "href": "posts/2024-02-28-viz-post/index.html#the-approach",
     "title": "Utilizing Strava Data to Evalute My Marathon Training",
     "section": "The Approach",
-    "text": "The Approach\nTBD"
+    "text": "The Approach"
+  },
+  {
+    "objectID": "posts/2024-02-28-viz-post/index.html#infographic",
+    "href": "posts/2024-02-28-viz-post/index.html#infographic",
+    "title": "Utilizing Strava Data to Evalute My Marathon Training",
+    "section": "Infographic",
+    "text": "Infographic\n\n\n\nPictured: An Infographic on Marathon Training Using Strava Data"
   },
   {
     "objectID": "posts/2024-02-28-viz-post/index.html#preliminary-data-analysis",
     "href": "posts/2024-02-28-viz-post/index.html#preliminary-data-analysis",
     "title": "Utilizing Strava Data to Evalute My Marathon Training",
     "section": "Preliminary Data Analysis",
-    "text": "Preliminary Data Analysis\n\nReading in the Data\n\n\nCode\n#Loading Libraries ---\nlibrary(rStrava)\nlibrary(tidyverse)\nlibrary(dplyr)\nlibrary(paletteer) #for color palettes\nlibrary(patchwork)\nlibrary(magick)\nlibrary(ggpubr)\nlibrary(png)\n\n\n\n\nCode\n#Reading in Data ---\n#strava_activities &lt;- read_csv(\"strava_activities.csv\")\n\n\n\n\nData Wrangling"
-  },
-  {
-    "objectID": "posts/2024-02-28-viz-post/index.html#final-result",
-    "href": "posts/2024-02-28-viz-post/index.html#final-result",
-    "title": "Utilizing Strava Data to Evalute My Marathon Training",
-    "section": "Final Result",
-    "text": "Final Result\n\nVisualization 1\n\n\nVisualization 2\n\n\nVisualization 3"
+    "text": "Preliminary Data Analysis\n\nReading in the Data\n\n\nCode\n#Loading Libraries ---\nlibrary(rStrava)\nlibrary(tidyverse)\nlibrary(dplyr)\nlibrary(paletteer) #for color palettes\nlibrary(patchwork)\nlibrary(magick)\nlibrary(ggpubr)\nlibrary(png)\n\n\n\n\nCode\n#Reading in Data ---\n#strava_activities &lt;- read_csv(\"strava_activities.csv\")\n\n\n\n\nData Wrangling\n\n\nVisualization 1\n\n\nVisualization 2\n\n\nVisualization 3"
   },
   {
     "objectID": "projects.html",

@@ -26,7 +26,11 @@ This data comes from my personal Strava data documented on the Strava web applic
 
 ## The Approach
 
-TBD
+
+
+## Infographic
+
+![Pictured: An Infographic on Marathon Training Using Strava Data](how_to_train_for_marathon.jpg){width="100%"}
 
 ## Preliminary Data Analysis
 
@@ -52,11 +56,26 @@ library(png)
 
 #### Data Wrangling
 
-## Final Result
+```{r}
+
+```
+
 
 ### Visualization 1
+```{r}
+
+```
+
 
 ### Visualization 2 
+```{r}
+
+```
+
 
 ### Visualization 3
+```{r}
+
+```
+
 
