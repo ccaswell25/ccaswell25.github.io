@@ -4,19 +4,19 @@ title: "About"
 
 ### {{< fa laptop >}} Professionally
 
-My previous experience involves helping large organizations work more efficiently with software as a service tools.
+My previous experience involves designing technical solutions tohelp large organizations work more efficiently by leveraging software as a service tools.
 
-After graduating with an undergraduate degree in Business Analytics, my goal was to work with data and gain experience understanding how businesses operate. I spent three years working as an Artificial Intelligence Solutions Consultant, which included designing and creating solutions to implement algorithms into workforce management tools. I helped Fortune 500 companies (examples included McDonald's,DoorDash, & Nike) optimize the costs associated with forecasting their demand, staffing labor, and allocating resources effectively.
+After graduating from the University of Vermont with an undergraduate degree in Business Analytics, my goal was to work with data and gain experience understanding how businesses operate. I spent three years working as an Artificial Intelligence Solutions Consultant, which included designing and creating solutions to implement algorithms into workforce management tools. I helped Fortune 500 companies (examples included McDonald's,DoorDash, & Nike) optimize the costs associated with forecasting their demand, staffing labor, and allocating resources effectively.
 
-With an interest in expanding my skills and working for a larger organization, I then became a Consultant for Smartsheet, a collaborative work management tool. At Smartsheet, I worked as a hybrid management and IT consultant analyzing client's existing processes and recommending and designing scalable solutions for them. I managed large project budgets, cross-functional work teams, and multi-year solution implementations.
+With an interest in expanding my skills and working for a larger organization, I then became a Consultant for Smartsheet, a collaborative work management tool. At Smartsheet, I worked as a hybrid management and IT consultant analyzing client's existing processes and recommending and designing scalable solutions for them. I managed large project budgets, cross-functional work teams, and multi-year solution implementations. I also designed technical solutions that optimized manual processes within teams, departments, and entire organizations.
 
 ![Onsite with a Client in Chicago](jpmc.png "Consulting Onsite with a Client"){fig-align="left" width="500"}
 
-After being in the workforce for five years, I began to re-think my career goals and found myself wanting to do more impactful work. Having experienced climate change first-hand and being passionate about saving our only planet, I realized I needed to pivot careers to focus on the environment. With my love for working with data and code from my time as an undergrad, I decided to go pursue my Master's degree to transition to this new line of work, combining both my love for data with my interest in climate solutions. My goal with this degree is, by combining my previous consulting and technology experience and my new knowledge of data science, I can provide helpful data science approaches to large organizations with a sustainable mission.
+After being in the workforce for five years, I began to re-think my career goals and found myself wanting to do more impactful work. With my love for working with data and solving problems through data analysis from my time as an undergraduate, I decided to pursue my Master's degree to transition to a new line of work that is focused on data-driven sustainable solutions. My goal with this degree is, by combining my previous consulting and technology experience with my new knowledge of data science and sustainability, I can translate business questions into data science solutions to large organizations with a sustainable mission.
 
 ### {{< fa person-hiking >}} Personally
 
-In my free time, I love to be outdoors with my dog, Kona. I am grateful to live in California where the weather allows me to be outside year round. My hobbies include trail running, hiking, yoga, surfing, skiing, and tennis. Growing up in Vermont, I loved skiing and hiking with family and friends. I now exploring the Sierras, skiing, hiking, and finding new trails wherever I go.
+In my free time, I love to be outdoors with my dog, Kona. I am grateful to live in California where the weather allows me to be outside year round. My hobbies include trail running, hiking, yoga, surfing, skiing, and tennis. Growing up in Vermont, I loved skiing and hiking with family and friends. I now love exploring the neighboring mountains and the Sierras by skiing, hiking, and finding new trails wherever I go.
 
 ![Trail Running in the Sawtooths with Kona](sawtooths.png "Title:Trail Running with Kona."){fig-align="left" width="400"}
 

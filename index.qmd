@@ -21,11 +21,11 @@ about:
 
 ## Hi There!
 
-My name is Carly and welcome to my personal website. This site will give you an overview of my professional life, interests, and passions (both personal and work-related).
+My name is Carly and welcome to my personal website. Here you'll find an overview of my professional life, interests, and passions (both personal and work-related).
 
 **What am I up to right now?**
 
-I am currently a Master of Environmental Data Science student at the University of California Santa Barbara, studying to apply data science skills to real challenges facing our ever-changing climate.
+I am currently a Master of Environmental Data Science student at the University of California Santa Barbara, studying to translate business questions focused on sustainability and climate into applicable data science solutions.
 
 ### {{< fa school >}} Education
 
