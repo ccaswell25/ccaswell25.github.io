@@ -12,7 +12,7 @@ With an interest in expanding my skills and working for a larger organization, I
 
 ![Onsite with a Client in Chicago](jpmc.png "Consulting Onsite with a Client"){fig-align="left" width="500"}
 
-After being in the workforce for five years, I began to re-think my career goals and found myself wanting to do more impactful work. With my love for working with data and solving problems through data analysis from my time as an undergraduate, I decided to pursue my Master's degree to transition to a new line of work that is focused on data-driven sustainable solutions. My goal with this degree is, by combining my previous consulting and technology experience with my new knowledge of data science and sustainability, I can translate business questions into data science solutions to large organizations with a sustainable mission.
+After being in the workforce for five years, I began to re-think my career goals and found myself wanting to do more impactful work. With my love for working with data and solving problems through data analysis from my time as an undergraduate, I decided to pursue my Master's degree to transition to a new line of work that is focused on data-driven sustainable solutions. My goal with this degree is, by combining my previous consulting and technology experience with my new knowledge of data science and sustainability, I can translate business questions into data science solutions for large organizations with a sustainable mission.
 
 ### {{< fa person-hiking >}} Personally
 
