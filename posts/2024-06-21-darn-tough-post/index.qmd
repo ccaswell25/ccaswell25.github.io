@@ -1,13 +1,13 @@
 ---
 title: "Streamlining Carbon Accounting for Darn Tough Vermont"
-description: "How we helped a sock manufacturer calculate their carbon emissions and pinpoint ways to meet reduction targets"
+description: "How we helped a sock manufacturer calculate their greenhouse gas emissions and pinpoint opportunities for meeting their emissions reduction targets"
 author: 
     name: Annie Adams, Carly Caswell, Flora Hamilton, Linus Ghanadan
     url: https://annieradams.github.io
     affiliation:      Bren School of Environmental Science and Management
     affiliation-url: https://ucsb-meds.github.io
 date: "June 18, 2024"
-categories: [R, Shiny, Carbon accounting]
+categories: [R, Shiny, Carbon Accounting]
 output:
     html_document:
     print_df: paged
@@ -24,7 +24,7 @@ knitr::include_graphics("images/topbar-image.png")
 
 ### Creating a Reproducible Emissions Model for a Sock Manufacturer
 
-With corporate sustainability growing ever more important, recent US, EU, and California legislation now mandates that public organizations disclose their greenhouse gas emissions and climate-related risks. Beyond these political pressures, social expectations are also driving organizations to adopt more sustainable practices and ensure transparency around their emissions. For Darn Tough, a brand committed to sustainability, these evolving standards present both a challenge and an opportunity.
+Consumer demand for sustainable products is increasingly driving companies to consider the life-cycle carbon emissions of products being sold. Darn Tough, a Vermont-based sock manufacturer, aims to continue their reputation of environmental stewardship by aligning operations with the 2030 carbon mitigation target set by its largest retailer, Recreational Equipment, Inc. (REI). Specifically, this target is to achieve a 55% reduction in total greenhouse gas (GHG) emissions from a 2019 baseline level by 2030.
 
 ### About Darn Tough
 
