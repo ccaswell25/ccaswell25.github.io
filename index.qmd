@@ -25,13 +25,13 @@ My name is Carly and welcome to my personal website. Here you'll find an overvie
 
 **What am I up to right now?**
 
-I am currently a Master of Environmental Data Science student at the University of California Santa Barbara, studying to translate business questions focused on sustainability and climate into applicable data science solutions.
+I have recently received a Master of Environmental Data Science degree from the University of California Santa Barbara, where I studied to translate business questions focused on sustainability and climate into applicable data science solutions.
 
 ### {{< fa school >}} Education
 
 ------------------------------------------------------------------------
 
-**Master in Environmental Data Science** \[Present\] University of California, Santa Barbara
+**Master in Environmental Data Science** \[2024\] University of California, Santa Barbara
 
 **BS in Business Administration** \[2018\] University of Vermont
 
