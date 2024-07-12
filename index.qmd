@@ -19,28 +19,28 @@ about:
       icon: envelope
 ---
 
-## Hi There!
+## Hello!
 
-My name is Carly and welcome to my personal website. Here you'll find an overview of my professional life, interests, and passions (both personal and work-related).
+Welcome to my website! Here you'll find an overview of my professional life, personal and professional interests, and a few of my passions. Explore using the website tabs to learn more about my five years of data analytics experience, my educational background, and my future goals.
 
-**What am I up to right now?**
+**What am I up to right now? Education Update!**
 
-I have recently received a Master of Environmental Data Science degree from the University of California Santa Barbara, where I studied to translate business questions focused on sustainability and climate into applicable data science solutions.
+I recently graduated from the Bren School of Environmental Science and Management at the University of California Santa Barbara, where I earned my Master's Degree in Environmental Data Science. This was an intense program where I was focused on finding applicable data science solutions for companies looking to become more environmentally sustainable, which has now become a strategic imperative. My goal in seeking this advanced degree was to learn how to use my tech skills to contribute meaningful change to our world.
 
 ### {{< fa school >}} Education
 
 ------------------------------------------------------------------------
 
-**Master in Environmental Data Science** \[2024\] University of California, Santa Barbara
+**Master of Environmental Data Science** \[2024\] University of California, Santa Barbara
 
-**BS in Business Administration** \[2018\] University of Vermont
+**Bachelor of Science in Business Administration** \[2018\] University of Vermont
 
 ### {{< fa briefcase >}} Experience
 
 ------------------------------------------------------------------------
 
-**Entrepreneurship Teaching Assistant** \[Fall 2023\] UCSB
+**Entrepreneurship Teaching Assistant** at UCSB \[Fall 2023\]
 
-**Solutions Consultant** \[2021 - 2023\] Smartsheet
+**Solutions Consultant** at Smartsheet \[2021 - 2023\]
 
-**AI Solutions Consultant** \[2018 - 2021\] Quinyx
+**AI Solutions Consultant** at Quinyx \[2018 - 2021\]
